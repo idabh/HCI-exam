@@ -1,11 +1,10 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
-import pandas as pd 
 
 # 1=sidebar menu, 2=horizontal menu, 3=horizontal menu w/ custom menu
 EXAMPLE_NO = 2
 
-pd.read_csv('Data/applicants250.csv',na_values=['a','b']) # a and b values will be treated as NaN after importing into dataframe.
+
 
 def streamlit_menu(example=1):
     if example == 2:
@@ -31,9 +30,24 @@ def streamlit_menu(example=1):
             )
             return selected
 
+    #A function that returns the html code as it should
+image_url = https://dflj.dk/wp-content/uploads/2016/04/01A0142-copy.jpg
+
+def show_image_from_url(image_url):
+    return(f’’)
+
+#Then created a new column
+df[‘image’] = df.apply( lambda x: show_image_from_url(x[‘image_url’]), axis = 1 )
+
+#And before run
+df.to_html()
+
 selected = streamlit_menu(example=EXAMPLE_NO)
 if selected == "All":
     st.title(f"You have selected {selected}")
+
+
+
 
 if selected == "Yes":
     st.title(f"You have selected {selected}")
