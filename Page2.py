@@ -1,8 +1,11 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
+import pandas as pd 
 
 # 1=sidebar menu, 2=horizontal menu, 3=horizontal menu w/ custom menu
 EXAMPLE_NO = 2
+
+pd.read_csv('Data/applicants250.csv',na_values=['a','b']) # a and b values will be treated as NaN after importing into dataframe.
 
 def streamlit_menu(example=1):
     if example == 2:
