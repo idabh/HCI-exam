@@ -1,42 +1,74 @@
+'''
+To pick a color: https://www.w3schools.com/colors/colors_picker.asp
+Grid ressource: https://gridbyexample.com/examples/
+'''
+
+
 import streamlit as st
-from streamlit_option_menu import option_menu
-import pandas as pd 
+from src.utils import *
+from PIL import Image
+import numpy as np 
+import pandas as pd
+from grid import *
 
-# 1=sidebar menu, 2=horizontal menu, 3=horizontal menu w/ custom menu
-EXAMPLE_NO = 2
+#set wide style 
+st.set_page_config(layout = "wide")
 
-pd.read_csv('Data/applicants250.csv',na_values=['a','b']) # a and b values will be treated as NaN after importing into dataframe.
+#define style
+local_css("styles.css")
 
-def streamlit_menu(example=1):
-    if example == 2:
-            # 2. horizontal menu w/o custom style
-            selected = option_menu(
-                menu_title=None,  # required
-                options=["All", "Yes", "Maybe", "No"],  # required
-                icons=["circle", "check-circle", "question-circle", "x-circle"],  # optional
-                menu_icon="cast",  # optional
-                default_index=0,  # optional
-                orientation="horizontal",
-                styles={
-                    "container": {"padding": "0!important", "background-color": "#fafafa"},
-                    #"icon": {"color": "orange", "font-size": "25px"},
-                    "nav-link": {
-                    #    "font-size": "25px",
-                        "text-align": "left",
-                        "margin": "0px",
-                        "--hover-color": "#eee",
-                    },
-                    "nav-link-selected": {"background-color": 'darkgrey'},
-                }
-            )
-            return selected
+#define data 
+candidates = pd.read_csv('Data/applicants250.csv',na_values=['a','b'])
+candidates = pd.DataFrame(candidates[0:5])
 
-selected = streamlit_menu(example=EXAMPLE_NO)
+#define process bar
+process_bar = st.progress(50)
+
+#define menu
+selected = streamlit_menu(options=["All", "Yes", "Maybe", "No"], icons=["circle", "check-circle", "question-circle", "x-circle"])
+
+
 if selected == "All":
     st.title(f"You have selected {selected}")
+    for c in range(0, len(candidates)): 
+        #define image
+        image = "<img src='data:image/png;base64,{}' class='img-fluid' style='width:300px; position:relative; top:15px;'>".format(
+            img_to_bytes('Images/download2.jpg')
+            )
 
+        #define info
+        Text1 = candidates.iloc[c]['Text1']
+        Text2 = candidates.iloc[c]['Text2']
+
+        #tags
+        tags ='''
+        <input type='radio' id='html' name='fav_language' value='HTML'> 
+        <label for='html'>HTML</label>
+        <br> 
+        '''
+        '''
+        <input type='radio' id='css' name='fav_language' value='CSS'> 
+        <label for='css'>CSS</label>
+        <br>
+        <input type='radio' id='javascript' name='fav_language' value='JavaScript'>
+        <label for="javascript">JavaScript</label>
+        <br>
+        '''
+        # "<input type='checkbox'><span> Pepperoni</span><br>"
+        
+
+        #print(info[1])
+        with Grid("1 1 1") as grid:
+            grid.cell("a", 1, 2, 1, 3).markdown(image)
+            grid.cell("b", 2, 3, 1, 2).markdown(Text1)
+            grid.cell("c", 2, 3, 2, 3).markdown(Text2)
+            grid.cell("d", 3, 4, 2, 3).plotly_chart(get_plotly_fig())
+            grid.cell("e", 3, 4, 1, 2).markdown(tags)
+        
 if selected == "Yes":
     st.title(f"You have selected {selected}")
+    yes_candidates = candidates.loc[candidates['tag'] == "Yes"]
+
 
 if selected == "Maybe":
     st.title(f"You have selected {selected}")
