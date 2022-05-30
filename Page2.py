@@ -1,6 +1,8 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
 
+process_bar = st.progress(50)
+
 # 1=sidebar menu, 2=horizontal menu, 3=horizontal menu w/ custom menu
 EXAMPLE_NO = 2
 
@@ -31,21 +33,13 @@ def streamlit_menu(example=1):
             return selected
 
     #A function that returns the html code as it should
-image_url = https://dflj.dk/wp-content/uploads/2016/04/01A0142-copy.jpg
 
-def show_image_from_url(image_url):
-    return(f’’)
-
-#Then created a new column
-df[‘image’] = df.apply( lambda x: show_image_from_url(x[‘image_url’]), axis = 1 )
-
-#And before run
-df.to_html()
 
 selected = streamlit_menu(example=EXAMPLE_NO)
 if selected == "All":
     st.title(f"You have selected {selected}")
 
+    st.markdown('<img src=url alt="W3Schools.com">', unsafe_allow_html=True)
 
 
 
