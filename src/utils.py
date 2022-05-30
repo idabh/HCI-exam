@@ -1,10 +1,12 @@
 from streamlit_option_menu import option_menu
+from pathlib import Path
+import base64
 
-def streamlit_menu():
+def streamlit_menu(options, icons):
         selected = option_menu(
             menu_title=None,  # required
-            options=["All", "Yes", "Maybe", "No"],  # required
-            icons=["circle", "check-circle", "question-circle", "x-circle"],  # optional
+            options=options,
+            icons=icons,
             menu_icon="cast",  # optional
             default_index=0,  # optional
             orientation="horizontal",
@@ -21,3 +23,8 @@ def streamlit_menu():
             }
         )
         return selected
+
+def img_to_bytes(img_path):
+    img_bytes = Path(img_path).read_bytes()
+    encoded = base64.b64encode(img_bytes).decode()
+    return encoded
