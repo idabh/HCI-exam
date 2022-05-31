@@ -88,8 +88,12 @@ class Cell:
     def dataframe(self, dataframe: pd.DataFrame):
         self.inner_html = dataframe.to_html()
 
+    #def radio(self, label, options):
+    #    self.inner_html = st.radio(label, options)
+
     def plotly_chart(self, fig):
         self.inner_html = f"""
+
     
     
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
