@@ -3,7 +3,6 @@ To pick a color: https://www.w3schools.com/colors/colors_picker.asp
 Grid ressource: https://gridbyexample.com/examples/
 '''
 
-
 import streamlit as st
 from src.utils import *
 from PIL import Image
@@ -31,11 +30,6 @@ selected = streamlit_menu(options=["All", "Yes", "Maybe", "No"], icons=["circle"
 
 #define columns
 col1, col2, col3 = st.columns(3)
-
-
-
-def update_first():
-    st.session_state.second = st.session_state.first
 
 
 if selected == "All":
