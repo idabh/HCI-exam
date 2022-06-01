@@ -32,8 +32,8 @@ with open('Data/applicants' + str(nr_applicants) + '.csv', 'w', newline ='') as 
             random.randint(0, 100), # python score
             random.choice(edu_levels), # education level
             random.choice(faculties), # faculty
-            random.choice(images),
             random.randint(0, 50), # years experience (OBS: make dependent on age ;))
+            random.choice(images),
             ''.join(random.choice(words) for i in range(10)), #random text 1 (CHANGE;))
             ''.join(random.choice(words) for i in range(20)) #random text 2 (CHANGE;))
             ])
