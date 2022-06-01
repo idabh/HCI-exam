@@ -30,6 +30,7 @@ education_rank = {"high school":1, "bachelor":2, "masters":3, "phd":4}
 with st.sidebar:
     st.title("STEP 1: Screening")
     st.header("Filters")
+    st.markdown("Narrow down the applicants by manipulating the filters below")
     
     education_level = st.selectbox("Minimum education level", options=["high school", "bachelor", "masters", "phd"], index=0, help="choose minimum education level needed for this position")
         
@@ -109,5 +110,63 @@ st.write('<style>div.Widget.row-widget.stRadio > div{flex-direction:row;}</style
 st.dataframe(data=temp_df, width=None, height=None)
 
 
+#next_page = '<button kind="primary" class="css-9dpgwh edgvbvh1" {background-color: #4CAF50;}  >Next</button>'
+next_page = '''
+<html>
+<head>
+<style>
+.button {
+  position: relative;
+  background-color: #4CAF50;
+  border: none;
+  font-size: 28px;
+  color: #FFFFFF;
+  padding: 20px;
+  width: 200px;
+  text-align: center;
+  transition-duration: 0.4s;
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.button:after {
+  content: "";
+  background: #f1f1f1;
+  display: block;
+  position: absolute;
+  padding-top: 300%;
+  padding-left: 350%;
+  margin-left: -20px !important;
+  margin-top: -120%;
+  opacity: 0;
+  transition: all 0.8s
+}
+
+.button:active:after {
+  padding: 0;
+  margin: 0;
+  opacity: 1;
+  transition: 0s
+}
+</style>
+</head>
+<body>
+
+<h2>Animated Button - Ripple Effect</h2>
+
+<button class="button">Click Me</button>
+
+</body>
+</html>
+
+
+'''
+
+left_column, mid_column, right_column = st.columns(3)
+with right_column:
+    st.button("next")
+    if st.markdown(next_page, unsafe_allow_html=True):
+        st.markdown("hello there")
 #st.balloons()
 #st.snow()
