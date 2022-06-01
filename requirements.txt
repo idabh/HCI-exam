@@ -1,1 +1,12 @@
+# pip install -r requirements.txt
+
+pandas
+numpy
+streamlit
 streamlit_option_menu
+matplotlib
+plotly
+markdown
+random
+csv
+names
