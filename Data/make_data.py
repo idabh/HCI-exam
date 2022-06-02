@@ -1,12 +1,13 @@
-# This script randomly autogenerates a pool of job applications distinguished by a number of different factors
-
+'''
+This script randomly autogenerates a pool of job applications distinguished by a number of different factors.
+'''
 import random
 import csv
 import names
 from os import listdir
 from os.path import isfile, join
 
-nr_applicants = 250 # set nr of applicants you want to generate
+nr_applicants = 200 # set nr of applicants you want to generate
 
 # set possible variable values (ADD MORE / CHECK THIS!)
 sexes = ['female', 'male', 'nonbinary', 'prefer not to say']
@@ -22,7 +23,7 @@ images = [f for f in listdir('Images') if isfile(join('Images', f))]
 # create a csv file named to contain the dataset
 with open('Data/applicants' + str(nr_applicants) + '.csv', 'w', newline ='') as f: 
     file = csv.writer(f)
-    file.writerow(['Name', 'Age', 'Sex', 'Python_score','Education_level', 'Education', 'Faculty', "Years_experience", "image", "Text1", "Text2"])
+    file.writerow(['Name', 'Age', 'Sex', 'Python_score', 'Education_level', 'Faculty', "Years_experience", "image", "Text1", "Text2", "factor1", "factor2"])
       
     # generate applicant data from random combinations of variables
     for i in range(nr_applicants):                          
@@ -37,5 +38,7 @@ with open('Data/applicants' + str(nr_applicants) + '.csv', 'w', newline ='') as 
             random.randint(0, 50), # years experience (OBS: make dependent on age ;))
             random.choice(images),
             ''.join(random.choice(words) for i in range(10)), #random text 1 (CHANGE;))
-            ''.join(random.choice(words) for i in range(20)) #random text 2 (CHANGE;))
+            ''.join(random.choice(words) for i in range(20)), #random text 2 (CHANGE;))
+            random.randint(0, 50), # factor 1
+            random.randint(0, 10) # factor 2
             ])

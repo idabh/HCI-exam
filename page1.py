@@ -1,5 +1,6 @@
 #Page 1
-
+import random
+import plotly.express as px
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -24,7 +25,7 @@ st.markdown(f""" <style>
 #define style
 local_css("/Users/thearolskovsloth/Documents/MASTERS_I_COGSCI/second_sem/HCI/HCI-exam/styles.css")
 #load data
-df = pd.read_csv('/Users/thearolskovsloth/Documents/MASTERS_I_COGSCI/second_sem/HCI/HCI-exam/Data/applicants250.csv')
+df = pd.read_csv('/Users/thearolskovsloth/Documents/MASTERS_I_COGSCI/second_sem/HCI/HCI-exam/Data/applicants200.csv')
 education_rank = {"high school":1, "bachelor":2, "masters":3, "phd":4}
 
 with st.sidebar:
@@ -32,9 +33,13 @@ with st.sidebar:
     st.header("Filters")
     st.markdown("Narrow down the applicants by manipulating the filters below")
     
-    education_level = st.selectbox("Minimum education level", options=["high school", "bachelor", "masters", "phd"], index=0, help="choose minimum education level needed for this position")
+    education_level = st.select_slider("Minimum education level", options=["high school", "bachelor", "masters", "phd"],  help="choose minimum education level needed for this position")
+
         
-    python_skills = st.slider("Python skills", min_value=0, max_value=100, value=0, step=None, format=None, key="bachelors", help="The performances of the candidates ", on_change=None, args=None, kwargs=None,  disabled=False)
+    python_skills = st.slider("Python skills", min_value=0, max_value=5, value=0, step=1, format=None, key="bachelors", help="The performances of the candidates ", on_change=None, args=None, kwargs=None,  disabled=False)
+
+    fac1 = st.slider('Select value fac1', 0,10,1)
+    fac2 = st.slider('Select value fac2',0,10,1)
     
     exp_needed = st.radio("Experience", options= ["Yes", "No"])
     
@@ -61,55 +66,34 @@ counting = f'<div data-testid="stMetricValue" class="css-1xarl3l e16fv1kl2"> <di
 st.markdown(counting, unsafe_allow_html=True)
 
 
+#RADAR##############################################################################################
 
 
-# code for displaying multiple images in one figure
-import altair as alt
-import pandas as pd
-import random
+temporal_data = pd.DataFrame(dict(
+    r=[python_skills/10,
+       education_level,
+       fac1,
+       fac2],
+    theta=['python skills','education_level','factor1',
+           'factor2']))
 
-#data = pd.DataFrame([dict(id=i) for i in range(0, len(temp_df))])
-data = pd.DataFrame([dict(id=i) for i in random.sample(range(1,10000),len(temp_df))])
-
-person = (
-    "M1.7 -1.7h-0.8c0.3 -0.2 0.6 -0.5 0.6 -0.9c0 -0.6 "
-    "-0.4 -1 -1 -1c-0.6 0 -1 0.4 -1 1c0 0.4 0.2 0.7 0.6 "
-    "0.9h-0.8c-0.4 0 -0.7 0.3 -0.7 0.6v1.9c0 0.3 0.3 0.6 "
-    "0.6 0.6h0.2c0 0 0 0.1 0 0.1v1.9c0 0.3 0.2 0.6 0.3 "
-    "0.6h1.3c0.2 0 0.3 -0.3 0.3 -0.6v-1.8c0 0 0 -0.1 0 "
-    "-0.1h0.2c0.3 0 0.6 -0.3 0.6 -0.6v-2c0.2 -0.3 -0.1 "
-    "-0.6 -0.4 -0.6z"
-)
-
-fig1=alt.Chart(data).transform_calculate(
-    row="ceil(datum.id/10)"
-).transform_calculate(
-    col="datum.id - datum.row*10"
-).mark_point(
-    filled=True,
-    size=50/len(temp_df)*100
-).encode(
-    x=alt.X("col:O", axis=None),
-
-    y=alt.Y("row:O", axis=None),
-    opacity=alt.value(0.4),
-    shape=alt.ShapeValue(person)
-).properties(
-    width=650,
-    height=400
-).configure_view(
-    strokeWidth=0
-)
-st.altair_chart(fig1, use_container_width=False)
-#fig = plt.scatter(x= temp_df["Age"], y= temp_df["Python_score"])
-#st.pyplot(fig) #display the plot
+def radar_chart(data):  
+    df = temporal_data
+    fig = px.line_polar(df, r='r', theta='theta', line_close=True)
+    st.write(fig)
+#chosen_var = st.radio("Select a variable", options= ['education_level','python skills','minimum education', 'thermal stability'])
+#
+radar_chart(temp_df)
 
 st.write('<style>div.Widget.row-widget.stRadio > div{flex-direction:row;}</style>', unsafe_allow_html=True)
+
+
+
 
 #show data frame
 st.dataframe(data=temp_df, width=None, height=None)
 
-
+#BUTTON##############################################################################################
 #next_page = '<button kind="primary" class="css-9dpgwh edgvbvh1" {background-color: #4CAF50;}  >Next</button>'
 next_page = '''
 <html>
@@ -170,3 +154,50 @@ with right_column:
         st.markdown("hello there")
 #st.balloons()
 #st.snow()
+
+
+
+'''
+
+
+#ISOTYPE###############################################################################################
+
+# code for displaying multiple images in one figure
+import altair as alt
+
+#data = pd.DataFrame([dict(id=i) for i in range(0, len(temp_df))])
+data = pd.DataFrame([dict(id=i) for i in random.sample(range(1,10000),len(temp_df))])
+
+person = (
+    "M1.7 -1.7h-0.8c0.3 -0.2 0.6 -0.5 0.6 -0.9c0 -0.6 "
+    "-0.4 -1 -1 -1c-0.6 0 -1 0.4 -1 1c0 0.4 0.2 0.7 0.6 "
+    "0.9h-0.8c-0.4 0 -0.7 0.3 -0.7 0.6v1.9c0 0.3 0.3 0.6 "
+    "0.6 0.6h0.2c0 0 0 0.1 0 0.1v1.9c0 0.3 0.2 0.6 0.3 "
+    "0.6h1.3c0.2 0 0.3 -0.3 0.3 -0.6v-1.8c0 0 0 -0.1 0 "
+    "-0.1h0.2c0.3 0 0.6 -0.3 0.6 -0.6v-2c0.2 -0.3 -0.1 "
+    "-0.6 -0.4 -0.6z"
+)
+
+fig1=alt.Chart(data).transform_calculate(
+    row="ceil(datum.id/10)"
+).transform_calculate(
+    col="datum.id - datum.row*10"
+).mark_point(
+    filled=True,
+    size=50/len(temp_df)*100
+).encode(
+    x=alt.X("col:O", axis=None),
+
+    y=alt.Y("row:O", axis=None),
+    opacity=alt.value(0.4),
+    shape=alt.ShapeValue(person)
+).properties(
+    width=650,
+    height=400
+).configure_view(
+    strokeWidth=0
+)
+st.altair_chart(fig1, use_container_width=False)
+#fig = plt.scatter(x= temp_df["Age"], y= temp_df["Python_score"])
+#st.pyplot(fig) #display the plot
+'''
