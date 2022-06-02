@@ -1,5 +1,6 @@
 #Page 1
-
+import random
+import plotly.express as px
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -62,11 +63,34 @@ st.markdown(counting, unsafe_allow_html=True)
 
 
 
+#RADAR##############################################################################################
+
+temporal_data = pd.DataFrame(dict(
+    r=[python_skills,
+       random.randint(0,5),
+       random.randint(0,5),
+       random.randint(0,5)],
+    theta=['education_level','python skills','minimum education',
+           'thermal stability']))
+
+def radar_chart(val):  
+    df = temporal_data
+    fig = px.line_polar(df, r='r', theta='theta', line_close=True)
+    st.write(fig)
+
+chosen_var = st.radio("Select a variable", options= ['education_level','python skills','minimum education',
+           'thermal stability'])
+
+val = st.slider('Select value',0,10,1)
+
+radar_chart(val)
+
+
+
+#ISOTYPE###############################################################################################
 
 # code for displaying multiple images in one figure
 import altair as alt
-import pandas as pd
-import random
 
 #data = pd.DataFrame([dict(id=i) for i in range(0, len(temp_df))])
 data = pd.DataFrame([dict(id=i) for i in random.sample(range(1,10000),len(temp_df))])
@@ -109,7 +133,7 @@ st.write('<style>div.Widget.row-widget.stRadio > div{flex-direction:row;}</style
 #show data frame
 st.dataframe(data=temp_df, width=None, height=None)
 
-
+#BUTTON##############################################################################################
 #next_page = '<button kind="primary" class="css-9dpgwh edgvbvh1" {background-color: #4CAF50;}  >Next</button>'
 next_page = '''
 <html>
