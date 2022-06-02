@@ -18,6 +18,17 @@ st.set_page_config(layout = "wide")
 #define style
 local_css("styles.css")
 
+#condense the space
+padding = 0
+st.markdown(f""" <style>
+    .reportview-container .main .block-container{{
+        padding-top: {padding}rem;
+        padding-right: {padding}rem;
+        padding-left: {padding}rem;
+        padding-bottom: {padding}rem;
+    }} </style> """, unsafe_allow_html=True)
+
+
 #define data 
 candidates = pd.read_csv('Data/applicants200.csv',na_values=['a','b'])
 candidates = pd.DataFrame(candidates[0:5])
@@ -44,9 +55,15 @@ for candidate in ['yes_candidates', 'maybe_candidates', 'no_candidates']:
     else: 
         st.session_state[candidate] = st.session_state[candidate]
 
+#Add title
+st.markdown("<h1 style='text-align: center;'>STEP 2: Review</h1>", unsafe_allow_html=True)
 
 #define process bar
 process_bar = st.progress(50)
+
+#Guide
+with st.expander("How to use this page"):
+    st.write('Guidelines')
 
 #define menu
 selected = streamlit_menu(options=[f'All ({len(candidates)})', f'Yes ({st.session_state.yes_candidates})', f'Maybe ({st.session_state.maybe_candidates})', f'No ({st.session_state.no_candidates})'], icons=["circle", "check-circle", "question-circle", "x-circle"])

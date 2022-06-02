@@ -6,6 +6,7 @@ import csv
 import names
 from os import listdir
 from os.path import isfile, join
+from motivation_letters import *
 
 nr_applicants = 200 # set nr of applicants you want to generate
 
@@ -26,7 +27,7 @@ personality_profiles = [f for f in listdir('Data/personality_plots') if isfile(j
 # create a csv file named to contain the dataset
 with open('Data/applicants' + str(nr_applicants) + '.csv', 'w', newline ='') as f: 
     file = csv.writer(f)
-    file.writerow(['Name', 'Age', 'Sex', 'Python_score', 'Education_level', 'education', 'Faculty', 'workfields', "Years_experience", "image", "personality_profiles", "strength", "Text1", "Text2", "factor1", "factor2", 'skills'])
+    file.writerow(['Name', 'Age', 'Sex', 'Python_score', 'Education_level', 'education', 'Faculty', 'workfields', "Years_experience", "image", "personality_profiles", "strength", "Text1", "Text2", "factor1", "factor2", 'skills', 'motivation_letter'])
       
     # generate applicant data from random combinations of variables
     for i in range(nr_applicants):                          
@@ -48,4 +49,5 @@ with open('Data/applicants' + str(nr_applicants) + '.csv', 'w', newline ='') as 
             random.randint(0, 50), # factor 1
             random.randint(0, 10), # factor 2
             random.sample(skills, 3),
+            random.choice(motivation_letter),
             ])

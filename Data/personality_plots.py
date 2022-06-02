@@ -17,7 +17,6 @@ for i in range(0, 50):
             width = 0.4)
     
     plt.ylabel("Score")
-    plt.title("DISC-profile")
 
     plt.savefig(f'Data/personality_plots/{i}_personality.png')
 
