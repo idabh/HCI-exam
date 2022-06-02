@@ -12,17 +12,25 @@ def show_page2(rkey_list, tkey_list, index, df):
     #define image
     image_path = df.iloc[index]['image']
     image = "<img src='data:image/png;base64,{}' class='img-fluid' style='width:270px; height:247px; position:relative; top:0px;'>".format(
-        img_to_bytes(f'Images/{image_path}')
+        img_to_bytes(f'Data/Images/{image_path}')
+        )
+    
+    #define personality profile
+    personality_path = df.iloc[index]['personality_profiles']
+    personality_profile = "<img src='data:image/png;base64,{}' class='img-fluid' style='width:270px; height:200px; position:relative; top:20px;'>".format(
+        img_to_bytes(f'Data/personality_plots/{personality_path}')
         )
         
 
     #define info
     Text1 = df.iloc[index]['Text1']
     Text2 = df.iloc[index]['Text2']
+    motivation = df.iloc[index]['motivation_letter']
     years_experience = df.iloc[index]['Years_experience']
     education = df.iloc[index]['education']
     workfield = df.iloc[index]['workfields']
     strength = df.iloc[index]['strength']
+
     skills_str = df.iloc[index]['skills']
     skill = list(skills_str.split("'"))
     skills = f'Skills: {skill[1]}, {skill[3]}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; and {skill[5]}'
@@ -39,10 +47,8 @@ def show_page2(rkey_list, tkey_list, index, df):
     
     with col2: 
         st.write('')
-        st.write('')
         st.radio(label = 'Select option', options =['Not selected', 'Yes', 'Maybe', 'No'], key=radio_key)
         st.text_input(label = 'Notes', key = text_key)
-        st.write('')
         st.write('')
         st.write('')
         st.write('')
@@ -62,5 +68,18 @@ def show_page2(rkey_list, tkey_list, index, df):
 
 
     with col4: 
-        st.markdown(f"<p style = 'position:absolute; top:{index + 25}px; height: 100px; width: 200px; border: 3px solid #73AD21;'>{Text1}</p> ", unsafe_allow_html=True)
-        st.markdown(f"<p style = 'position:absolute; top:{index + 140}px; height: 100px; width: 200px; border: 3px solid #73AD21;'>{Text2}</p> ", unsafe_allow_html=True)
+        st.markdown("<div style = 'position:relative; left:95px; top:25px; '>DISC-Profile</div>", unsafe_allow_html= True)
+        st.markdown(personality_profile, unsafe_allow_html= True)
+        st.write('')
+        #st.write('')
+        #st.checkbox('Compare', key = index)    
+
+
+        #st.markdown(f"<p style = 'position:absolute; top:{index + 25}px; height: 100px; width: 200px; border: 3px solid #73AD21;'>{Text1}</p> ", unsafe_allow_html=True)
+        #st.markdown(f"<p style = 'position:absolute; top:{index + 140}px; height: 100px; width: 200px; border: 3px solid #73AD21;'>{Text2}</p> ", unsafe_allow_html=True)
+  
+    #Add addtional information
+    with st.expander("More information"):
+        st.markdown(f'<b>Motivation </b> <br> {motivation}', unsafe_allow_html=True)
+    st.write('')
+    st.write('')
