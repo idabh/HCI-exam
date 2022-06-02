@@ -23,7 +23,7 @@ images = [f for f in listdir('Images') if isfile(join('Images', f))]
 # create a csv file named to contain the dataset
 with open('Data/applicants' + str(nr_applicants) + '.csv', 'w', newline ='') as f: 
     file = csv.writer(f)
-    file.writerow(['Name', 'Age', 'Sex', 'Python_score', 'Education_level', 'Faculty', "Years_experience", "image", "Text1", "Text2", "factor1", "factor2"])
+    file.writerow(['Name', 'Age', 'Sex', 'Python_score', 'Education_level', 'education', 'Faculty', "Years_experience", "image", "Text1", "Text2", "factor1", "factor2"])
       
     # generate applicant data from random combinations of variables
     for i in range(nr_applicants):                          
