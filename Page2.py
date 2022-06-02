@@ -19,7 +19,7 @@ st.set_page_config(layout = "wide")
 local_css("styles.css")
 
 #define data 
-candidates = pd.read_csv('Data/applicants250.csv',na_values=['a','b'])
+candidates = pd.read_csv('Data/applicants200.csv',na_values=['a','b'])
 candidates = pd.DataFrame(candidates[0:5])
 text_input = [1, len(candidates)]
 
@@ -68,26 +68,21 @@ if selected == f'All ({len(candidates)})':
     for c in range(0, len(candidates)): 
         #show page
         show_page2(rkey_list, tkey_list, index = c, df = candidates)   
-
   
 if selected == f'Yes ({st.session_state.yes_candidates})':
-
     #loop through candidates
     for c in yes_candidates: 
-
         #show page
         show_page2(rkey_list, tkey_list, index = c, df = candidates)   
 
 if selected == f'Maybe ({st.session_state.maybe_candidates})':
     #loop through candidates
     for c in maybe_candidates: 
-
         #show page
         show_page2(rkey_list, tkey_list, index = c, df = candidates)   
 
 if selected == f'No ({st.session_state.no_candidates})':
     #loop through candidates 
     for c in no_candidates: 
-
         #show page
         show_page2(rkey_list, tkey_list, index = c, df = candidates)   

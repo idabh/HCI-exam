@@ -19,12 +19,14 @@ words = ['this ', 'is ', 'a ', 'random ', 'selection ', 'of ', 'words ', 'yay ',
 strength = ['Very commited and fierce', 'Love working with coworkers', 'Efficient and a teamplayer', 'Creative and solution-minded', 'Great with tech']
 #Hobbies =['Hiking', 'football', 'Gaming', 'Skydiving']
 skills =['communication', 'word', 'python', 'statistics', 'management', 'excel', 'java', 'analytics', 'powerpoint', 'problem solving', 'juristics']
-images = [f for f in listdir('Images') if isfile(join('Images', f))]
+images = [f for f in listdir('Data/Images') if isfile(join('Data/Images', f))]
+personality_profiles = [f for f in listdir('Data/personality_plots') if isfile(join('Data/personality_plots', f))]
+
 
 # create a csv file named to contain the dataset
 with open('Data/applicants' + str(nr_applicants) + '.csv', 'w', newline ='') as f: 
     file = csv.writer(f)
-    file.writerow(['Name', 'Age', 'Sex', 'Python_score', 'Education_level', 'education', 'Faculty', 'workfields', "Years_experience", "image", "strength", "Text1", "Text2", "factor1", "factor2", 'skills'])
+    file.writerow(['Name', 'Age', 'Sex', 'Python_score', 'Education_level', 'education', 'Faculty', 'workfields', "Years_experience", "image", "personality_profiles", "strength", "Text1", "Text2", "factor1", "factor2", 'skills'])
       
     # generate applicant data from random combinations of variables
     for i in range(nr_applicants):                          
@@ -39,6 +41,7 @@ with open('Data/applicants' + str(nr_applicants) + '.csv', 'w', newline ='') as 
             random.choice(workfields),
             random.randint(0, 50), # years experience (OBS: make dependent on age ;))
             random.choice(images),
+            random.choice(personality_profiles),
             random.choice(strength),
             ''.join(random.choice(words) for i in range(10)), #random text 1 (CHANGE;))
             ''.join(random.choice(words) for i in range(20)), #random text 2 (CHANGE;))
