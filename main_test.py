@@ -24,7 +24,7 @@ selected = streamlit_menu()
 
 if selected == "Home":
     st.title(f"You have selected {selected}")
-if selected == "Projects":
+if selected == "Counter":
     st.title(f"You have selected {selected}")
 if selected == "Contact":
     st.title(f"You have selected {selected}")
