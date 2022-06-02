@@ -14,8 +14,9 @@ sexes = ['female', 'male', 'nonbinary', 'prefer not to say']
 edu_levels = ['high school', 'bachelor', 'masters', 'phd']
 faculties = ['arts', 'sciences', 'engineering']
 education = ['Information Sciences', 'Computer Scientist', 'Software Engineer', 'Media Science', 'Cognitive Science', 'Journalist']
-
+workfields = ['databases', 'software programming', 'accounting', 'management', 'service industry']
 words = ['this ', 'is ', 'a ', 'random ', 'selection ', 'of ', 'words ', 'yay ', 'banana ', 'cool ', 'hello ']
+strength = ['Very commited and fierce', 'Love working with coworkers', 'Efficient and a teamplayer', 'Creative and solution-minded', 'Great with tech']
 #Hobbies =['Hiking', 'football', 'Gaming', 'Skydiving']
 #skills =['communication', 'leadership', 'cooking']
 images = [f for f in listdir('Images') if isfile(join('Images', f))]
@@ -23,7 +24,7 @@ images = [f for f in listdir('Images') if isfile(join('Images', f))]
 # create a csv file named to contain the dataset
 with open('Data/applicants' + str(nr_applicants) + '.csv', 'w', newline ='') as f: 
     file = csv.writer(f)
-    file.writerow(['Name', 'Age', 'Sex', 'Python_score', 'Education_level', 'education', 'Faculty', "Years_experience", "image", "Text1", "Text2", "factor1", "factor2"])
+    file.writerow(['Name', 'Age', 'Sex', 'Python_score', 'Education_level', 'education', 'Faculty', 'workfields', "Years_experience", "image", "strength", "Text1", "Text2", "factor1", "factor2"])
       
     # generate applicant data from random combinations of variables
     for i in range(nr_applicants):                          
@@ -35,8 +36,10 @@ with open('Data/applicants' + str(nr_applicants) + '.csv', 'w', newline ='') as 
             random.choice(edu_levels), # education level
             random.choice(education), # education level
             random.choice(faculties), # faculty
+            random.choice(workfields),
             random.randint(0, 50), # years experience (OBS: make dependent on age ;))
             random.choice(images),
+            random.choice(strength),
             ''.join(random.choice(words) for i in range(10)), #random text 1 (CHANGE;))
             ''.join(random.choice(words) for i in range(20)), #random text 2 (CHANGE;))
             random.randint(0, 50), # factor 1
