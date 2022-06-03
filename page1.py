@@ -11,19 +11,6 @@ import plotly.io as pio
 pio.kaleido.scope.default_format = "png"
 
 #PAGE SETUP #######################################################
-#from streamlit_option_menu import option_menu
-st.write('<style>div.Widget.row-widget.stRadio > div{flex-direction:row;}</style>', unsafe_allow_html=True)
-# Remove whitespace from the top of the page and sidebar
-st.write('<style>div.block-container{padding-top:2rem;}</style>', unsafe_allow_html=True)
-#condense the space
-padding = 0
-st.markdown(f""" <style>
-    .reportview-container .main .block-container{{
-        padding-top: {padding}rem;
-        padding-right: {padding}rem;
-        padding-left: {padding}rem;
-        padding-bottom: {padding}rem;
-    }} </style> """, unsafe_allow_html=True)
 
 #define style
 local_css("/Users/thearolskovsloth/Documents/MASTERS_I_COGSCI/second_sem/HCI/HCI-exam/styles.css")
