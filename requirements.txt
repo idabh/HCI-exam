@@ -3,6 +3,7 @@ pandas
 numpy
 streamlit
 streamlit_option_menu
+streamlit-multipage
 matplotlib
 plotly
 markdown
