@@ -1,6 +1,7 @@
 #Page 1
 import random
 import plotly.express as px
+import plotly.graph_objects as go
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -30,7 +31,6 @@ local_css("/Users/thearolskovsloth/Documents/MASTERS_I_COGSCI/second_sem/HCI/HCI
 #load data
 df = pd.read_csv('/Users/thearolskovsloth/Documents/MASTERS_I_COGSCI/second_sem/HCI/HCI-exam/Data/applicants200.csv')
 education_rank = {"high school":1, "bachelor":2, "masters":3, "phd":4, "postdoc":5}
-
 
 # DEFINE SIDEBAR #####################
 with st.sidebar:
@@ -70,7 +70,6 @@ st.markdown(counting, unsafe_allow_html=True)
 
 #RADAR##############################################################################################
 
-
 radar_data = pd.DataFrame(dict(
     r=[python_skills/10,
        education_rank[education_level]*2,
@@ -79,64 +78,72 @@ radar_data = pd.DataFrame(dict(
        exp/5],
     theta=['python skills','education_level','factor1',
            'factor2', 'experience'],
-    color = ["#E4FF87", '#709BFF', '#719BFF', '#FFAA70', '#B6FFB4']))
-
-
-def radar_chart(data):  
-    
-    fig = px.line_polar(data, r='r', theta='theta', line_close=True, template='ggplot2', range_r=[0,10], width=600, height=600)
-    st.write(fig)
-
-radar_chart(radar_data)
+    color = ["#E4FF87", '#709BFF', '#719BFF', '#FFAA70', '#B6FFB4']
+    ))
 
 #bar radar
-
 def radar_bar(data):
-    
-    fig1 = px.bar_polar(data, r='r', theta='theta',color='color', template='ggplot2', range_r=[0,10], width=600, height=600)
-    fig1.update_traces(opacity=0.5, selector=dict(type='barpolar')) 
+    fig = px.bar_polar(data, r='r', theta='theta',color='color', template='ggplot2', range_r=[0,10], width=600, height=600)
+    fig.update_traces(opacity=0.5, selector=dict(type='barpolar')) 
+    fig1 = go.Figure(data = fig.data, 
+    layout=go.Layout(
+        polar={'radialaxis': {'visible': False}},width=700, height=700,
+        showlegend=False
+        ))
+    fig1.update_polars(radialaxis_range=[0,10]) 
     st.write(fig1)
+
 radar_bar(radar_data)
 
+def applicant_match(data, ID, match_data):
+    
+    d = data.loc[data['Name'] == ID]
+    app_data = pd.DataFrame(dict(
+    r=[ d.iloc[0,3]/10,
+        education_rank[d.iloc[0,4]]*2,
+        d.iloc[0,14]/5,
+        d.iloc[0,15],
+        d.iloc[0,8]/5],
+    theta=['python skills','education_level','factor1',
+           'factor2', 'experience']))
+    individual = px.line_polar(app_data, r='r', theta='theta', line_close=True, template='ggplot2', range_r=[0,10],width=600, height=600)
+    
+    minimum_demand = px.bar_polar(match_data, r='r', theta='theta',color='color', template='ggplot2', range_r=[0,10],width=600, height=600)
+    minimum_demand.update_traces(opacity=0.5, selector=dict(type='barpolar')) 
 
-
-
-
-import plotly.graph_objects as go
-
-categories = ['python skills','education_level','factor1','factor2', 'experience']
-categories = [*categories, categories[0]]
-
-restaurant_1 = [4, 4, 5, 4, 3]
-
-restaurant_1 = [*restaurant_1, restaurant_1[0]]
-
-
-
-fig = go.Figure(
-    data=[
-        go.Scatterpolar(r=restaurant_1, theta=categories,fill='toself', name='Restaurant 1'),
-        go.Barpolar(r=restaurant_1, theta=categories, name='Restaurant 1',opacity=0.6)
-    ],
-    layout=go.Layout(
-        title=go.layout.Title(text='Restaurant comparison'),
-        polar={'radialaxis': {'visible': True}},
-        showlegend=True
-    )
-)
-
-st.write(fig)
-
+    match_individual = go.Figure(data = individual.data + minimum_demand.data,
+        layout=go.Layout(
+        polar={'radialaxis': {'visible': False}},width=600, height=600,
+        showlegend=False
+    ))
+    match_individual.update_polars(radialaxis_range=[0,10]) 
+    #st.write(match_individual)
+    match_individual.write_image((f"Images/{ID}.png").replace(" ", ""))
+    
+    
+#applicant_match(ID, radar_data)
 #show data frame
 #st.dataframe(data=temp_df, width=None, height=None)
 
 #BUTTON##############################################################################################
-next_page = '<button kind="primary" class="css-9dpgwh edgvbvh1" {background-color: #4CAF50;}  >Next</button>'
+_, _, _, _, _, _, _, _, _, col10 = st.columns(10)
 
-left_column, mid_column, right_column = st.columns(3)
-with right_column:
-    st.button("next")
-    if st.markdown(next_page, unsafe_allow_html=True):
-        st.markdown("hello there")
+
+
+with col10: 
+    if st.button('   Next   '):
+        for applicant in list(temp_df['Name']):
+            applicant_match(temp_df, applicant, radar_data)
+            st.write(applicant)
+            temp_df[temp_df.Name == applicant, "Image"] = (f"Images/{applicant}.png").replace(" ", "")
+        st.markdown(f"writing csv for {len(temp_df)} applicants")
+            
+        temp_df.to_csv("Data/applicants-from-page-1.csv")
+
 #st.balloons()
 #st.snow()
+
+#def radar_chart(data):  
+#    fig = px.line_polar(data, r='r', theta='theta', line_close=True, template='ggplot2', range_r=[0,10], #width=600, height=600)
+#    st.write(fig)
+#radar_chart(radar_data)
