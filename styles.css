@@ -13,3 +13,25 @@ body {
     left: 30px;
     border: 3px solid #73AD21;
   }
+
+  /*Next button*/
+  button.css-1cpxqw2{
+    background-color:rgba(111, 111, 111, 0.018);
+    
+  }
+
+  div.st-d8 {
+    background-color: #0dcaf0;
+}
+
+/*Remove padding*/
+div.css-v561tt{
+  gap: 0rem;
+}
+div.css-ocqkz7{
+  gap: 0rem;
+}
+
+div.css{
+  gap: 0rem;
+}
