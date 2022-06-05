@@ -56,7 +56,7 @@ temp_df = df.loc[
 
 remaining_app = len(temp_df)
 diff_app = f"{(remaining_app)-(len(df))} applicants since initial something"
-counting = f'<div data-testid="stMetricValue" class="css-1xarl3l e16fv1kl2"> <div class="css-1ht1j8u e16fv1kl0"> <span style="font-size:20px;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;There are  &nbsp;&nbsp;</span> <span <h1 style="text-align: center;font-size:100px;">  {remaining_app} </h1> </span><span style="font-size:20px;">applicants remaining</span></div></div>'
+counting = f'<div data-testid="stMetricValue" class="css-1xarl3l e16fv1kl2"> <div class="css-1ht1j8u e16fv1kl0"> <span style="font-size:20px;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;There are  &nbsp;&nbsp;</span> <span <h1 style="text-align: center;font-size:100px;">  {remaining_app} </h1> </span><span style="font-size:20px;">applicants remaining</span> </div></div>'
 st.markdown(counting, unsafe_allow_html=True)
 
 #RADAR##############################################################################################
@@ -118,17 +118,18 @@ with col1:
     if st.button ('+joker', help='Click here to add a joker/wildcard to the full pool of applicants that does not meet the requirements you set'):
         wildcard = df.sample()
         
-        st.write('added a wildcard')
+        st.info('added a wildcard')
 
 image_files=[]
 moving_on = 0
 with col10: 
     if st.button('   Next   '):
         moving_on = 1
+        st.success('GREAT')
         #temp_df = pd.concat([temp_df,wildcard]) #should be fixed with cache or sessionstate
         for applicant in list(temp_df['Name']):
             applicant_match(temp_df, applicant, radar_data)
-            st.write(applicant)
+            
             image_files.append(f'{(applicant).replace(" ", "")}.png')
         temp_df['ano_image'] = image_files    
         temp_df.to_csv("Data/applicants-from-page-1.csv")
