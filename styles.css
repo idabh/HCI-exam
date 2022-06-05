@@ -1,5 +1,5 @@
 body {
-    background-color: powderblue;
+    background-color: rgb(49, 132, 143);
   }
   h1 {
     color: rgb(54, 54, 54);
@@ -55,6 +55,7 @@ div.css-1a7jz76{
   gap: 0rem;
 }
 
+/*Move 'remaining X' text up*/
 
 @import url('https://fonts.googleapis.com/css?family=Lato:100&display=swap');
 
