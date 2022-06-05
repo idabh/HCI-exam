@@ -17,11 +17,22 @@ body {
   /*Next button*/
   button.css-1cpxqw2{
     background-color:rgba(111, 111, 111, 0.018);
-    
+    padding-right: 30px;
+    padding-left: 30px;
+    right: -1020px;
+    position: relative
   }
 
-  div.st-d8 {
-    background-color: #0dcaf0;
+/*Right center compare button: Label and square*/
+div.css-1djdyxw.ek41t0m0{
+  left: 130px;
+  display: inline-block;
+  position: relative;
+  top: 2px
+}
+span.st-ev {
+  left: 225px;
+  position: relative;
 }
 
 /*Remove padding*/
@@ -31,7 +42,6 @@ div.css-v561tt{
 div.css-ocqkz7{
   gap: 0rem;
 }
-
 div.css{
   gap: 0rem;
 }

@@ -1,13 +1,17 @@
 import streamlit as st
 from src.utils import * 
 from PIL import Image
+    
+with open('styles.css') as f:
+    st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
-def show_page2(rkey_list, tkey_list, index, df): 
+def show_page2(ckey_list, rkey_list, tkey_list, index, df): 
     col1, col2, col3, col4 = st.columns(4)
     
     #define keys
     radio_key = rkey_list[index]
     text_key = tkey_list[index]
+    compare_key = ckey_list[index]
 
     #define image
     image_path = df.iloc[index]['image']
@@ -17,7 +21,7 @@ def show_page2(rkey_list, tkey_list, index, df):
     
     #define personality profile
     personality_path = df.iloc[index]['personality_profiles']
-    personality_profile = "<img src='data:image/png;base64,{}' class='img-fluid' style='width:270px; height:200px; position:relative; top:20px;'>".format(
+    personality_profile = "<img src='data:image/png;base64,{}' class='img-fluid' style='width:270px; height:200px; position:relative; top:-7px;'>".format(
         img_to_bytes(f'Data/personality_plots/{personality_path}')
         )
         
@@ -37,26 +41,14 @@ def show_page2(rkey_list, tkey_list, index, df):
 
 
     with col1: 
-        st.write('')
         st.markdown(image, unsafe_allow_html= True)
-        st.write('')
-        st.write('')
-        st.write('')
-        st.write('')
-        st.write('')
     
     with col2: 
-        st.write('')
         st.radio(label = 'Select option', options =['Not selected', 'Yes', 'Maybe', 'No'], key=radio_key)
+        st.write('')
         st.text_input(label = 'Notes', key = text_key)
-        st.write('')
-        st.write('')
-        st.write('')
 
     with col3: 
-        st.write('')
-        st.write('')
-        st.write('')
         #write education
         st.markdown(f"<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-book' viewBox='0 0 16 16'><path d='M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z'/></svg>     {education}", unsafe_allow_html=True)
         #write experience
@@ -68,18 +60,19 @@ def show_page2(rkey_list, tkey_list, index, df):
 
 
     with col4: 
-        st.markdown("<div style = 'position:relative; left:95px; top:25px; '>DISC-Profile</div>", unsafe_allow_html= True)
+        st.markdown("<div style = 'position:relative; left:95px; top:opx; '>DISC-Profile</div>", unsafe_allow_html= True)
         st.markdown(personality_profile, unsafe_allow_html= True)
-        st.write('')
-        #st.write('')
-        #st.checkbox('Compare', key = index)    
-
+        st.checkbox('Compare', key =  compare_key)
 
         #st.markdown(f"<p style = 'position:absolute; top:{index + 25}px; height: 100px; width: 200px; border: 3px solid #73AD21;'>{Text1}</p> ", unsafe_allow_html=True)
         #st.markdown(f"<p style = 'position:absolute; top:{index + 140}px; height: 100px; width: 200px; border: 3px solid #73AD21;'>{Text2}</p> ", unsafe_allow_html=True)
   
-    #Add addtional information
     with st.expander("More information"):
         st.markdown(f'<b>Motivation </b> <br> {motivation}', unsafe_allow_html=True)
     st.write('')
     st.write('')
+    
+    
+
+
+

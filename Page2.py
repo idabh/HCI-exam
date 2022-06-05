@@ -10,24 +10,15 @@ import numpy as np
 import pandas as pd
 import csv 
 import os.path
-from src.utils_page2 import * 
+from elgiganten_view import * 
 
 #set wide style 
 st.set_page_config(layout = "wide")
 
-#define style
-local_css("styles.css")
+from src.utils_page2 import * 
 
-#condense the space
-padding = 0
-st.markdown(f""" <style>
-    .reportview-container .main .block-container{{
-        padding-top: {padding}rem;
-        padding-right: {padding}rem;
-        padding-left: {padding}rem;
-        padding-bottom: {padding}rem;
-    }} </style> """, unsafe_allow_html=True)
-
+with open('styles.css') as f:
+    st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
 #define data 
 candidates = pd.read_csv('Data/applicants200.csv',na_values=['a','b'])
@@ -37,6 +28,7 @@ text_input = [1, len(candidates)]
 #initialise session state
 rkey_list = [f'radio_{i}' for i in range(0, len(candidates))]
 tkey_list = [f'text_{i}' for i in range(0, len(candidates))]
+ckey_list = [f'compare_{i}' for i in range(0, len(candidates))]
 
 for key in rkey_list: 
     if key not in st.session_state:
@@ -48,12 +40,20 @@ for key in tkey_list:
         st.session_state[key] = ""
     else:
         st.session_state[key] = st.session_state[key]
+for key in ckey_list: 
+    if key not in st.session_state:
+        st.session_state[key] = False
+    else:
+        st.session_state[key] = st.session_state[key]
 
 for candidate in ['yes_candidates', 'maybe_candidates', 'no_candidates']:
     if candidate not in st.session_state: 
         st.session_state[candidate] = 0
     else: 
         st.session_state[candidate] = st.session_state[candidate]
+
+#Define comparison: 
+compare_candidates = [key for key, value in st.session_state.items() if 'compare_' in key and value == True]
 
 #Add title
 st.markdown("<h1 style='text-align: center;'>STEP 2: Review</h1>", unsafe_allow_html=True)
@@ -62,8 +62,11 @@ st.markdown("<h1 style='text-align: center;'>STEP 2: Review</h1>", unsafe_allow_
 process_bar = st.progress(50)
 
 #Guide
-with st.expander("How to use this page"):
-    st.write('Guidelines')
+with st.expander("Compare candidates"):
+    elgiganten_view(candidates, compare_candidates)
+
+if len(compare_candidates) > 3:
+    st.warning('You can only compare 3 candidates at the time!')
 
 #define menu
 selected = streamlit_menu(options=[f'All ({len(candidates)})', f'Yes ({st.session_state.yes_candidates})', f'Maybe ({st.session_state.maybe_candidates})', f'No ({st.session_state.no_candidates})'], icons=["circle", "check-circle", "question-circle", "x-circle"])
@@ -84,22 +87,33 @@ if selected == f'All ({len(candidates)})':
     #loop through candidates
     for c in range(0, len(candidates)): 
         #show page
-        show_page2(rkey_list, tkey_list, index = c, df = candidates)   
+        show_page2(ckey_list, rkey_list, tkey_list, index = c, df = candidates)   
   
 if selected == f'Yes ({st.session_state.yes_candidates})':
     #loop through candidates
     for c in yes_candidates: 
         #show page
-        show_page2(rkey_list, tkey_list, index = c, df = candidates)   
+        show_page2(ckey_list, rkey_list, tkey_list, index = c, df = candidates)   
 
 if selected == f'Maybe ({st.session_state.maybe_candidates})':
     #loop through candidates
     for c in maybe_candidates: 
         #show page
-        show_page2(rkey_list, tkey_list, index = c, df = candidates)   
+        show_page2(ckey_list, rkey_list, tkey_list, index = c, df = candidates)   
 
 if selected == f'No ({st.session_state.no_candidates})':
     #loop through candidates 
     for c in no_candidates: 
         #show page
-        show_page2(rkey_list, tkey_list, index = c, df = candidates)   
+        show_page2(ckey_list, rkey_list, tkey_list, index = c, df = candidates)
+
+#Next button
+next = st.button('Next')
+
+#Create output
+if next == True: 
+    df = candidates.iloc[yes_candidates]
+    df.to_csv('Data/yes_candidates.csv') 
+
+#st.markdown("<style>div.sticky{position:sticky;bottom:0;padding:50px;font-size: 20px;}</style><div class='sticky'>I will stick to the screen when you reach my scroll position</div>", unsafe_allow_html=True)    #Add addtional information
+#st.markdown("<style> {position:sticky; top : 0;  font-size: 30px;  color: white;  background-color:  #3991bd;  width: 150px;  height: 150px;}</style>", unsafe_allow_html=True)  
