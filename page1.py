@@ -95,6 +95,8 @@ def applicant_match(data, ID, match_data):
     theta=['python skills','education_level','factor1',
            'factor2', 'experience']))
     individual = px.line_polar(app_data, r='r', theta='theta', line_close=True, template='ggplot2', range_r=[0,10],width=600, height=600)
+    individual.update_traces(fill='toself')
+    #if we want to change colors, look at Scatterpolar
     
     minimum_demand = px.bar_polar(match_data, r='r', theta='theta',color='color', template='ggplot2', range_r=[0,10],width=600, height=600)
     minimum_demand.update_traces(opacity=0.5, selector=dict(type='barpolar')) 
@@ -110,17 +112,25 @@ def applicant_match(data, ID, match_data):
 #st.dataframe(data=temp_df, width=None, height=None)
 
 #BUTTON##############################################################################################
-_, _, _, _, _, _, _, _, _, col10 = st.columns(10)
+col1, _, _, _, _, _, col7, col8, _, col10 = st.columns(10)
+
+with col1:
+    if st.button ('+joker', help='Click here to add a joker/wildcard to the full pool of applicants that does not meet the requirements you set'):
+        wildcard = df.sample()
+        
+        st.write('added a wildcard')
 
 image_files=[]
+moving_on = 0
 with col10: 
     if st.button('   Next   '):
+        moving_on = 1
+        #temp_df = pd.concat([temp_df,wildcard]) #should be fixed with cache or sessionstate
         for applicant in list(temp_df['Name']):
             applicant_match(temp_df, applicant, radar_data)
             st.write(applicant)
             image_files.append(f'{(applicant).replace(" ", "")}.png')
-        temp_df['image'] = image_files    
+        temp_df['ano_image'] = image_files    
         temp_df.to_csv("Data/applicants-from-page-1.csv")
-
 #st.balloons()
 #st.snow()
