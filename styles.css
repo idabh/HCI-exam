@@ -54,79 +54,64 @@ div.css-ib6r8f{
 div.css-1a7jz76{
   gap: 0rem;
 }
-@import 'https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300';
 
-html,
-body {
+
+@import url('https://fonts.googleapis.com/css?family=Lato:100&display=swap');
+
+body, html {
   width: 100%;
   height: 100%;
-  overflow: hidden;
   margin: 0;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  font-family: 'Open Sans Condensed', sans-serif;
+  padding: 0;
+  background: #5CA4EA;
+  overflow: hidden;
+  font-family: 'Lato', sans-serif;
 }
 
-div[class*=box] {
-  height: 33.33%;
-  width: 100%; 
+.container {
+  width: 400px;
+  height: 400px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.box-1 { background-color: #FF6766; }
-.box-2 { background-color: #3C3C3C; }
-.box-3 { background-color: #66A182; }
+.center {
+  width: 180px;
+  height: 60px;
+  position: absolute;
+}
 
 .btn {
-  line-height: 50px;
-  height: 50px;
-  text-align: center;
-  width: 250px;
+  width: 180px;
+  height: 60px;
   cursor: pointer;
+  background: transparent;
+  border: 1px solid #b3e7b1;
+  outline: none;
+  transition: 1s ease-in-out;
 }
 
-/* 
-========================
-      BUTTON THREE
-========================
-*/
-.btn-three {
-  color: #FFF;
-  transition: all 0.5s;
-  position: relative;
-}
-.btn-three::before {
-  content: '';
+svg {
   position: absolute;
-  top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  background-color: rgba(255,255,255,0.1);
-  transition: all 0.3s;
-}
-.btn-three:hover::before {
-  opacity: 0 ;
-  transform: scale(0.5,0.5);
-}
-.btn-three::after {
-  content: '';
-  position: absolute;
   top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  opacity: 0;
-  transition: all 0.3s;
-  border: 1px solid rgba(255,255,255,0.5);
-  transform: scale(1.2,1.2);
+  fill: none;
+  stroke: rgb(184, 244, 214);
+  stroke-dasharray: 150 480;
+  stroke-dashoffset: 150;
+  transition: 1s ease-in-out;
 }
-.btn-three:hover::after {
-  opacity: 1;
-  transform: scale(1,1);
+
+.btn:hover {
+  transition: 1s ease-in-out;
+  background: #4fda58;
+}
+
+.btn:hover svg {
+  stroke-dashoffset: -480;
 }
