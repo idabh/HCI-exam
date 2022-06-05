@@ -1,44 +1,44 @@
-import streamlit as st 
-from grid import *
-from src.utils import * 
+
+import streamlit as st
+from page1 import *
+from src.utils_page1 import *
+from page2 import *
+from page5 import *
+
 st.set_page_config(layout = "wide")
 
-col1, col2, col3 = st.columns(3)
-with col1: 
-  st.radio(label = 'Select option', options =['Not selected', 'Yes', 'Maybe', 'No'], key='key1')
-with col2: 
-  st.radio(label = 'Select option', options =['Not selected', 'Yes', 'Maybe', 'No'], key='key2')
-with col3: 
-  st.radio(label = 'Select option', options =['Not selected', 'Yes', 'Maybe', 'No'], key='key3')
-    
-image = "<img src='data:image/png;base64,{}' class='img-fluid' style='width:300px; position:relative; top:15px;'>".format(
-            img_to_bytes('Images/download2.jpg')
-            )
+option_names = ["page1", "page2", "page3"]
 
-with Grid("1 1 1") as grid:
-        grid.cell(2,3,1,2).markdown(image)
-        grid.cell("b", 2, 3, 2, 3).text("The cell to the left is a dataframe")
-        grid.cell("c", 3, 4, 2, 3).plotly_chart(get_plotly_fig())
-        grid.cell("d", 1, 2, 1, 3).dataframe(get_dataframe())
-        grid.cell("e", 3, 4, 1, 2).markdown("Try changing the **block container style** in the sidebar!")
+placeholder = st.empty()
 
-   
-modal = st.expander("Advanced options")
+next = st.button("Next/save")
 
-option_1 = modal.checkbox("Option 1")
-option_2 = modal.checkbox("Option 2")
-option_3 = modal.checkbox("Option 3")
-option_4 = modal.checkbox("Option 4")
+if next:
+   if st.session_state["radio_option"] == 'page1':
+        st.session_state.radio_option = 'page2'
+   elif st.session_state["radio_option"] == 'page2':
+        st.session_state.radio_option = 'page5'
+   else: 
+       st.session_state["radio_option"] = 'page1'
 
-if option_1:
-   st.write("Hello world 1")
+with st.expander('Navigate'): 
+   option = st.radio("Pick an option", option_names , key="radio_option")
 
-if option_2:
-   st.write("Hello world 2")
-
-if option_3:
-   st.write("Hello world 3")
-
-if option_4:
-   st.write("Hello world 4")
-
+if option == 'page1':
+   with placeholder.container(): 
+      temp_df, radar_data, education_rank = page1()
+      #image_files=[]
+      #for applicant in list(temp_df['Name']):
+      #   applicant_match(temp_df, applicant, radar_data, education_rank)
+      #   image_files.append(f'{(applicant).replace(" ", "")}.png')
+      #   temp_df['ano_image'] = image_files    
+      #   temp_df.to_csv("Data/applicants-from-page-1.csv")
+      
+elif option == 'page2':
+   with placeholder.container(): 
+      yes_candidates = page2(candidates)
+      df = candidates.iloc[yes_candidates]
+      df.to_csv('Data/yes_candidates.csv') 
+elif option == 'page5':
+   with placeholder.container(): 
+      page5()

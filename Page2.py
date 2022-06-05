@@ -14,14 +14,8 @@ from elgiganten_view import *
 from src.utils_page2 import * 
 
 candidates = pd.read_csv('Data/applicants-from-page-1.csv',na_values=['a','b'])
-st.set_page_config(layout = "wide")
 
 def page2(candidates): 
-    with open('styles.css') as f:
-        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
-
-    #define data 
-
     #initialise session state
     rkey_list = [f'radio_{i}' for i in range(0, len(candidates))]
     tkey_list = [f'text_{i}' for i in range(0, len(candidates))]
@@ -106,7 +100,5 @@ def page2(candidates):
 
     
     return yes_candidates
-    #st.markdown("<style>div.sticky{position:sticky;bottom:0;padding:50px;font-size: 20px;}</style><div class='sticky'>I will stick to the screen when you reach my scroll position</div>", unsafe_allow_html=True)    #Add addtional information
-    #st.markdown("<style> {position:sticky; top : 0;  font-size: 30px;  color: white;  background-color:  #3991bd;  width: 150px;  height: 150px;}</style>", unsafe_allow_html=True)  
 
-page2(candidates)
+#page2(candidates)
