@@ -31,12 +31,13 @@ columns = [col1, col2,col3]
 #for candidate,ncol in list(df['ano_image']):
 for candidate,ncol in zip(list(df['ano_image']), cycle(columns)): 
     with ncol: 
-        st.image('/Users/thearolskovsloth/Documents/MASTERS_I_COGSCI/second_sem/HCI/HCI-exam/Images/DSC02719.png')
+        st.image('/Users/thearolskovsloth/Documents/MASTERS_I_COGSCI/second_sem/HCI/HCI-exam/Data/Images/download2.jpg')
         #st.image(f'/Users/thearolskovsloth/Documents/MASTERS_I_COGSCI/second_sem/HCI/HCI-exam/Images/{candidate}')
         current_name = df.loc[df['ano_image']== candidate]
 
-        st.subheader(f'This is {current_name.iloc[0,1]}.')
+        st.subheader(f'{current_name.iloc[0,1]}:')
+        
+        st.markdown(f'{current_name.iloc[0,1]} is __{current_name.iloc[0,2]} years old__ and has a __{current_name.iloc[0,5]}__ in __{current_name.iloc[0,6]}__.', unsafe_allow_html=True)
         
 
-with col3:
-    st.markdown(f'<div class="box-3"><div class="btn btn-one"><span>INVITE CANDIDATES TO INTERVIEW</span></div></div>', unsafe_allow_html=True)
+st.markdown(f'<div class="box-3"><div class="btn btn-one"><span>INVITE CANDIDATES TO INTERVIEW</span></div></div>', unsafe_allow_html=True)
