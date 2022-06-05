@@ -55,8 +55,13 @@ div.css-1a7jz76{
   gap: 0rem;
 }
 
-/*Move 'remaining X' text up*/
+/*move 'remaining text up*/
 
+/*
+div.css-znku1x{
+  position: relative;
+  top: -50px;
+}
 @import url('https://fonts.googleapis.com/css?family=Lato:100&display=swap');
 
 body, html {
@@ -116,3 +121,4 @@ svg {
 .btn:hover svg {
   stroke-dashoffset: -480;
 }
+*/

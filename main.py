@@ -1,64 +1,44 @@
-import streamlit as st
-from streamlit_option_menu import option_menu
+from page1 import * 
+from page2 import *
+from page5 import * 
+import os
 
-# 1=sidebar menu, 2=horizontal menu, 3=horizontal menu w/ custom menu
-EXAMPLE_NO = 2
+#set wide style 
 
+#define style
+with open('styles.css') as f:
+    st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
-def streamlit_menu(example=1):
-    if example == 1:
-        # 1. as sidebar menu
-        with st.sidebar:
-            selected = option_menu(
-                menu_title="Main Menu",  # required
-                options=["Home", "Projects", "Contact"],  # required
-                icons=["house", "book", "envelope"],  # optional
-                menu_icon="cast",  # optional
-                default_index=0,  # optional
-            )
-        return selected
+candidates = pd.read_csv('Data/applicants-from-page-1.csv',na_values=['a','b'])
+st.session_state['page_no'] = 1
 
-    if example == 2:
-        # 2. horizontal menu w/o custom style
-        selected = option_menu(
-            menu_title=None,  # required
-            options=["Home", "Projects", "Contact"],  # required
-            icons=["house", "book", "envelope"],  # optional
-            menu_icon="cast",  # optional
-            default_index=0,  # optional
-            orientation="horizontal",
-        )
-        return selected
+def main(candidates): 
+    if st.session_state['page_no'] == 1: 
+        temp_df, radar_data, education_rank = page1(st.session_state['page_no'])
+        #Next button
+        next1 = st.button('Next', key = 'page1')
 
-    if example == 3:
-        # 2. horizontal menu with custom style
-        selected = option_menu(
-            menu_title=None,  # required
-            options=["Home", "Projects", "Contact"],  # required
-            icons=["house", "book", "envelope"],  # optional
-            menu_icon="cast",  # optional
-            default_index=0,  # optional
-            orientation="horizontal",
-            styles={
-                "container": {"padding": "0!important", "background-color": "#fafafa"},
-                "icon": {"color": "orange", "font-size": "25px"},
-                "nav-link": {
-                    "font-size": "25px",
-                    "text-align": "left",
-                    "margin": "0px",
-                    "--hover-color": "#eee",
-                },
-                "nav-link-selected": {"background-color": "green"},
-            },
-        )
-        return selected 
+        #Change to next page
+        if next1 == True: 
+            image_files=[]
+            for applicant in list(temp_df['Name']):
+                applicant_match(temp_df, applicant, radar_data, education_rank)
+                image_files.append(f'{(applicant).replace(" ", "")}.png')
+            temp_df['ano_image'] = image_files    
+            temp_df.to_csv("Data/applicants-from-page-1.csv")
+            st.session_state['page_no'] = 2
 
+    elif st.session_state['page_no'] == 2: 
+        yes_candidates = page2(st.session_state['page_no'], candidates)
+        #Next button
+        next2 = st.button('Next', key = 'page2')
+        #Change to next page
+        if next2 == True: 
+            df = candidates.iloc[yes_candidates]
+            df.to_csv('Data/yes_candidates.csv') 
+            st.session_state['page_no'] = 3
+    elif st.session_state['page_no'] == 3:
+        #page1()
+        st.write('succes')
 
-selected = streamlit_menu(example=EXAMPLE_NO)
-
-if selected == "Home":
-    st.title(f"You have selected {selected}")
-if selected == "Projects":
-    st.title(f"You have selected {selected}")
-if selected == "Contact":
-    st.title(f"You have selected {selected}")
+main(candidates)
