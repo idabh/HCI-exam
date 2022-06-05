@@ -8,3 +8,4 @@ matplotlib
 plotly
 markdown
 names
+kaleido
