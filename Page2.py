@@ -21,7 +21,7 @@ with open('styles.css') as f:
     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
 #define data 
-candidates = pd.read_csv('Data/applicants200.csv',na_values=['a','b'])
+candidates = pd.read_csv('Data/applicants-from-page-1.csv',na_values=['a','b'])
 candidates = pd.DataFrame(candidates[0:5])
 text_input = [1, len(candidates)]
 

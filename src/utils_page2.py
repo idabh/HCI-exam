@@ -14,7 +14,7 @@ def show_page2(ckey_list, rkey_list, tkey_list, index, df):
     compare_key = ckey_list[index]
 
     #define image
-    image_path = df.iloc[index]['image']
+    image_path = df.iloc[index]['ano_image']
     image = "<img src='data:image/png;base64,{}' class='img-fluid' style='width:270px; height:247px; position:relative; top:0px;'>".format(
         img_to_bytes(f'Data/Images/{image_path}')
         )
