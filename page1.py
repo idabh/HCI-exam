@@ -13,12 +13,12 @@ pio.kaleido.scope.default_format = "png"
 #PAGE SETUP #######################################################
 
 #define style
-local_css("/Users/thearolskovsloth/Documents/MASTERS_I_COGSCI/second_sem/HCI/HCI-exam/styles.css")
+local_css("styles.css")
 
 ########################
 
 #load data
-df = pd.read_csv('/Users/thearolskovsloth/Documents/MASTERS_I_COGSCI/second_sem/HCI/HCI-exam/Data/applicants200.csv')
+df = pd.read_csv('/Data/applicants200.csv')
 education_rank = {"high school":1, "bachelor":2, "masters":3, "phd":4, "postdoc":5}
 
 # DEFINE SIDEBAR #####################
@@ -106,7 +106,7 @@ def applicant_match(data, ID, match_data):
         polar={'radialaxis': {'visible': False}},width=600, height=600,
         showlegend=False))
     match_individual.update_polars(radialaxis_range=[0,10]) 
-    match_individual.write_image((f"/Users/thearolskovsloth/Documents/MASTERS_I_COGSCI/second_sem/HCI/HCI-exam/Images/{ID}.png").replace(" ", ""))
+    match_individual.write_image((f"/Images/{ID}.png").replace(" ", ""))
     
 #show data frame
 #st.dataframe(data=temp_df, width=None, height=None)
