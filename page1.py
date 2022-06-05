@@ -11,14 +11,14 @@ import plotly.io as pio
 pio.kaleido.scope.default_format = "png"
 
 #PAGE SETUP #######################################################
-
 #define style
-local_css("styles.css")
+with open('styles.css') as f:
+    st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
 ########################
 
 #load data
-df = pd.read_csv('/Data/applicants200.csv')
+df = pd.read_csv('Data/applicants200.csv')
 education_rank = {"high school":1, "bachelor":2, "masters":3, "phd":4, "postdoc":5}
 
 # DEFINE SIDEBAR #####################
@@ -106,7 +106,7 @@ def applicant_match(data, ID, match_data):
         polar={'radialaxis': {'visible': False}},width=600, height=600,
         showlegend=False))
     match_individual.update_polars(radialaxis_range=[0,10]) 
-    match_individual.write_image((f"/Images/{ID}.png").replace(" ", ""))
+    match_individual.write_image((f"Images/{ID}.png").replace(" ", ""))
     
 #show data frame
 #st.dataframe(data=temp_df, width=None, height=None)
