@@ -1,3 +1,14 @@
+import random
+from timeit import repeat
+import plotly.express as px
+import plotly.graph_objects as go
+import streamlit as st
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from src.utils import *
+from itertools import cycle
+import plotly.offline as pyo
 
 df = pd.read_csv('/Users/thearolskovsloth/Documents/MASTERS_I_COGSCI/second_sem/HCI/HCI-exam/Data/applicants-from-page-1.csv')
 education_rank = {"high school":1, "bachelor":2, "masters":3, "phd":4, "postdoc":5}
@@ -33,9 +44,6 @@ st.write(match_individual)
 
 
 
-import plotly.graph_objects as go
-import plotly.offline as pyo
-
 
 categories = ['python skills','education_level','factor1','factor2', 'experience']
 categories = [*categories, categories[0]]
@@ -60,4 +68,4 @@ fig = go.Figure(
         showlegend=True
     )
 )
-#page5()
+st.write(fig)
