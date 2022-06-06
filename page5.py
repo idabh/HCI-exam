@@ -12,7 +12,9 @@ from itertools import cycle
 
 def page5():
     #load data
-    df = pd.read_csv('Data/yes_candidates.csv')
+    df = st.session_state['output_from_page2']
+    #st.write(df)
+
 
     #Add title
     st.markdown("<h1 style='text-align: center;'>STEP 3: Here are your candidates</h1>", unsafe_allow_html=True)
@@ -36,15 +38,18 @@ def page5():
                 st.markdown(f'{current_name.iloc[0,2]} is __{current_name.iloc[0,3]} years old__ and has a __{current_name.iloc[0,6]}__ in __{current_name.iloc[0,7]}__.', unsafe_allow_html=True)
                 invite = st.checkbox(f'Invite {current_name.iloc[0,2]} to interview', value=True)
 
-        if st.button(' INVITE CANDIDATES TO INTERVIEW '):
-            st.success('Sent e-mail invitations to all selected')
+        #if st.button(' INVITE CANDIDATES TO INTERVIEW '):
+         #   st.success('Sent e-mail invitations to all selected')
 
-        st.subheader(f'{current_name.iloc[0,1]}:')
+        #st.subheader(f'{current_name.iloc[0,1]}:')
         
-        st.markdown(f'{current_name.iloc[0,1]} is __{current_name.iloc[0,2]} years old__ and has a __{current_name.iloc[0,5]}__ in __{current_name.iloc[0,6]}__.', unsafe_allow_html=True)
+        #st.markdown(f'{current_name.iloc[0,1]} is __{current_name.iloc[0,2]} years old__ and has a __{current_name.iloc[0,5]}__ in __{current_name.iloc[0,6]}__.', unsafe_allow_html=True)
 
-        invite = st.checkbox(f'Invite {current_name.iloc[0,1]} to interview', value=True)
+        #invite = st.checkbox(f'Invite {current_name.iloc[0,1]} to interview', value=True)
 
-    with col2:
-        if st.button(' INVITE CANDIDATES TO INTERVIEW '):
-            st.success('Sent e-mail invitations to all selected')
+
+    
+
+    st.write('')
+    if st.button(' INVITE CANDIDATES TO INTERVIEW '):
+        st.success('Sent e-mail invitations to all selected')

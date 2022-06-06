@@ -13,7 +13,7 @@ import os.path
 from elgiganten_view import * 
 from src.utils_page2 import * 
 
-candidates = pd.read_csv('Data/applicants-from-page-1.csv',na_values=['a','b'])
+#candidates = pd.read_csv('Data/applicants-from-page-1.csv',na_values=['a','b'])
 
 def page2(): 
     candidates = st.session_state.temp_df
@@ -39,7 +39,7 @@ def page2():
         else:
             st.session_state[key] = st.session_state[key]
 
-    for candidate in ['yes_candidates', 'maybe_candidates', 'no_candidates']:
+    for candidate in ['no_yes_candidates', 'no_maybe_candidates', 'no_no_candidates']:
         if candidate not in st.session_state: 
             st.session_state[candidate] = 0
         else: 
@@ -62,18 +62,25 @@ def page2():
         st.warning('You can only compare 3 candidates at the time!')
 
     #define menu
-    selected = streamlit_menu(options=[f'All ({len(candidates)})', f'Yes ({st.session_state.yes_candidates})', f'Maybe ({st.session_state.maybe_candidates})', f'No ({st.session_state.no_candidates})'], icons=["circle", "check-circle", "question-circle", "x-circle"])
+    #--test:
+    #yes_col, ignore_col = st.columns([900,1])
+    placeholder2 = st.empty()
+    with placeholder2.container():
+        selected = streamlit_menu(options=[f'All ({len(candidates)})', f'Yes ({st.session_state.no_yes_candidates})', f'Maybe ({st.session_state.no_maybe_candidates})', f'No ({st.session_state.no_no_candidates})'], icons=["circle", "check-circle", "question-circle", "x-circle"])
+
+    
+    #selected = streamlit_menu(options=[f'All ({len(candidates)})', f'Yes ({st.session_state.no_yes_candidates})', f'Maybe ({st.session_state.no_maybe_candidates})', f'No ({st.session_state.no_no_candidates})'], icons=["circle", "check-circle", "question-circle", "x-circle"])
 
     #define columns
     col1, col2, col3, col4 = st.columns(4)
 
     #define candidates
-    yes_candidates = [int(item[0][-1]) for item in st.session_state.items() if item[1]== 'Yes']
-    st.session_state['yes_candidates'] = len(yes_candidates)
-    maybe_candidates = [int(item[0][-1]) for item in st.session_state.items() if item[1]== 'Maybe']
-    st.session_state['maybe_candidates'] = len(maybe_candidates)
-    no_candidates = [int(item[0][-1]) for item in st.session_state.items() if item[1]== 'No']
-    st.session_state['no_candidates'] = len(no_candidates)
+    yes_candidates = [int(item[0][-1]) for item in st.session_state.items() if  'radio_' in item[0] and item[1]== 'Yes']
+    st.session_state['no_yes_candidates'] = len(yes_candidates)
+    maybe_candidates = [int(item[0][-1]) for item in st.session_state.items() if 'radio_' in item[0] and item[1]== 'Maybe']
+    st.session_state['no_maybe_candidates'] = len(maybe_candidates)
+    no_candidates = [int(item[0][-1]) for item in st.session_state.items() if  'radio_' in item[0] and item[1]== 'No']
+    st.session_state['no_no_candidates'] = len(no_candidates)
 
     #define pages
     if selected == f'All ({len(candidates)})':
@@ -83,21 +90,21 @@ def page2():
             show_page2(ckey_list, rkey_list, tkey_list, index = c, df = candidates)   
             st.write('---')
     
-    if selected == f'Yes ({st.session_state.yes_candidates})':
+    if selected == f'Yes ({st.session_state.no_yes_candidates})':
         #loop through candidates
         for c in yes_candidates: 
             #show page
             show_page2(ckey_list, rkey_list, tkey_list, index = c, df = candidates)   
             st.write('---')
 
-    if selected == f'Maybe ({st.session_state.maybe_candidates})':
+    if selected == f'Maybe ({st.session_state.no_maybe_candidates})':
         #loop through candidates
         for c in maybe_candidates: 
             #show page
             show_page2(ckey_list, rkey_list, tkey_list, index = c, df = candidates)   
             st.write('---')
 
-    if selected == f'No ({st.session_state.no_candidates})':
+    if selected == f'No ({st.session_state.no_no_candidates})':
         #loop through candidates 
         for c in no_candidates: 
             #show page
@@ -107,4 +114,11 @@ def page2():
     
     st.session_state.yes_candidates = yes_candidates
 
-#page2(candidates)
+    # TESTING UPDATING:
+
+    placeholder2.empty()
+    with placeholder2.container():
+        selected = streamlit_menu(options=[f'All ({len(candidates)})', f'Yes ({st.session_state.no_yes_candidates})', f'Maybe ({st.session_state.no_maybe_candidates})', f'No ({st.session_state.no_no_candidates})'], icons=["circle", "check-circle", "question-circle", "x-circle"])
+
+
+#page2()

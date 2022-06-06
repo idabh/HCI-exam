@@ -125,18 +125,19 @@ div.stDownloadButton > button:hover {
 
 placeholder = st.empty()
 
-next = st.button("Next/save")
-
 if 'page' not in st.session_state: 
    st.session_state["page"] ='page1'
+
+if st.session_state["page"] in ["page1", "page2"]:
+   next = st.button("Next/save")
 
 if next:
    if st.session_state["page"] == 'page1':
         st.session_state["page"] = 'page2'
    elif st.session_state["page"] == 'page2':
         st.session_state["page"] = 'page5'
-   elif st.session_state["page"] == 'page5':
-        st.session_state["page"] = 'page1'
+   #elif st.session_state["page"] == 'page5':
+   #     st.session_state["page"] = 'page1'
 
 if st.session_state["page"] == 'page1':
    with placeholder.container(): 
@@ -148,8 +149,7 @@ elif st.session_state["page"] == 'page2':
 
    with placeholder.container(): 
       page2()
-      df = candidates.iloc[st.session_state['yes_candidates']]
-      df.to_csv('Data/yes_candidates.csv') 
+      st.session_state['output_from_page2'] = st.session_state['temp_df'].iloc[st.session_state['yes_candidates']]
 elif st.session_state["page"] == 'page5':
    with placeholder.container(): 
       page5()

@@ -48,5 +48,5 @@ def create_plots():
     for applicant in list(st.session_state['temp_df']['Name']):
         applicant_match(st.session_state['temp_df'], applicant, st.session_state['radar_data'], st.session_state['education_rank'])
         image_files.append(f'{(applicant).replace(" ", "")}.png')
-        st.session_state['temp_df']['ano_image'] = image_files    
-        st.session_state['temp_df'].to_csv("Data/applicants-from-page-1.csv")
+    st.session_state['temp_df']['ano_image'] = image_files    
+    st.session_state['temp_df'].to_csv("Data/applicants-from-page-1.csv")
