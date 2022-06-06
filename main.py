@@ -126,21 +126,19 @@ div.stDownloadButton > button:hover {
 placeholder = st.empty()
 next_button = st.empty()
 
-
 if 'page' not in st.session_state: 
    st.session_state["page"] ='page1'
 
-next = next_button.button("Next/save")
-
-
+with next_button.container():
+   next = next_button.button("Next/save")
 
 if next:
    if st.session_state["page"] == 'page1':
         st.session_state["page"] = 'page2'
    elif st.session_state["page"] == 'page2':
         st.session_state["page"] = 'page5'
-   #elif st.session_state["page"] == 'page5':
-   #     st.session_state["page"] = 'page1'
+   elif st.session_state["page"] == 'page5':
+        st.session_state["page"] = 'page1'
 
 if st.session_state["page"] == 'page1':
    with placeholder.container(): 
@@ -156,4 +154,6 @@ elif st.session_state["page"] == 'page2':
 elif st.session_state["page"] == 'page5':
    with placeholder.container(): 
       page5()
+      with next_button.container():
+         next = st.write('')
 
