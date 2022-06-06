@@ -13,10 +13,10 @@ import os.path
 from elgiganten_view import * 
 from src.utils_page2 import * 
 
-candidates = pd.read_csv('Data/applicants-from-page-1.csv',na_values=['a','b'])
+#candidates = pd.read_csv('Data/applicants-from-page-1.csv',na_values=['a','b'])
 
 def page2(): 
-    #candidates = st.session_state.temp_df
+    candidates = st.session_state.temp_df
 
     #initialise session state
     rkey_list = [f'radio_{i}' for i in range(0, len(candidates))]
