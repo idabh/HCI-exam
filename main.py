@@ -1,64 +1,47 @@
+
 import streamlit as st
-from streamlit_option_menu import option_menu
+from page1 import *
+from src.utils_page1 import *
+from page2 import *
+from page5 import *
 
-# 1=sidebar menu, 2=horizontal menu, 3=horizontal menu w/ custom menu
-EXAMPLE_NO = 2
+st.set_page_config(layout = "wide")
 
+#define style
+local_css("styles.css")
 
-def streamlit_menu(example=1):
-    if example == 1:
-        # 1. as sidebar menu
-        with st.sidebar:
-            selected = option_menu(
-                menu_title="Main Menu",  # required
-                options=["Home", "Projects", "Contact"],  # required
-                icons=["house", "book", "envelope"],  # optional
-                menu_icon="cast",  # optional
-                default_index=0,  # optional
-            )
-        return selected
+option_names = ["page1", "page2", "page5"]
 
-    if example == 2:
-        # 2. horizontal menu w/o custom style
-        selected = option_menu(
-            menu_title=None,  # required
-            options=["Home", "Projects", "Contact"],  # required
-            icons=["house", "book", "envelope"],  # optional
-            menu_icon="cast",  # optional
-            default_index=0,  # optional
-            orientation="horizontal",
-        )
-        return selected
+placeholder = st.empty()
 
-    if example == 3:
-        # 2. horizontal menu with custom style
-        selected = option_menu(
-            menu_title=None,  # required
-            options=["Home", "Projects", "Contact"],  # required
-            icons=["house", "book", "envelope"],  # optional
-            menu_icon="cast",  # optional
-            default_index=0,  # optional
-            orientation="horizontal",
-            styles={
-                "container": {"padding": "0!important", "background-color": "#fafafa"},
-                "icon": {"color": "orange", "font-size": "25px"},
-                "nav-link": {
-                    "font-size": "25px",
-                    "text-align": "left",
-                    "margin": "0px",
-                    "--hover-color": "#eee",
-                },
-                "nav-link-selected": {"background-color": "green"},
-            },
-        )
-        return selected 
+next = st.button("Next/save")
 
+if next:
+   if st.session_state["radio_option"] == 'page1':
+        st.session_state.radio_option = 'page2'
+   elif st.session_state["radio_option"] == 'page2':
+        st.session_state.radio_option = 'page5'
+   else: 
+       st.session_state["radio_option"] = 'page1'
 
-selected = streamlit_menu(example=EXAMPLE_NO)
+with st.expander('Navigate'): 
+   option = st.radio("Pick an option", option_names , key="radio_option")
 
-if selected == "Home":
-    st.title(f"You have selected {selected}")
-if selected == "Projects":
-    st.title(f"You have selected {selected}")
-if selected == "Contact":
-    st.title(f"You have selected {selected}")
+if option == 'page1':
+   with placeholder.container(): 
+      temp_df, radar_data, education_rank = page1()
+      #image_files=[]
+      #for applicant in list(temp_df['Name']):
+      #   applicant_match(temp_df, applicant, radar_data, education_rank)
+      #   image_files.append(f'{(applicant).replace(" ", "")}.png')
+      #   temp_df['ano_image'] = image_files    
+      #   temp_df.to_csv("Data/applicants-from-page-1.csv")
+      
+elif option == 'page2':
+   with placeholder.container(): 
+      yes_candidates = page2(candidates)
+      df = candidates.iloc[yes_candidates]
+      df.to_csv('Data/yes_candidates.csv') 
+elif option == 'page5':
+   with placeholder.container(): 
+      page5()

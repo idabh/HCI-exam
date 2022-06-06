@@ -2,9 +2,6 @@ import streamlit as st
 from src.utils import * 
 from PIL import Image
     
-with open('styles.css') as f:
-    st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
-
 def show_page2(ckey_list, rkey_list, tkey_list, index, df): 
     col1, col2, col3, col4 = st.columns(4)
     
@@ -27,8 +24,6 @@ def show_page2(ckey_list, rkey_list, tkey_list, index, df):
         
 
     #define info
-    Text1 = df.iloc[index]['Text1']
-    Text2 = df.iloc[index]['Text2']
     motivation = df.iloc[index]['motivation_letter']
     years_experience = df.iloc[index]['Years_experience']
     education = df.iloc[index]['education']
@@ -63,9 +58,6 @@ def show_page2(ckey_list, rkey_list, tkey_list, index, df):
         st.markdown("<div style = 'position:relative; left:95px; top:opx; '>DISC-Profile</div>", unsafe_allow_html= True)
         st.markdown(personality_profile, unsafe_allow_html= True)
         st.checkbox('Compare', key =  compare_key)
-
-        #st.markdown(f"<p style = 'position:absolute; top:{index + 25}px; height: 100px; width: 200px; border: 3px solid #73AD21;'>{Text1}</p> ", unsafe_allow_html=True)
-        #st.markdown(f"<p style = 'position:absolute; top:{index + 140}px; height: 100px; width: 200px; border: 3px solid #73AD21;'>{Text2}</p> ", unsafe_allow_html=True)
   
     with st.expander("More information"):
         st.markdown(f'<b>Motivation </b> <br> {motivation}', unsafe_allow_html=True)
