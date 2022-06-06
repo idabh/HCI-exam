@@ -62,7 +62,14 @@ def page2():
         st.warning('You can only compare 3 candidates at the time!')
 
     #define menu
-    selected = streamlit_menu(options=[f'All ({len(candidates)})', f'Yes ({st.session_state.no_yes_candidates})', f'Maybe ({st.session_state.no_maybe_candidates})', f'No ({st.session_state.no_no_candidates})'], icons=["circle", "check-circle", "question-circle", "x-circle"])
+    #--test:
+    #yes_col, ignore_col = st.columns([900,1])
+    placeholder2 = st.empty()
+    with placeholder2.container():
+        selected = streamlit_menu(options=[f'All ({len(candidates)})', f'Yes ({st.session_state.no_yes_candidates})', f'Maybe ({st.session_state.no_maybe_candidates})', f'No ({st.session_state.no_no_candidates})'], icons=["circle", "check-circle", "question-circle", "x-circle"])
+
+    
+    #selected = streamlit_menu(options=[f'All ({len(candidates)})', f'Yes ({st.session_state.no_yes_candidates})', f'Maybe ({st.session_state.no_maybe_candidates})', f'No ({st.session_state.no_no_candidates})'], icons=["circle", "check-circle", "question-circle", "x-circle"])
 
     #define columns
     col1, col2, col3, col4 = st.columns(4)
@@ -106,5 +113,12 @@ def page2():
 
     
     st.session_state.yes_candidates = yes_candidates
+
+    # TESTING UPDATING:
+
+    placeholder2.empty()
+    with placeholder2.container():
+        selected = streamlit_menu(options=[f'All ({len(candidates)})', f'Yes ({st.session_state.no_yes_candidates})', f'Maybe ({st.session_state.no_maybe_candidates})', f'No ({st.session_state.no_no_candidates})'], icons=["circle", "check-circle", "question-circle", "x-circle"])
+
 
 #page2()
