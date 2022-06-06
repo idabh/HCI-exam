@@ -15,7 +15,9 @@ from src.utils_page2 import *
 
 candidates = pd.read_csv('Data/applicants-from-page-1.csv',na_values=['a','b'])
 
-def page2(candidates): 
+def page2(): 
+    candidates = st.session_state.temp_df
+
     #initialise session state
     rkey_list = [f'radio_{i}' for i in range(0, len(candidates))]
     tkey_list = [f'text_{i}' for i in range(0, len(candidates))]
@@ -99,6 +101,6 @@ def page2(candidates):
             show_page2(ckey_list, rkey_list, tkey_list, index = c, df = candidates)
 
     
-    return yes_candidates
+    st.session_state.yes_candidates = yes_candidates
 
 #page2(candidates)
