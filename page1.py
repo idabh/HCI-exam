@@ -13,6 +13,7 @@ pio.kaleido.scope.default_format = "png"
 
 def page1():
     #load data
+    st.write('hej')
     df = pd.read_csv('Data/applicants200.csv')
     education_rank = {"high school":1, "bachelor":2, "masters":3, "phd":4, "postdoc":5}
 
@@ -66,18 +67,23 @@ def page1():
 
     radar_bar(radar_data)
 
-        
+    st.button("hej")    
     #show data frame
     #st.dataframe(data=temp_df, width=None, height=None)
 
     #BUTTON##############################################################################################
-    col1, _, _, _, _, _, col7, col8, _, col10 = st.columns(10)
+    #col1, _, _, _, _, _, col7, col8, _, col10 = st.columns(10)
+    col1,col2 = st.columns([1,9])
+    if col2.button('hej2'):
+        st.write("hej 44")
     with col1:
         if st.button ('+joker', help='Click here to add a joker/wildcard to the full pool of applicants that does not meet the requirements you set'):
             wildcard = df.sample()
             
             st.info('added a wildcard')
 
-    return temp_df, radar_data, education_rank
+    st.session_state.temp_df = temp_df
+    st.session_state.radar_data= radar_data
+    st.session_state.education_rank = education_rank
 
     #page1()
