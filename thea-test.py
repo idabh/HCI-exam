@@ -32,7 +32,6 @@ def applicant_match(data, individual, color):
 '''
 def applicant_match(data, individual, color):
     d = data.loc[data['Name'] == individual]
-    
     r=[ d.iloc[0,4]/10,
         education_rank[d.iloc[0,5]]*2,
         d.iloc[0,15]/5,
@@ -42,9 +41,7 @@ def applicant_match(data, individual, color):
         'factor2', 'experience']
     r = [*r, r[0]]
     individual = go.Scatterpolar(r=r, theta=theta, fill='toself',name=individual, line_color = color,opacity = 0.2,fillcolor= color) 
-    
     return individual
-    #match_individual.write_image((f"/Users/thearolskovsloth/Documents/MASTERS_I_COGSCI/second_sem/HCI/HCI-exam/Images/{individual}.png").replace(" ", ""))
 
 compare_these = list(df['Name'])
 individual1 = applicant_match(df,compare_these[0], "orange")
