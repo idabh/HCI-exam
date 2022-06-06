@@ -3,11 +3,12 @@ from pathlib import Path
 import base64
 import streamlit as st
 
-def streamlit_menu(options, icons):
+def streamlit_menu(options, icons, key):
         selected = option_menu(
             menu_title=None,  # required
             options=options,
             icons=icons,
+            key = key,
             menu_icon="cast",  # optional
             default_index=0,  # optional
             orientation="horizontal",
