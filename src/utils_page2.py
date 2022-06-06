@@ -1,6 +1,7 @@
 import streamlit as st
 from src.utils import * 
 from PIL import Image
+import plotly.graph_objects as go
     
 def show_page2(ckey_list, rkey_list, tkey_list, index, df): 
     col1, col2, col3, col4 = st.columns(4)
@@ -66,5 +67,20 @@ def show_page2(ckey_list, rkey_list, tkey_list, index, df):
     
     
 
+def applicant_compare(data, individual):
+    education_rank = {"high school":1, "bachelor":2, "masters":3, "phd":4, "postdoc":5}
+    d = data.loc[data['Name'] == individual]
+    ID = str(d.iloc[0,20])
+    r=[ d.iloc[0,3]/10,
+        education_rank[d.iloc[0,4]]*2,
+        d.iloc[0,14]/5,
+        d.iloc[0,15],
+        d.iloc[0,8]/5]
+    theta=['python skills','education_level','factor1',
+        'factor2', 'experience']
+    color = d.iloc[0,18]
+    r = [*r, r[0]]
+    individual = go.Scatterpolar(r=r, theta=theta, fill='toself',name=ID, line_color = color,opacity = 0.2,fillcolor= color) 
+    return individual
 
 

@@ -1,3 +1,5 @@
+from turtle import fillcolor
+from numpy import mat
 import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
@@ -5,6 +7,7 @@ import pandas as pd
 from src.utils import *
 import plotly.io as pio
 pio.kaleido.scope.default_format = "png"
+from random import randint
 
 #bar radar
 def radar_bar(data):
@@ -20,22 +23,23 @@ def radar_bar(data):
 
 def applicant_match(data, ID, match_data, education_rank):
     d = data.loc[data['Name'] == ID]
-    app_data = pd.DataFrame(dict(
+    
     r=[ d.iloc[0,3]/10,
         education_rank[d.iloc[0,4]]*2,
         d.iloc[0,14]/5,
         d.iloc[0,15],
-        d.iloc[0,8]/5],
+        d.iloc[0,8]/5]
     theta=['python skills','education_level','factor1',
-        'factor2', 'experience']))
-    individual = px.line_polar(app_data, r='r', theta='theta', line_close=True, template='ggplot2', range_r=[0,10],width=600, height=600)
-    individual.update_traces(fill='toself')
-    #if we want to change colors, look at Scatterpolar
-    
-    minimum_demand = px.bar_polar(match_data, r='r', theta='theta',color='color', template='ggplot2', range_r=[0,10],width=600, height=600)
-    minimum_demand.update_traces(opacity=0.5, selector=dict(type='barpolar')) 
+        'factor2', 'experience']
+    color = d.iloc[0,18]
+    r = [*r, r[0]]
+    individual = go.Scatterpolar(r=r, theta=theta, fill='toself', line_color = color, opacity = 0.2,fillcolor= color) 
 
-    match_individual = go.Figure(data = individual.data + minimum_demand.data,
+    r_match = list(match_data['r'])
+    r_match = [*r_match, r_match[0]]
+    minimum_demand = go.Barpolar(r=r_match, theta=theta, opacity = 0.2)
+    
+    match_individual = go.Figure(data = [individual, minimum_demand],
         layout=go.Layout(
         polar={'radialaxis': {'visible': False}},width=600, height=600,
         showlegend=False))
@@ -45,8 +49,15 @@ def applicant_match(data, ID, match_data, education_rank):
 @st.cache
 def create_plots(): 
     image_files=[]
+    color_list = []
+    n_colors_to_generate = len(list(st.session_state['temp_df']['Name']))
+    for i in range(n_colors_to_generate):
+        color_list.append('#%06X' % randint(0, 0xFFFFFF))
+    
+    st.session_state['temp_df']['unique_color'] =color_list
     for applicant in list(st.session_state['temp_df']['Name']):
         applicant_match(st.session_state['temp_df'], applicant, st.session_state['radar_data'], st.session_state['education_rank'])
         image_files.append(f'{(applicant).replace(" ", "")}.png')
     st.session_state['temp_df']['ano_image'] = image_files    
+    st.session_state['temp_df']['ID'] = range(1,len(list(st.session_state['temp_df']['Name']))+1)
     st.session_state['temp_df'].to_csv("Data/applicants-from-page-1.csv")
