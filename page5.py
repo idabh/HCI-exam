@@ -13,7 +13,7 @@ from itertools import cycle
 def page5():
     #load data
     df = st.session_state['output_from_page2']
-    st.write(df)
+    #st.write(df)
 
 
     #Add title
