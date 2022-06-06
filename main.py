@@ -144,12 +144,11 @@ if st.session_state["page"] == 'page1':
             
 elif st.session_state["page"] == 'page2':
    #Save image output from page1
-   create_plots()
+   #create_plots()
 
    with placeholder.container(): 
       page2()
-      df = candidates.iloc[st.session_state['yes_candidates']]
-      df.to_csv('Data/yes_candidates.csv') 
+      st.session_state['output_from_page2'] = st.session_state['temp_df'].iloc[st.session_state['yes_candidates']]
 elif st.session_state["page"] == 'page5':
    with placeholder.container(): 
       page5()

@@ -12,7 +12,7 @@ from itertools import cycle
 
 def page5():
     #load data
-    df = pd.read_csv('Data/yes_candidates.csv')
+    df = st.session_state['output_from_page2']
 
     #Add title
     st.markdown("<h1 style='text-align: center;'>STEP 3: Here are your candidates</h1>", unsafe_allow_html=True)
