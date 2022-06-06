@@ -81,24 +81,28 @@ def page2():
         for c in range(0, len(candidates)): 
             #show page
             show_page2(ckey_list, rkey_list, tkey_list, index = c, df = candidates)   
+            st.write('---')
     
     if selected == f'Yes ({st.session_state.yes_candidates})':
         #loop through candidates
         for c in yes_candidates: 
             #show page
             show_page2(ckey_list, rkey_list, tkey_list, index = c, df = candidates)   
+            st.write('---')
 
     if selected == f'Maybe ({st.session_state.maybe_candidates})':
         #loop through candidates
         for c in maybe_candidates: 
             #show page
             show_page2(ckey_list, rkey_list, tkey_list, index = c, df = candidates)   
+            st.write('---')
 
     if selected == f'No ({st.session_state.no_candidates})':
         #loop through candidates 
         for c in no_candidates: 
             #show page
             show_page2(ckey_list, rkey_list, tkey_list, index = c, df = candidates)
+            st.write('---')
 
     
     st.session_state.yes_candidates = yes_candidates
