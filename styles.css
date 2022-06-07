@@ -121,4 +121,27 @@ svg {
 .btn:hover svg {
   stroke-dashoffset: -480;
 }
+
+
+/*change color of label on slider
+div.StyledThumbValue{
+  font-family: "Source Code Pro", monospace;
+  font-size: 14px;
+  padding-bottom: 9.33333px;
+  color: #0061a7;
+  top: -22px;
+  position: absolute;
+  white-space: nowrap;
+  background-color: transparent;
+  line-height: 1.6;
+  font-weight: normal;
+}
+/*change color of all text in markdown below slider
+div.css-fg4pbf{
+  color: #0061a7;
+}
+
+/*change color of radio button
+div.st-e5 {
+   background-color: rgb(247 75 255);
 */
