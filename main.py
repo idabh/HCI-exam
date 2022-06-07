@@ -8,7 +8,7 @@ from page5 import *
 
 # --- MARKDOWN:
 # Setting main page configurations
-st.set_page_config(layout="wide",page_title="(COOL NAME)", page_icon="🔍")
+st.set_page_config(layout="wide",page_title="ScreenAid", page_icon="🔍")
 
 # Setting main page configurations
 st.markdown("""
