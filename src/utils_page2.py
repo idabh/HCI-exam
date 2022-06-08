@@ -30,10 +30,11 @@ def show_page2(ckey_list, rkey_list, tkey_list, index, df):
     education = df.iloc[index]['Education']
     workfield = df.iloc[index]['Workfields']
     strength = df.iloc[index]['Strength']
-
+    alias = df.iloc[index]['Alias']
     skills = df.iloc[index]['Skills']
 
     with col1: 
+        st.subheader(alias)
         st.markdown(image, unsafe_allow_html= True)
     
     with col2: 

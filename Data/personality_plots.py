@@ -14,7 +14,7 @@ for i in range(0, 50):
     
     # creating the bar plot
     plt.bar(dims, values, color =['red', 'yellow', 'green', 'blue'],
-            width = 0.4)
+            width = 0.4, alpha=.4)
     
     plt.ylabel("Score")
 
