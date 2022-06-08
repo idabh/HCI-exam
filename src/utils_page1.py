@@ -46,9 +46,10 @@ def applicant_match(data, ID, match_data, education_rank, proficiency_rank):
     match_individual.write_image((f"Images/{ID}.png").replace(" ", ""))
 
 @st.cache
-def create_plots(): 
+def create_plots(current_page): 
     image_files=[]
     color_list = []
+    current_page = current_page
     n_colors_to_generate = len(list(st.session_state['temp_df']['Name']))
     for i in range(n_colors_to_generate):
         color_list.append('#%06X' % randint(0, 0xFFFFFF))
@@ -60,3 +61,4 @@ def create_plots():
     st.session_state['temp_df']['ano_image'] = image_files    
     st.session_state['temp_df']['ID'] = range(1,len(list(st.session_state['temp_df']['Name']))+1)
     st.session_state['temp_df'].to_csv("Data/applicants-from-page-1.csv")
+    st.session_state['temp_df2'] = st.session_state['temp_df']

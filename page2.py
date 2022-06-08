@@ -18,9 +18,8 @@ from src.utils_page2 import *
 #local_css("styles.css")
 
 def page2(): 
-    candidates = st.session_state.temp_df
+    candidates = st.session_state.temp_df2
 
-    
     #initialise session state
     rkey_list = [f'radio_{i}' for i in range(0, len(candidates))]
     tkey_list = [f'text_{i}' for i in range(0, len(candidates))]

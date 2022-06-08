@@ -31,10 +31,7 @@ def show_page2(ckey_list, rkey_list, tkey_list, index, df):
     workfield = df.iloc[index]['Workfields']
     strength = df.iloc[index]['Strength']
 
-    skills_str = df.iloc[index]['Skills']
-    skill = list(skills_str.split("'"))
-    skills = f'Skills: {skill[1]}, {skill[3]}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; and {skill[5]}'
-
+    skills = df.iloc[index]['Skills']
 
     with col1: 
         st.markdown(image, unsafe_allow_html= True)

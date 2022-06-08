@@ -8,6 +8,7 @@ from os import listdir
 from os.path import isfile, join
 from motivation_letters import *
 import numpy as np
+import randomname
 
 nr_applicants = 200 # set nr of applicants you want to generate
 
@@ -25,13 +26,19 @@ images = [f for f in listdir('Data/Images') if isfile(join('Data/Images', f))]
 personality_profiles = [f for f in listdir('Data/personality_plots') if isfile(join('Data/personality_plots', f))]
 english_proficiency = ['No Proficiency', 'Limited', 'Professional', 'Advanced', 'Native']
 
+
+
+
 # create a csv file named to contain the dataset
 with open('Data/applicants' + str(nr_applicants) + '.csv', 'w', newline ='') as f: 
     file = csv.writer(f)
-    file.writerow(['Name', 'Age', 'Sex', 'Python Score', 'Education Level', 'Education', 'Faculty', 'Workfields', "Years Experience", "image", "Personality Profiles", "Strength", "Text1", "Text2", "English Proficiency", "GPA", 'Skills', 'Motivation Letter', 'SQL Score'])
+    file.writerow(['Name', 'Age', 'Sex', 'Python Score', 'Education Level', 'Education', 'Faculty', 'Workfields', "Years Experience", "image", "Personality Profiles", "Strength", "Text1", "Text2", "English Proficiency", "GPA", 'Skills', 'Motivation Letter', 'SQL Score', 'Alias'])
       
     # generate applicant data from random combinations of variables
-    for i in range(nr_applicants):                          
+    for i in range(nr_applicants):
+        skill = random.sample(skills, 3)
+        alias = randomname.get_name(adj=('colors'), noun=('fruit'))
+        alias = alias.replace('-', ' ')
         file.writerow([
             names.get_full_name(), # name
             random.randint(18, 65), # age
@@ -49,7 +56,8 @@ with open('Data/applicants' + str(nr_applicants) + '.csv', 'w', newline ='') as 
             ''.join(random.choice(words) for i in range(20)), #random text 2 (CHANGE;))
             random.choice(english_proficiency), # English Proficiency
             random.uniform(0, 12), # GPA
-            random.sample(skills, 3),
+            f'Skills: {skill[0]}, {skill[1]} and {skill[2]}',
             random.choice(motivation_letter),
             random.randint(0, 100), # python score
+            alias.capitalize(),
             ])

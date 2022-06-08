@@ -9,7 +9,8 @@ plotly==5.6.0
 plotly-express==0.4.1
 Markdown ==3.3.6
 names==0.3.0
-kaleido==0.1.0
+kaleido==0.1.0.post1
+randomname
 
 
 

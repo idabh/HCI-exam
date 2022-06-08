@@ -154,17 +154,19 @@ if back:
 if st.session_state["page"] == 'page1':
    with placeholder.container(): 
       page1()
+
    with back_button.container():
       back = st.write('')
    
             
 elif st.session_state["page"] == 'page2':
    #Save image output from page1
-   create_plots()
+   current_page = st.session_state["page"]
+   create_plots(current_page)
 
    with placeholder.container(): 
       page2()
-      st.session_state['output_from_page2'] = st.session_state['temp_df'].iloc[st.session_state['yes_candidates']]
+      st.session_state['output_from_page2'] = st.session_state['temp_df2'].iloc[st.session_state['yes_candidates']]
 
 elif st.session_state["page"] == 'page5':
    with placeholder.container(): 
