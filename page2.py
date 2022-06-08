@@ -53,7 +53,7 @@ def page2():
 
     #define process bar
     progress2_path = 'Data/progress/progress2.png'
-    progress2 = "<img src='data:image/png;base64,{}' class='img-fluid' style= 'padding-bottom: 30px; padding-left: 260px;'>".format(
+    progress2 = "<img src='data:image/png;base64,{}' class='img-fluid' style= 'height:100px; padding-bottom: 30px; padding-left: 400px;'>".format(
         img_to_bytes(progress2_path)
         ) 
     st.markdown(progress2, unsafe_allow_html= True)

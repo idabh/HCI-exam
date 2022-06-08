@@ -13,6 +13,13 @@ pio.kaleido.scope.default_format = "png"
 
 def page1():
     
+    #define process bar
+    progress1_path = 'Data/progress/progress1.png'
+    progress1 = "<img src='data:image/png;base64,{}' class='img-fluid' style= 'height:100px; padding-bottom: 30px; padding-left: 80px;'>".format(
+        img_to_bytes(progress1_path)
+        ) 
+    st.markdown(progress1, unsafe_allow_html= True)
+
     c1,c2 = st.columns([20,5])    
     #load data
     df = pd.read_csv('Data/applicants200.csv')
@@ -22,10 +29,6 @@ def page1():
     # DEFINE SIDEBAR #####################
     with st.sidebar:
         st.image('logo.png')
-        #st.title("STEP 1: Screening")
-        #st.header("Filters")
-        #st.markdown("Narrow down the applicants by manipulating the filters below")
-        st.expander
         education_level = st.select_slider("Education level", options=["High School", "Bachelor", "Masters", "Ph.d.", "Postdoc"],  help="Choose minimum education level needed")
             
         python_skills = st.slider("Python test score", min_value=0, max_value=100, value=0, step=1, format=None,  help="The performances of the candidates on the python test", on_change=None, args=None, kwargs=None,  disabled=False)
@@ -37,8 +40,7 @@ def page1():
         
         #academic_prof = st.multiselect("Academic profile", options=["sciences", "engineering", "arts"], default=["sciences", "engineering", "arts"], key=None, help="Check all the relevant profiles for this position", on_change=None, args=None, kwargs=None, disabled=False)
 
-    #process bar
-    #st.image('progress1.png')
+
 
     #chosen applicants
     temp_df = df.loc[
@@ -81,3 +83,4 @@ def page1():
     st.session_state.education_rank = education_rank
     st.session_state.proficiency_rank = proficiency_rank
 
+#page1()
