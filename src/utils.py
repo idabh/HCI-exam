@@ -13,15 +13,16 @@ def streamlit_menu(options, icons, key):
             default_index=0,  # optional
             orientation="horizontal",
             styles={
-                "container": {"padding": "0!important", "background-color": "#fafafa"},
-                #"icon": {"color": "orange", "font-size": "25px"},
+                "container": {"padding": "0!important", "background-color": "#b8d5cd"},
+                "icon": {"color": "white", "font-size": "20px"},
                 "nav-link": {
-                #    "font-size": "25px",
-                    "text-align": "left",
+                    "font-size": "17px",
+                    "text-align": "center",
                     "margin": "0px",
-                    "--hover-color": "#eee",
+                    "--hover-color": "#8abaae",
+                     "color": "white",
                 },
-                "nav-link-selected": {"background-color": 'darkgrey'},
+                "nav-link-selected": {"background-color": '#5ca08e', "color": "white"},
             }
         )
         return selected
