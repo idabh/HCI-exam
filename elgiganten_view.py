@@ -30,8 +30,8 @@ def elgiganten_view(df, compare_candidates):
             
             values = [list(df.index), df[df.columns[0]], df[df.columns[1]]]
             
-            IDs = list(df.iloc[-1])
-            uni_colors = list(df.iloc[-2])
+            IDs = list(df.iloc[-2])
+            uni_colors = list(df.iloc[-1])
             value_header = [['Variable'], IDs[0], IDs[1]]
             compare_these = list(identify_IDs['Name'])
         
@@ -54,15 +54,15 @@ def elgiganten_view(df, compare_candidates):
             values = [list(df.index), df[df.columns[0]], df[df.columns[1]], df[df.columns[2]]]
             #value_header = [['Variable'], ['Candidate X'], ['Candidate Y'], ['Candidate Z']]
             
-            IDs = list(df.iloc[-1])
+            IDs = list(df.iloc[-2])
             value_header = [['Variable'], IDs[0], IDs[1], IDs[2]]
-            uni_colors = list(df.iloc[-2])            
+            uni_colors = list(df.iloc[-1])            
             compare_these = list(identify_IDs['Name'])
             individual1 = applicant_compare(identify_IDs,compare_these[0])
             individual2 = applicant_compare(identify_IDs,compare_these[1])
             individual3 = applicant_compare(identify_IDs,compare_these[2])
             match_individual = go.Figure(data=[individual1,individual2,individual3],
-                layout=go.Layout(polar={'radialaxis': {'visible': False}},width=400, height=400,showlegend=True))
+                layout=go.Layout(polar={'radialaxis': {'visible': False}},width=500, height=400,showlegend=True))
             match_individual.update_polars(radialaxis_range=[0,10]) 
 
         fig = go.Figure(data=[go.Table(
@@ -87,7 +87,7 @@ def elgiganten_view(df, compare_candidates):
         
         fig.update_layout(
             autosize=False,
-            width=600,
+            width=500,
             height=500,
             margin=dict(
                 l=50,
@@ -98,7 +98,7 @@ def elgiganten_view(df, compare_candidates):
             )
         )
         
-        col1, col2 = st.columns([10,15])
+        col1, col2 = st.columns([15,15])
         with col1:
             st.write(match_individual)
         with col2:        
