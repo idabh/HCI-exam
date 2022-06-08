@@ -52,7 +52,7 @@ def page2():
     compare_candidates = [key for key, value in st.session_state.items() if 'compare_' in key and value == True]
 
     #define process bar
-    progress2_path = 'Data\progress\progress2.png'
+    progress2_path = 'Data/progress/progress2.png'
     progress2 = "<img src='data:image/png;base64,{}' class='img-fluid' style= 'padding-bottom: 30px; padding-left: 260px;'>".format(
         img_to_bytes(progress2_path)
         ) 
