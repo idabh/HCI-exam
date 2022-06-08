@@ -15,7 +15,7 @@ def radar_bar(data):
     fig.update_traces(opacity=0.5, selector=dict(type='barpolar')) 
     fig1 = go.Figure(data = fig.data, 
     layout=go.Layout(
-        polar={'radialaxis': {'visible': False}},width=700, height=700,
+        polar={'radialaxis': {'visible': False}},width=500, height=500,
         showlegend=False
         ))
     fig1.update_polars(radialaxis_range=[0,10]) 
