@@ -7,7 +7,7 @@ from src.utils_page2 import applicant_compare
 def elgiganten_view(df, compare_candidates):
     #Define show variables in df
     #variables = ['Python_score', 'Education_level', 'Faculty', 'Years_experience', 'factor1', 'factor2', 'ID']
-    variables = ['education', 'Faculty', 'workfields', 'Years_experience', 'strength', 'skills', 'ID', 'unique_color']
+    variables = ['Education', 'Faculty', 'Workfields', 'Years Experience', 'Strength', 'Skills', 'ID', 'unique_color']
     df_plot =df
     df = df[df.columns.intersection(variables)]
     #st.dataframe(df)

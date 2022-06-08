@@ -21,17 +21,16 @@ def radar_bar(data):
     fig1.update_polars(radialaxis_range=[0,10]) 
     st.write(fig1)
 
-def applicant_match(data, ID, match_data, education_rank):
+def applicant_match(data, ID, match_data, education_rank, proficiency_rank):
     d = data.loc[data['Name'] == ID]
     
     r=[ d.iloc[0,3]/10,
         education_rank[d.iloc[0,4]]*2,
-        d.iloc[0,14]/5,
+        proficiency_rank[d.iloc[0,14]]*2,
         d.iloc[0,15],
-        d.iloc[0,8]/5]
-    theta=['python skills','education_level','factor1',
-        'factor2', 'experience']
-    color = d.iloc[0,18]
+        d.iloc[0,18]/10]
+    theta=['Python Score','Education Level','English Proficiency','GPA', 'SQL Score']
+    color = d.iloc[0,19]
     r = [*r, r[0]]
     individual = go.Scatterpolar(r=r, theta=theta, fill='toself', line_color = color, opacity = 0.3,fillcolor= color) 
 
@@ -56,7 +55,7 @@ def create_plots():
     
     st.session_state['temp_df']['unique_color'] =color_list
     for applicant in list(st.session_state['temp_df']['Name']):
-        applicant_match(st.session_state['temp_df'], applicant, st.session_state['radar_data'], st.session_state['education_rank'])
+        applicant_match(st.session_state['temp_df'], applicant, st.session_state['radar_data'], st.session_state['education_rank'],st.session_state['proficiency_rank'])
         image_files.append(f'{(applicant).replace(" ", "")}.png')
     st.session_state['temp_df']['ano_image'] = image_files    
     st.session_state['temp_df']['ID'] = range(1,len(list(st.session_state['temp_df']['Name']))+1)

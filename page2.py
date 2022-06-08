@@ -13,11 +13,14 @@ import os.path
 from elgiganten_view import * 
 from src.utils_page2 import * 
 
+#st.set_page_config(layout="wide",page_title="ScreenAid", page_icon="🔍")
 #candidates = pd.read_csv('Data/applicants-from-page-1.csv',na_values=['a','b'])
+#local_css("styles.css")
 
 def page2(): 
     candidates = st.session_state.temp_df
 
+    
     #initialise session state
     rkey_list = [f'radio_{i}' for i in range(0, len(candidates))]
     tkey_list = [f'text_{i}' for i in range(0, len(candidates))]
@@ -48,11 +51,13 @@ def page2():
     #Define comparison: 
     compare_candidates = [key for key, value in st.session_state.items() if 'compare_' in key and value == True]
 
-    #Add title
-    st.markdown("<h1 style='text-align: center;'>STEP 2: Review</h1>", unsafe_allow_html=True)
-
     #define process bar
-    process_bar = st.progress(50)
+    progress2_path = 'Data/progress/progress2.png'
+    progress2 = "<img src='data:image/png;base64,{}' class='img-fluid' style= 'padding-bottom: 30px; padding-left: 260px;'>".format(
+        img_to_bytes(progress2_path)
+        ) 
+    st.markdown(progress2, unsafe_allow_html= True)
+
 
     #Add comparison
     with st.expander("Compare candidates"):
@@ -113,6 +118,5 @@ def page2():
     placeholder2.empty()
     with placeholder2.container():
         streamlit_menu(options=[f'All ({len(candidates)})', f'Yes ({st.session_state.no_yes_candidates})', f'Maybe ({st.session_state.no_maybe_candidates})', f'No ({st.session_state.no_no_candidates})'], icons=["circle", "check-circle", "question-circle", "x-circle"], key = 'updated')
-
 
 #page2()
