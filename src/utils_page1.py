@@ -32,7 +32,7 @@ def applicant_match(data, ID, match_data, education_rank, proficiency_rank):
     theta=['Python Score','Education Level','English Proficiency','GPA', 'SQL Score']
     color = d.iloc[0,19]
     r = [*r, r[0]]
-    individual = go.Scatterpolar(r=r, theta=theta, fill='toself', line_color = color, opacity = 0.3,fillcolor= color) 
+    individual = go.Scatterpolar(r=r, theta=theta, fill='toself', line_color = "grey", opacity = 0.3,fillcolor= color) 
 
     r_match = list(match_data['r'])
     r_match = [*r_match, r_match[0]]
