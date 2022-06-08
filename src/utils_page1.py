@@ -30,7 +30,7 @@ def applicant_match(data, ID, match_data, education_rank, proficiency_rank):
         d.iloc[0,15],
         d.iloc[0,18]/10]
     theta=['Python Score','Education Level','English Proficiency','GPA', 'SQL Score']
-    color = d.iloc[0,19]
+    color = d.iloc[0,20]
     r = [*r, r[0]]
     individual = go.Scatterpolar(r=r, theta=theta, fill='toself', line_color = color, opacity = 0.3,fillcolor= color) 
 
@@ -59,6 +59,6 @@ def create_plots(current_page):
         applicant_match(st.session_state['temp_df'], applicant, st.session_state['radar_data'], st.session_state['education_rank'],st.session_state['proficiency_rank'])
         image_files.append(f'{(applicant).replace(" ", "")}.png')
     st.session_state['temp_df']['ano_image'] = image_files    
-    st.session_state['temp_df']['ID'] = range(1,len(list(st.session_state['temp_df']['Name']))+1)
+    #st.session_state['temp_df']['ID'] = range(1,len(list(st.session_state['temp_df']['Name']))+1)
     st.session_state['temp_df'].to_csv("Data/applicants-from-page-1.csv")
     st.session_state['temp_df2'] = st.session_state['temp_df']
