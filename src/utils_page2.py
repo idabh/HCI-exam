@@ -30,7 +30,7 @@ def show_page2(ckey_list, rkey_list, tkey_list, index, df):
     education = df.iloc[index]['Education']
     workfield = df.iloc[index]['Workfields']
     strength = df.iloc[index]['Strength']
-    alias = df.iloc[index]['Alias']
+    alias = df.iloc[index]['ID']
     skills = df.iloc[index]['Skills']
 
     with col1: 
@@ -76,7 +76,7 @@ def applicant_compare(data, individual):
         d.iloc[0,15],
         d.iloc[0,18]/10]
     theta=['Python Score','Education Level','English Proficiency','GPA', 'SQL Score']
-    color = d.iloc[0,19]
+    color = d.iloc[0,20]
     r = [*r, r[0]]
     individual = go.Scatterpolar(r=r, theta=theta, fill='toself',name=ID, line_color = color,opacity = 0.2,fillcolor= color) 
     return individual
