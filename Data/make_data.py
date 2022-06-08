@@ -32,7 +32,7 @@ english_proficiency = ['No Proficiency', 'Limited', 'Professional', 'Advanced', 
 # create a csv file named to contain the dataset
 with open('Data/applicants' + str(nr_applicants) + '.csv', 'w', newline ='') as f: 
     file = csv.writer(f)
-    file.writerow(['Name', 'Age', 'Sex', 'Python Score', 'Education Level', 'Education', 'Faculty', 'Workfields', "Years Experience", "image", "Personality Profiles", "Strength", "Text1", "Text2", "English Proficiency", "GPA", 'Skills', 'Motivation Letter', 'SQL Score', 'Alias'])
+    file.writerow(['Name', 'Age', 'Sex', 'Python Score', 'Education Level', 'Education', 'Faculty', 'Workfields', "Years Experience", "image", "Personality Profiles", "Strength", "Text1", "Text2", "English Proficiency", "GPA", 'Skills', 'Motivation Letter', 'SQL Score', 'ID'])
       
     # generate applicant data from random combinations of variables
     for i in range(nr_applicants):
