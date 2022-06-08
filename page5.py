@@ -1,5 +1,6 @@
 import random
 from timeit import repeat
+from click import progressbar
 import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
@@ -9,16 +10,27 @@ import matplotlib.pyplot as plt
 from src.utils import *
 from itertools import cycle
 
+#df = pd.read_csv('Data/yes_candidates.csv',na_values=['a','b'])
+
 
 def page5():
     #load data
     df = st.session_state['output_from_page2']
 
-    #Add title
-    st.markdown("<h1 style='text-align: center;'>STEP 3: Here are your candidates</h1>", unsafe_allow_html=True)
 
     #define process bar
-    process_bar = st.progress(100)
+    progress3_path = 'Data/progress/progress3.png'
+    progress4_path = 'Data/progress/progressdone.png'
+    progress3 = "<img src='data:image/png;base64,{}' class='img-fluid' style= 'height:100px; padding-bottom: 30px; padding-left: 100px;'>".format(
+        img_to_bytes(progress3_path)
+        )
+    progress4 = "<img src='data:image/png;base64,{}' class='img-fluid' style= 'height:100px; padding-bottom: 30px; padding-left: 100px;'>".format(
+        img_to_bytes(progress4_path)
+        ) 
+
+    progressbar = st.empty()
+    with progressbar.container():
+        st.markdown(progress3, unsafe_allow_html= True)
 
     #Define columns
     col1, col2,col3 = st.columns(3)
@@ -39,5 +51,9 @@ def page5():
 
     st.write('')
     col1, col2,col3 = st.columns(3)
-    if st.button(' INVITE CANDIDATES TO INTERVIEW '):
-        st.success('Sent e-mail invitations to all selected')
+    if st.button(' Invite candidates to interview '):
+        st.success('Sent e-mail invitations to all selected candidates')
+        with progressbar.container():
+            st.markdown(progress4, unsafe_allow_html= True)
+
+#page5()
