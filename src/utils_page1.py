@@ -42,7 +42,7 @@ def applicant_match(data, ID, match_data, education_rank, proficiency_rank):
         layout=go.Layout(
         polar={'radialaxis': {'visible': False}},width=600, height=600,
         showlegend=False))
-    match_individual.update_polars(radialaxis_range=[0,10]) 
+    match_individual.update_polars(radialaxis_range=[0,10])
     match_individual.write_image((f"Images/{ID}.png").replace(" ", ""))
 
 @st.cache
