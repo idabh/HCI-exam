@@ -56,8 +56,6 @@ def page5():
                     files=os.listdir(path)
                     male_img=random.choice(files)
                     st.image(os.path.join(path,male_img))
-                else: 
-                    st.image('Data/Images/male/c14.png')
                 
                 st.subheader(f'{current_name.iloc[0,0]}')
                 st.markdown(f'{current_name.iloc[0,0]} is __{current_name.iloc[0,1]} years old__ and has a __{current_name.iloc[0,4]}__ in __{current_name.iloc[0,5]}__.', unsafe_allow_html=True)
