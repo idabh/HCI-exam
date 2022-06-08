@@ -9,6 +9,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from src.utils import *
 from itertools import cycle
+import os
 
 #df = pd.read_csv('Data/yes_candidates.csv',na_values=['a','b'])
 
@@ -44,12 +45,23 @@ def page5():
         #Loop through candidates
         for candidate,ncol in zip(list(df['ano_image']), cycle(columns)): 
             with ncol: 
-                st.image('Data/Images/download2.jpg')
                 current_name = df.loc[df['ano_image']== candidate]
+                if current_name.iloc[0,2] == 'female':
+                    path="Data/Images/female/"
+                    files=os.listdir(path)
+                    female_img=random.choice(files)
+                    st.image(os.path.join(path,female_img))
+                if current_name.iloc[0,2] == 'male':
+                    path="Data/Images/male/"
+                    files=os.listdir(path)
+                    male_img=random.choice(files)
+                    st.image(os.path.join(path,male_img))
+                else: 
+                    st.image('Data/Images/male/c14.png')
+                
                 st.subheader(f'{current_name.iloc[0,0]}')
                 st.markdown(f'{current_name.iloc[0,0]} is __{current_name.iloc[0,1]} years old__ and has a __{current_name.iloc[0,4]}__ in __{current_name.iloc[0,5]}__.', unsafe_allow_html=True)
                 st.checkbox(f'Invite {current_name.iloc[0,0]} to interview', value=True, key = current_name)
-
 
     st.write('')
     col1, col2,col3 = st.columns(3)
