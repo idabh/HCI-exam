@@ -75,23 +75,22 @@ header {
    }
 
 div.stButton > button:first-child {
-   box-shadow:inset 0px 1px 0px 0px #54a3f7;
-   background:linear-gradient(to bottom, #0975b0 5%, #0061a7 100%);
-   background-color:#0975b0;
-   border-radius:5px;
-   border:1px solid #124d77;
+   box-shadow: inset 0px 1px 0px 0px #5ca08e;
+   background: linear-gradient(to bottom, #5ca08e 5%, #69b8a3 100%);
+   background-color: #76b1a1;
+   border-radius: 10px;
+   border: 1px solid #5ca08e;
    display: flex;
    flex-direction: column;
-   cursor:pointer;
-   color:#ffffff;
+   cursor: pointer;
+   color: #ffffff;
    height: 3.3em;
    margin: auto;
    width: 100%;
-
    }
 div.stButton > button:hover {
-   background:linear-gradient(to bottom, #0061a7 80%, #0a6da3 100%);
-   background-color:#0061a7;
+   background:linear-gradient(to bottom, #74a397 80%, #7fb3a5 100%);
+   background-color:#8abaae;
    }
 
 div.stButton > button:active {
