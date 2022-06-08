@@ -18,20 +18,20 @@ def show_page2(ckey_list, rkey_list, tkey_list, index, df):
         )
     
     #define personality profile
-    personality_path = df.iloc[index]['personality_profiles']
+    personality_path = df.iloc[index]['Personality Profiles']
     personality_profile = "<img src='data:image/png;base64,{}' class='img-fluid' style='width:270px; height:200px; position:relative; top:-7px;'>".format(
         img_to_bytes(f'Data/personality_plots/{personality_path}')
         )
         
 
     #define info
-    motivation = df.iloc[index]['motivation_letter']
-    years_experience = df.iloc[index]['Years_experience']
-    education = df.iloc[index]['education']
-    workfield = df.iloc[index]['workfields']
-    strength = df.iloc[index]['strength']
+    motivation = df.iloc[index]['Motivation Letter']
+    years_experience = df.iloc[index]['Years Experience']
+    education = df.iloc[index]['Education']
+    workfield = df.iloc[index]['Workfields']
+    strength = df.iloc[index]['Strength']
 
-    skills_str = df.iloc[index]['skills']
+    skills_str = df.iloc[index]['Skills']
     skill = list(skills_str.split("'"))
     skills = f'Skills: {skill[1]}, {skill[3]}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; and {skill[5]}'
 
@@ -68,7 +68,7 @@ def show_page2(ckey_list, rkey_list, tkey_list, index, df):
     
 
 def applicant_compare(data, individual):
-    education_rank = {"high school":1, "bachelor":2, "masters":3, "phd":4, "postdoc":5}
+    education_rank = {"High School":1, "Bachelor":2, "Masters":3, "Ph.d.":4, "Postdoc":5}
     proficiency_rank = {"No Proficiency":1, "Limited":2, "Professional":3, "Advanced":4, "Native":5}
     d = data.loc[data['Name'] == individual]
     ID = str(d.iloc[0,21])

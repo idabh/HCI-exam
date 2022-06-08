@@ -65,7 +65,7 @@ def page1():
         grade,
         sql/10],
         theta=['Python Score','Education Level','English Proficiency','GPA', 'SQL Score'],
-        color = ["#E4FF87", '#809BFF', '#719BFF', '#FFAA70', '#B6FFB4']))
+        color = ['#006a4e', '#2e856e', '#5ca08e', '#8abaae', '#b8d5cd']))
 
     with c1:
         radar_bar(radar_data)
