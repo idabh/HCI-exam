@@ -13,7 +13,7 @@ import randomname
 nr_applicants = 200 # set nr of applicants you want to generate
 
 # set possible variable values (ADD MORE / CHECK THIS!)
-sexes = ['female', 'male', 'nonbinary', 'prefer not to say']
+sexes = ['female', 'male']
 edu_levels = ["High School", "Bachelor", "Masters", "Ph.d.", "Postdoc"]
 faculties = ['arts', 'sciences', 'engineering']
 education = ['Information Sciences', 'Computer Scientist', 'Software Engineer', 'Media Science', 'Cognitive Science', 'Journalist']
@@ -39,10 +39,11 @@ with open('Data/applicants' + str(nr_applicants) + '.csv', 'w', newline ='') as 
         skill = random.sample(skills, 3)
         alias = randomname.get_name(adj=('colors'), noun=('fruit'))
         alias = alias.replace('-', ' ')
+        sex = random.choice(sexes)
         file.writerow([
-            names.get_full_name(), # name
+            names.get_full_name(gender = sex), # name
             random.randint(18, 65), # age
-            random.choice(sexes), # sex (OBS: make dependent on name;))
+            sex, # sex (OBS: make dependent on name;))
             random.randint(0, 100), # python score
             random.choice(edu_levels), # education level
             random.choice(education), # education
@@ -55,7 +56,7 @@ with open('Data/applicants' + str(nr_applicants) + '.csv', 'w', newline ='') as 
             ''.join(random.choice(words) for i in range(10)), #random text 1 (CHANGE;))
             ''.join(random.choice(words) for i in range(20)), #random text 2 (CHANGE;))
             random.choice(english_proficiency), # English Proficiency
-            random.uniform(0, 12), # GPA
+            random.uniform(0, 10), # GPA
             f'Skills: {skill[0]}, {skill[1]} and {skill[2]}',
             random.choice(motivation_letter),
             random.randint(0, 100), # python score
