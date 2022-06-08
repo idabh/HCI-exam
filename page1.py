@@ -15,12 +15,13 @@ def page1():
     
     #define process bar
     progress1_path = 'Data/progress/progress1.png'
-    progress1 = "<img src='data:image/png;base64,{}' class='img-fluid' style= 'height:100px; padding-bottom: 30px; padding-left: 80px;'>".format(
+    progress1 = "<img src='data:image/png;base64,{}' class='img-fluid' style= 'height:100px; padding-bottom: 30px; padding-left: 103px;'>".format(
         img_to_bytes(progress1_path)
         ) 
     st.markdown(progress1, unsafe_allow_html= True)
 
-    c1,c2 = st.columns([20,5])    
+    c1,c2 = st.columns([20,5])
+    
     #load data
     df = pd.read_csv('Data/applicants200.csv')
     education_rank = {"High School":1, "Bachelor":2, "Masters":3, "Ph.d.":4, "Postdoc":5}
