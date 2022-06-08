@@ -13,12 +13,12 @@ import os.path
 from elgiganten_view import * 
 from src.utils_page2 import * 
 
-st.set_page_config(layout="wide",page_title="ScreenAid", page_icon="🔍")
-candidates = pd.read_csv('Data/applicants-from-page-1.csv',na_values=['a','b'])
-local_css("styles.css")
+#st.set_page_config(layout="wide",page_title="ScreenAid", page_icon="🔍")
+#candidates = pd.read_csv('Data/applicants-from-page-1.csv',na_values=['a','b'])
+#local_css("styles.css")
 
 def page2(): 
-    #candidates = st.session_state.temp_df
+    candidates = st.session_state.temp_df
 
     
     #initialise session state
@@ -119,5 +119,4 @@ def page2():
     with placeholder2.container():
         streamlit_menu(options=[f'All ({len(candidates)})', f'Yes ({st.session_state.no_yes_candidates})', f'Maybe ({st.session_state.no_maybe_candidates})', f'No ({st.session_state.no_no_candidates})'], icons=["circle", "check-circle", "question-circle", "x-circle"], key = 'updated')
 
-
-page2()
+#page2()
