@@ -10,12 +10,12 @@ import matplotlib.pyplot as plt
 from src.utils import *
 from itertools import cycle
 
-df = pd.read_csv('Data/yes_candidates.csv',na_values=['a','b'])
+#df = pd.read_csv('Data/yes_candidates.csv',na_values=['a','b'])
 
 
 def page5():
     #load data
-    #df = st.session_state['output_from_page2']
+    df = st.session_state['output_from_page2']
 
     if 'invited' not in st.session_state: 
         st.session_state.invited = 0
@@ -67,4 +67,4 @@ def page5():
             st.success('The profiles is sent to your e-mail')
 
 
-page5()
+#page5()
