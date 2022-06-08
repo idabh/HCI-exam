@@ -11,7 +11,7 @@ from random import randint
 
 #bar radar
 def radar_bar(data):
-    fig = px.bar_polar(data, r='r', theta='theta',color='grey', template='ggplot2', range_r=[0,10], width=600, height=600)
+    fig = px.bar_polar(data, r='r', theta='theta',color='color', template='ggplot2', range_r=[0,10], width=600, height=600)
     fig.update_traces(opacity=0.5, selector=dict(type='barpolar')) 
     fig1 = go.Figure(data = fig.data, 
     layout=go.Layout(
