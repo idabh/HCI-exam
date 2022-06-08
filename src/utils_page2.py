@@ -34,7 +34,8 @@ def show_page2(ckey_list, rkey_list, tkey_list, index, df):
     skills = df.iloc[index]['Skills']
 
     with col1: 
-        st.subheader(alias)
+        st.markdown(f"<div style = ' position:relative; left:90px; '> <b> {alias} </b></div>", unsafe_allow_html=True)
+
         st.markdown(image, unsafe_allow_html= True)
     
     with col2: 
