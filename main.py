@@ -122,15 +122,21 @@ div.stDownloadButton > button:hover {
 #define style
 #local_css("styles.css")
 
+col1, col2 = st.columns(2)
+
 placeholder = st.empty()
-next_button = st.empty()
+next_button = col2.empty()
+back_button = col1.empty()
 
 if 'page' not in st.session_state: 
    st.session_state["page"] ='page1'
 
+with back_button.container():
+   back = back_button.button("Back")
 with next_button.container():
-   next = next_button.button("Next/save")
+   next = next_button.button("Next")
 
+   
 if next:
    if st.session_state["page"] == 'page1':
         st.session_state["page"] = 'page2'
@@ -139,9 +145,18 @@ if next:
    elif st.session_state["page"] == 'page5':
         st.session_state["page"] = 'page1'
 
+if back:
+   if st.session_state["page"] == 'page2':
+        st.session_state["page"] = 'page1'
+   elif st.session_state["page"] == 'page5':
+        st.session_state["page"] = 'page2'
+
 if st.session_state["page"] == 'page1':
    with placeholder.container(): 
       page1()
+   with back_button.container():
+      back = st.write('')
+   
             
 elif st.session_state["page"] == 'page2':
    #Save image output from page1
@@ -150,6 +165,7 @@ elif st.session_state["page"] == 'page2':
    with placeholder.container(): 
       page2()
       st.session_state['output_from_page2'] = st.session_state['temp_df'].iloc[st.session_state['yes_candidates']]
+
 elif st.session_state["page"] == 'page5':
    with placeholder.container(): 
       page5()
