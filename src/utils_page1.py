@@ -33,7 +33,7 @@ def applicant_match(data, ID, match_data, education_rank):
         'factor2', 'experience']
     color = d.iloc[0,18]
     r = [*r, r[0]]
-    individual = go.Scatterpolar(r=r, theta=theta, fill='toself', line_color = color, opacity = 0.2,fillcolor= color) 
+    individual = go.Scatterpolar(r=r, theta=theta, fill='toself', line_color = color, opacity = 0.3,fillcolor= color) 
 
     r_match = list(match_data['r'])
     r_match = [*r_match, r_match[0]]
