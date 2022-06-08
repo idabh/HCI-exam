@@ -61,7 +61,7 @@ def page5():
         with progressbar.container():
             st.markdown(progress4, unsafe_allow_html= True)
         st.write('')
-        st.markdown("<div style = ' position:relative; left:170px; '> <b> Write your email to receive the applicants' full profiles </b></div>", unsafe_allow_html=True)
+        st.markdown("<div style = ' position:relative; left:300px; '> <b> Write your email to receive the applicants' full profiles </b></div>", unsafe_allow_html=True)
         input = st.text_input(label = 'Email:')
         if len(input) > 0:
             st.success('The profiles is sent to your e-mail')
