@@ -10,13 +10,15 @@ import matplotlib.pyplot as plt
 from src.utils import *
 from itertools import cycle
 
-#df = pd.read_csv('Data/yes_candidates.csv',na_values=['a','b'])
+df = pd.read_csv('Data/yes_candidates.csv',na_values=['a','b'])
 
 
 def page5():
     #load data
-    df = st.session_state['output_from_page2']
+    #df = st.session_state['output_from_page2']
 
+    if 'invited' not in st.session_state: 
+        st.session_state.invited = 0
 
     #define process bar
     progress3_path = 'Data/progress/progress3.png'
@@ -46,14 +48,23 @@ def page5():
                 current_name = df.loc[df['ano_image']== candidate]
                 st.subheader(f'{current_name.iloc[0,0]}')
                 st.markdown(f'{current_name.iloc[0,0]} is __{current_name.iloc[0,1]} years old__ and has a __{current_name.iloc[0,4]}__ in __{current_name.iloc[0,5]}__.', unsafe_allow_html=True)
-                invite = st.checkbox(f'Invite {current_name.iloc[0,0]} to interview', value=True, key = current_name)
+                st.checkbox(f'Invite {current_name.iloc[0,0]} to interview', value=True, key = current_name)
 
 
     st.write('')
     col1, col2,col3 = st.columns(3)
-    if st.button(' Invite candidates to interview '):
+    if col2.button('Invite candidates to interview'): 
+        st.session_state.invited = 1
+
+    if st.session_state.invited == 1:
         st.success('Sent e-mail invitations to all selected candidates')
         with progressbar.container():
             st.markdown(progress4, unsafe_allow_html= True)
+        st.write('')
+        st.markdown("<div style = ' position:relative; left:170px; '> <b> Write your email to receive the applicants' full profiles </b></div>", unsafe_allow_html=True)
+        input = st.text_input(label = 'Email:')
+        if len(input) > 0:
+            st.success('The profiles is sent to your e-mail')
 
-#page5()
+
+page5()
