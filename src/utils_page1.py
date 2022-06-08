@@ -11,7 +11,7 @@ from random import randint
 
 #bar radar
 def radar_bar(data):
-    fig = px.bar_polar(data, r='r', theta='theta',color='color', template='ggplot2', range_r=[0,10], width=600, height=600)
+    fig = px.bar_polar(data, r='r', theta='theta',color='grey', template='ggplot2', range_r=[0,10], width=600, height=600)
     fig.update_traces(opacity=0.5, selector=dict(type='barpolar')) 
     fig1 = go.Figure(data = fig.data, 
     layout=go.Layout(
@@ -32,7 +32,7 @@ def applicant_match(data, ID, match_data, education_rank, proficiency_rank):
     theta=['Python Score','Education Level','English Proficiency','GPA', 'SQL Score']
     color = d.iloc[0,19]
     r = [*r, r[0]]
-    individual = go.Scatterpolar(r=r, theta=theta, fill='toself', line_color = "grey", opacity = 0.3,fillcolor= color) 
+    individual = go.Scatterpolar(r=r, theta=theta, fill='toself', line_color = color, opacity = 0.3,fillcolor= color) 
 
     r_match = list(match_data['r'])
     r_match = [*r_match, r_match[0]]
