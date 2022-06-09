@@ -70,7 +70,7 @@ def applicant_compare(data, individual):
     education_rank = {"High School":1, "Bachelor":2, "Masters":3, "Ph.d.":4, "Postdoc":5}
     proficiency_rank = {"No Proficiency":1, "Limited":2, "Professional":3, "Advanced":4, "Native":5}
     d = data.loc[data['Name'] == individual]
-    ID = str(d.iloc[0,21])
+    ID = str(d.iloc[0,19])
     r=[ d.iloc[0,3]/10,
         education_rank[d.iloc[0,4]]*2,
         proficiency_rank[d.iloc[0,14]]*2,
