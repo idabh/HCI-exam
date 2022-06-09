@@ -1,6 +1,8 @@
 <div id="top"></div>
 <div align="center">
-<h2 align="center">The Blind Hiring Tool</h3>
+  <img src="logo_white.png" alt="Logo">
+<h2 align="center">A bias-diminishing applicant shortlisting tool</h2>
+  
 
   <p align="center">
     Human Computer Interaction Exam - MSc Cognitive Science at Aarhus University - Spring 2022
@@ -14,10 +16,7 @@
 
 This repository contains our project for the Human-Computer Interaction exam at the Msc Cognitive Science at Aarhus University, spring 2022.
 
-Blablabla
-
-### Abstract
-(MAYBE INSERT ABSTRACT HERE) <br>
+(INSERT ABSTRACT HERE) <br>
 <br>
 ***Key words:** x, x, x*
 
