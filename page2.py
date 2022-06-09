@@ -3,6 +3,7 @@ To pick a color: https://www.w3schools.com/colors/colors_picker.asp
 Grid ressource: https://gridbyexample.com/examples/
 '''
 
+from xml.dom.xmlbuilder import Options
 import streamlit as st
 from src.utils import *
 from PIL import Image
@@ -66,56 +67,72 @@ def page2():
         st.warning('You can only compare 3 candidates at the time!')
 
     #define menu
+    if 'selected' not in st.session_state: 
+        st.session_state.selected = 'All'
+    if 'selected_index' not in st.session_state: 
+        st.session_state.selected_index = 0
+
     placeholder2 = st.empty()
+    print('1',st.session_state.selected)
+    options = [f'All ({len(candidates)})', f'Yes ({st.session_state.no_yes_candidates})', f'Maybe ({st.session_state.no_maybe_candidates})', f'No ({st.session_state.no_no_candidates})']
+    options_short = ['All', 'Yes', 'Maybe', 'No']
     with placeholder2.container():
-        selected = streamlit_menu(options=[f'All ({len(candidates)})', f'Yes ({st.session_state.no_yes_candidates})', f'Maybe ({st.session_state.no_maybe_candidates})', f'No ({st.session_state.no_no_candidates})'], icons=["circle", "check-circle", "question-circle", "x-circle"], key = 'original')
+        st.session_state.selected = streamlit_menu(options=options, icons=["circle", "check-circle", "question-circle", "x-circle"], key = 'original', default_index = st.session_state.selected_index)
+        st.session_state.selected = st.session_state['selected'].split(' ')[0]
+        st.session_state.selected_index = options_short.index(st.session_state.selected)
 
     #define columns
     col1, col2, col3, col4 = st.columns(4)
 
     #define candidates
     yes_candidates = [int(item[0][-1]) for item in st.session_state.items() if  'radio_' in item[0] and item[1]== 'Yes']
-    st.session_state['no_yes_candidates'] = len(yes_candidates)
     maybe_candidates = [int(item[0][-1]) for item in st.session_state.items() if 'radio_' in item[0] and item[1]== 'Maybe']
-    st.session_state['no_maybe_candidates'] = len(maybe_candidates)
     no_candidates = [int(item[0][-1]) for item in st.session_state.items() if  'radio_' in item[0] and item[1]== 'No']
-    st.session_state['no_no_candidates'] = len(no_candidates)
+   
+    print('2', st.session_state.selected)
 
     #define pages
-    if selected == f'All ({len(candidates)})':
+    if st.session_state.selected == 'All':
         #loop through candidates
         for c in range(0, len(candidates)): 
             #show page
             show_page2(ckey_list, rkey_list, tkey_list, index = c, df = candidates)   
             st.write('---')
     
-    if selected == f'Yes ({st.session_state.no_yes_candidates})':
+    if st.session_state.selected == 'Yes':
         #loop through candidates
         for c in yes_candidates: 
             #show page
             show_page2(ckey_list, rkey_list, tkey_list, index = c, df = candidates)   
             st.write('---')
 
-    if selected == f'Maybe ({st.session_state.no_maybe_candidates})':
+    if st.session_state.selected == 'Maybe':
         #loop through candidates
         for c in maybe_candidates: 
             #show page
             show_page2(ckey_list, rkey_list, tkey_list, index = c, df = candidates)   
             st.write('---')
 
-    if selected == f'No ({st.session_state.no_no_candidates})':
+    if st.session_state.selected == 'No':
         #loop through candidates 
         for c in no_candidates: 
             #show page
             show_page2(ckey_list, rkey_list, tkey_list, index = c, df = candidates)
             st.write('---')
 
-    
+    st.session_state['no_yes_candidates'] = len(yes_candidates)
+    st.session_state['no_maybe_candidates'] = len(maybe_candidates)
+    st.session_state['no_no_candidates'] = len(no_candidates)
+
     st.session_state.yes_candidates = yes_candidates
+    options = [f'All ({len(candidates)})', f'Yes ({st.session_state.no_yes_candidates})', f'Maybe ({st.session_state.no_maybe_candidates})', f'No ({st.session_state.no_no_candidates})']
 
     #update menu
-    placeholder2.empty()
+    #placeholder2.empty()
     with placeholder2.container():
-        streamlit_menu(options=[f'All ({len(candidates)})', f'Yes ({st.session_state.no_yes_candidates})', f'Maybe ({st.session_state.no_maybe_candidates})', f'No ({st.session_state.no_no_candidates})'], icons=["circle", "check-circle", "question-circle", "x-circle"], key = 'updated')
+        st.session_state.selected = streamlit_menu(options=options, icons=["circle", "check-circle", "question-circle", "x-circle"], key = 'updated', default_index = st.session_state.selected_index)
+        st.session_state.selected = st.session_state['selected'].split(' ')[0]
+        st.session_state.selected_index = options_short.index(st.session_state.selected)
+
 
 #page2()

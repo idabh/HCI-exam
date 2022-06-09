@@ -145,6 +145,8 @@ with next_button.container():
 if st.session_state['next']:
    if st.session_state["page"] == 'page1':
         st.session_state["page"] = 'page2'
+        #Save image output from page1
+        create_plots()
    elif st.session_state["page"] == 'page2':
         st.session_state["page"] = 'page5'
    elif st.session_state["page"] == 'page5':
@@ -161,9 +163,6 @@ if st.session_state["page"] == 'page1':
       page1()   
             
 elif st.session_state["page"] == 'page2':
-   #Save image output from page1
-   create_plots()
-
    with placeholder.container(): 
       page2()
       st.session_state['output_from_page2'] = st.session_state['temp_df2'].iloc[st.session_state['yes_candidates']]
