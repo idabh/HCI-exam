@@ -67,14 +67,14 @@ def page5():
         st.session_state.invited = 1
 
     if st.session_state.invited == 1:
-        st.success('Sent e-mail invitations to all selected candidates')
+        st.success('Interview inviations have been sent to all selected candidates via e-mail.')
         with progressbar.container():
             st.markdown(progress4, unsafe_allow_html= True)
         st.write('')
-        st.markdown("<div style = ' position:relative; left:300px; '> <b> Write your email to receive the applicants' full profiles </b></div>", unsafe_allow_html=True)
+        st.markdown("<div style = ' position:relative; left:300px; '> <b> Input your email to receive the applicants' full profiles. </b></div>", unsafe_allow_html=True)
         input = st.text_input(label = 'Email:')
         if len(input) > 0:
-            st.success('The profiles is sent to your e-mail')
+            st.success('The profiles have been sent to your e-mail.')
 
 
 #page5()
