@@ -39,6 +39,7 @@ with open('Data/applicants' + str(nr_applicants) + '.csv', 'w', newline ='') as 
         skill = random.sample(skills, 3)
         alias = randomname.get_name(adj=('colors'), noun=('fruit'))
         alias = alias.replace('-', ' ')
+        alias = alias.split(' ')[0].capitalize() + ' ' + alias.split(' ')[1].capitalize()
         sex = random.choice(sexes)
         file.writerow([
             names.get_full_name(gender = sex), # name
@@ -60,5 +61,5 @@ with open('Data/applicants' + str(nr_applicants) + '.csv', 'w', newline ='') as 
             f'Skills: {skill[0]}, {skill[1]} and {skill[2]}',
             random.choice(motivation_letter),
             random.randint(0, 100), # python score
-            alias.capitalize(),
+            alias,
             ])

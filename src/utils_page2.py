@@ -59,7 +59,7 @@ def show_page2(ckey_list, rkey_list, tkey_list, index, df):
         st.markdown(personality_profile, unsafe_allow_html= True)
         st.checkbox('Compare', key =  compare_key)
   
-    with st.expander("More information"):
+    with st.expander(f"More information about {alias}"):
         st.markdown(f'<b>Motivation </b> <br> {motivation}', unsafe_allow_html=True)
     st.write('')
     st.write('')
