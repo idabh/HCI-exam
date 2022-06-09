@@ -9,6 +9,7 @@ import plotly.io as pio
 pio.kaleido.scope.default_format = "png"
 from random import randint
 
+
 #bar radar
 def radar_bar(data):
     fig = px.bar_polar(data, r='r', theta='theta',color='color', template='ggplot2', range_r=[0,10], width=600, height=600)
@@ -45,11 +46,10 @@ def applicant_match(data, ID, match_data, education_rank, proficiency_rank):
     match_individual.update_polars(radialaxis_range=[0,10])
     match_individual.write_image((f"Images/{ID}.png").replace(" ", ""))
 
-@st.cache
-def create_plots(current_page): 
+#@st.cache
+def create_plots(): 
     image_files=[]
     color_list = []
-    current_page = current_page
     n_colors_to_generate = len(list(st.session_state['temp_df']['Name']))
     for i in range(n_colors_to_generate):
         color_list.append('#%06X' % randint(0, 0xFFFFFF))
