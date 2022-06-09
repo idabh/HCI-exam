@@ -126,6 +126,34 @@ placeholder = st.empty()
 
 if 'page' not in st.session_state: 
    st.session_state["page"] ='page1'
+if 'back' not in st.session_state: 
+   st.session_state['back'] = False
+if 'next' not in st.session_state: 
+   st.session_state['next'] = False
+
+col1, col2 = st.columns(2)
+
+next_button = col2.empty()
+back_button = col1.empty()
+
+with back_button.container():
+   st.session_state['back'] = st.button("Back")
+with next_button.container():
+   st.session_state['next'] = st.button("Next")
+
+if st.session_state['next']:
+   if st.session_state["page"] == 'page1':
+        st.session_state["page"] = 'page2'
+   elif st.session_state["page"] == 'page2':
+        st.session_state["page"] = 'page5'
+   elif st.session_state["page"] == 'page5':
+        st.session_state["page"] = 'page1'
+
+if st.session_state['back']:
+   if st.session_state["page"] == 'page2':
+        st.session_state["page"] = 'page1'
+   elif st.session_state["page"] == 'page5':
+        st.session_state["page"] = 'page2'
 
 if st.session_state["page"] == 'page1':
    with placeholder.container(): 
@@ -144,29 +172,7 @@ elif st.session_state["page"] == 'page5':
    with placeholder.container(): 
       page5()
 
-col1, col2 = st.columns(2)
 
-next_button = col2.empty()
-back_button = col1.empty()
-
-with back_button.container():
-   back = st.button("Back")
-with next_button.container():
-   next = st.button("Next")
-
-if next:
-   if st.session_state["page"] == 'page1':
-        st.session_state["page"] = 'page2'
-   elif st.session_state["page"] == 'page2':
-        st.session_state["page"] = 'page5'
-   elif st.session_state["page"] == 'page5':
-        st.session_state["page"] = 'page1'
-
-if back:
-   if st.session_state["page"] == 'page2':
-        st.session_state["page"] = 'page1'
-   elif st.session_state["page"] == 'page5':
-        st.session_state["page"] = 'page2'
 
 if st.session_state["page"] == 'page1':
    with back_button.container():
@@ -175,3 +181,5 @@ if st.session_state["page"] == 'page1':
 elif st.session_state["page"] == 'page5':
    with next_button.container():
          next = st.write('')
+
+
