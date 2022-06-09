@@ -154,14 +154,6 @@ with back_button.container():
 with next_button.container():
    next = st.button("Next")
 
-if st.session_state["page"] == 'page1':
-   with back_button.container():
-      back = st.write('')
-
-elif st.session_state["page"] == 'page5':
-   with next_button.container():
-         next = st.write('')
-
 if next:
    if st.session_state["page"] == 'page1':
         st.session_state["page"] = 'page2'
@@ -175,3 +167,11 @@ if back:
         st.session_state["page"] = 'page1'
    elif st.session_state["page"] == 'page5':
         st.session_state["page"] = 'page2'
+
+if st.session_state["page"] == 'page1':
+   with back_button.container():
+      back = st.write('')
+
+elif st.session_state["page"] == 'page5':
+   with next_button.container():
+         next = st.write('')
