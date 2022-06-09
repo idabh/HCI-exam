@@ -124,6 +124,7 @@ div.stDownloadButton > button:hover {
 
 placeholder = st.empty()
 
+
 if 'page' not in st.session_state: 
    st.session_state["page"] ='page1'
 if 'back' not in st.session_state: 
@@ -171,8 +172,6 @@ elif st.session_state["page"] == 'page2':
 elif st.session_state["page"] == 'page5':
    with placeholder.container(): 
       page5()
-
-
 
 if st.session_state["page"] == 'page1':
    with back_button.container():
