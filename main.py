@@ -162,8 +162,7 @@ if st.session_state["page"] == 'page1':
             
 elif st.session_state["page"] == 'page2':
    #Save image output from page1
-   current_page = st.session_state["page"]
-   create_plots(current_page)
+   create_plots()
 
    with placeholder.container(): 
       page2()
