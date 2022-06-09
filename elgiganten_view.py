@@ -3,6 +3,7 @@ import pandas as pd
 import plotly.graph_objects as go
 from src.utils import * 
 from src.utils_page2 import applicant_compare
+import matplotlib.colors
 
 def elgiganten_view(df, compare_candidates):
     #Define show variables in df
@@ -32,6 +33,8 @@ def elgiganten_view(df, compare_candidates):
             
             IDs = list(df.iloc[-2])
             uni_colors = list(df.iloc[-1])
+            uni_colors_rgba = [f"rgba{matplotlib.colors.to_rgb(x)}"[:-1]+", 0.3)" for x in uni_colors]#B4FBB8
+            
             value_header = [['Variable'], IDs[0], IDs[1]]
             compare_these = list(identify_IDs['Name'])
         
@@ -56,13 +59,15 @@ def elgiganten_view(df, compare_candidates):
             
             IDs = list(df.iloc[-2])
             value_header = [['Variable'], IDs[0], IDs[1], IDs[2]]
-            uni_colors = list(df.iloc[-1])            
+            uni_colors = list(df.iloc[-1])
+            uni_colors_rgba = [f"rgba{matplotlib.colors.to_rgb(x)}"[:-1]+", 0.3)" for x in uni_colors]#B4FBB8
+
             compare_these = list(identify_IDs['Name'])
             individual1 = applicant_compare(identify_IDs,compare_these[0])
             individual2 = applicant_compare(identify_IDs,compare_these[1])
             individual3 = applicant_compare(identify_IDs,compare_these[2])
             match_individual = go.Figure(data=[individual1,individual2,individual3],
-                layout=go.Layout(polar={'radialaxis': {'visible': False}},width=500, height=400,showlegend=True))
+                layout=go.Layout(polar={'radialaxis': {'visible': False}},width=550, height=400,showlegend=True))
             match_individual.update_polars(radialaxis_range=[0,10]) 
 
         fig = go.Figure(data=[go.Table(
@@ -78,7 +83,7 @@ def elgiganten_view(df, compare_candidates):
             cells=dict(
                 values=values,
                 line_color='white',
-                fill=dict(color=['lightgrey']+ uni_colors),
+                fill=dict(color=['lightgrey']+ uni_colors_rgba),
                 align=['left', 'center'],
                 font_size=12,
                 height=50)
@@ -98,14 +103,15 @@ def elgiganten_view(df, compare_candidates):
             )
         )
         
+        c1, c2, c3 = st.columns(3)
+        with c3:
+            st.checkbox('Show only differences')
         col1, col2 = st.columns([15,15])
         with col1:
             st.write(match_individual)
         with col2:        
+            #st.checkbox('Show only differences')
             st.plotly_chart(fig)
-            if st.checkbox('Show only differences'):
-                st.write('differences')
-
     else: 
         st.warning('Choose 2 or 3 candidates to compare')
 
