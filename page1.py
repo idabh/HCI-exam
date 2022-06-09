@@ -15,7 +15,7 @@ def page1():
     
     #define process bar
     progress1_path = 'Data/progress/progress1.png'
-    progress1 = "<img src='data:image/png;base64,{}' class='img-fluid' style= 'height:100px; padding-bottom: 30px; padding-left: 103px;'>".format(
+    progress1 = "<img src='data:image/png;base64,{}' class='img-fluid' style= 'height:100px; padding-bottom: 30px; padding-left: 50px;'>".format(
         img_to_bytes(progress1_path)
         ) 
     st.markdown(progress1, unsafe_allow_html= True)
@@ -55,7 +55,7 @@ def page1():
     #count of remaining applicants
     remaining_app = len(temp_df)
 
-    counting = f'<div data-testid="stMetricValue" class="css-1xarl3l e16fv1kl2"> <div class="css-1ht1j8u e16fv1kl0"> <span <h1 style="text-align: center;font-size:80px;"> <br><br> {remaining_app} </h1> </span><span style="font-size:14px;"><br> applicants remaining</span> </div></div>'
+    counting = f'<div data-testid="stMetricValue" class="css-1xarl3l e16fv1kl2"> <div class="css-1ht1j8u e16fv1kl0"> <span <h1 style="text-align: center;font-size:80px; position: relative; top: -100px;"> <br><br> {remaining_app} </h1> </span><span style="font-size:20px; position: relative; top: -120px; left: 0px;"><br> applicants remaining </span> </div></div>'
     with c2:
         st.markdown(counting, unsafe_allow_html=True)
 
@@ -75,9 +75,11 @@ def page1():
 
     #BUTTON##############################################################################################
 
-    if st.checkbox('Add a wildcard', help='Click here to add a wildcard to the full pool of applicants that does not meet the requirements you set'):
-        wildcard = df.sample()
-        st.info('Added a wildcard')
+    col1, col2 = st.columns(2)
+    with col2: 
+        if st.checkbox('Add a wildcard', help='Click here to add a wildcard to the full pool of applicants that does not meet the requirements you set'):
+            wildcard = df.sample()
+            st.info('Added a wildcard')
 
     st.session_state.temp_df = temp_df
     st.session_state.radar_data= radar_data
