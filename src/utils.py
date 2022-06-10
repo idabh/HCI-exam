@@ -3,14 +3,14 @@ from pathlib import Path
 import base64
 import streamlit as st
 
-def streamlit_menu(options, icons, key):
+def streamlit_menu(options, icons, key, default_index):
         selected = option_menu(
             menu_title=None,  # required
             options=options,
             icons=icons,
             key = key,
             menu_icon="cast",  # optional
-            default_index=0,  # optional
+            default_index=default_index,  # optional
             orientation="horizontal",
             styles={
                 "container": {"padding": "0!important", "background-color": "#b8d5cd"},
