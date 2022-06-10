@@ -16,13 +16,14 @@
 
 This repository contains our project for the Human-Computer Interaction exam at the Msc Cognitive Science at Aarhus University, spring 2022.
 
-(INSERT ABSTRACT HERE) <br>
-<br>
-***Key words:** x, x, x*
+We here present ScreenAid, a software tool to diminish biodemographic biasses in the task of shortlisting job applicants for interviews. Research shows that recruiters are prone to biasses and often discriminate based on irrelevant biodemographic factors such as age, sex, and ethnicity when screening job applicants. ScreenAid aims to combat these problems by presenting anonymised, relevant information to best support comparison between candidates. It facilitates a narrowing process through different steps of filtering, browsing, comparing, sorting, and inviting applicants for interviews.
 
-### Get started
-* First step?
-* Clone the repo
+<div align="center">
+<img src="steps.png" height = 400 alt="ScreenAid process">
+</div>
+  
+## Get started
+* Clone the repository
    ```sh
    git clone https://github.com/idabh/HCI-exam
    ```
@@ -30,7 +31,11 @@ This repository contains our project for the Human-Computer Interaction exam at 
   ```sh
   pip install -r requirements.txt
   ```
-* More steps?
+* Launch the Streamlit application
+  ```sh
+  streamlit run main.py
+  ```
+
 
 ## Contact
 Ida Bang Hansen - idabanghansen@gmail.com
@@ -38,8 +43,3 @@ Ida Bang Hansen - idabanghansen@gmail.com
 Kiri Koppelgaard - kiri.koppelgaard@gmail.com
 <br />
 Thea Rolskov Sloth - thearollesloth@gmail.com
-
-## Acknowledgments
-* Thank you to someone
-* And someone else
-
