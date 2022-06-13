@@ -105,8 +105,41 @@ def elgiganten_view(df, compare_candidates):
         )
         
         c1, c2, c3 = st.columns(3)
-        with c3:
-            st.checkbox('Show only differences')
+        if c3.checkbox('Show only differences'):
+            fig = go.Figure(data=[go.Table(
+                columnwidth = [15,20, 20, 20],
+                header = dict(
+                    values = value_header,
+                    line_color='darkslategray',
+                    fill_color='darkgrey',
+                    align=['left','center'],
+                    font=dict(color='white', size=12),
+                    height=40
+                ),
+                cells=dict(
+                    #values=values,
+                    values = ["diffffff" for i in values],
+                    line_color='white',
+                    fill=dict(color=['lightgrey']+ uni_colors_rgba),
+                    align=['left', 'center'],
+                    font_size=12,
+                    height=50)
+                    )
+                ])
+            
+            fig.update_layout(
+                autosize=False,
+                width=500,
+                height=500,
+                margin=dict(
+                    l=50,
+                    r=50,
+                    b=100,
+                    t=100,
+                    pad=10
+                )
+            ) 
+
         col1, col2 = st.columns([15,15])
         with col1:
             st.write(match_individual)
