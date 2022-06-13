@@ -81,7 +81,8 @@ def elgiganten_view(df, compare_candidates):
                 height=40
             ),
             cells=dict(
-                values=values,
+                #values=values,
+                values = [i[:-2] for i in values],
                 line_color='white',
                 fill=dict(color=['lightgrey']+ uni_colors_rgba),
                 align=['left', 'center'],
