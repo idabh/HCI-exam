@@ -43,18 +43,19 @@ def page5():
         st.warning('You have not choosen any candidates!')
     if len(df) > 1: 
         #Loop through candidates
-        for candidate,ncol in zip(list(df['ano_image']), cycle(columns)): 
+        for candidate,ncol,i in zip(list(df['ano_image']), cycle(columns), range(0,len(df))): 
             with ncol: 
                 current_name = df.loc[df['ano_image']== candidate]
                 if current_name.iloc[0,2] == 'female':
                     path="Data/Images/female/"
                     files=os.listdir(path)
-                    female_img=random.choice(files)
+                    female_img = files[i]
                     st.image(os.path.join(path,female_img))
                 if current_name.iloc[0,2] == 'male':
                     path="Data/Images/male/"
                     files=os.listdir(path)
-                    male_img=random.choice(files)
+
+                    male_img = files[i]
                     st.image(os.path.join(path,male_img))
                 
                 st.subheader(f'{current_name.iloc[0,0]}')
