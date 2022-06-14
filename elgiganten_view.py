@@ -110,9 +110,7 @@ def elgiganten_view(df, compare_candidates):
         )
         
         c1, c2, c3 = st.columns(3)
-        if c3.checkbox('Show only differences'):
-            print([i for i in zip(*differences)])
-            print(differences)
+        if c3.checkbox('Show only differences', help='Check this box to only show rows where the candidates differ'):
             fig = go.Figure(data=[go.Table(
                 columnwidth = [15,20, 20, 20],
                 header = dict(
@@ -125,8 +123,7 @@ def elgiganten_view(df, compare_candidates):
                 ),
                 cells=dict(
                     #values=values,
-                    values = [i for i in zip(*differences)],
-                    
+                    values = [i[:-2] for i in [i for i in zip(*differences)]],
                     line_color='white',
                     fill=dict(color=['lightgrey']+ uni_colors_rgba),
                     align=['left', 'center'],
