@@ -35,7 +35,7 @@ def elgiganten_view(df, compare_candidates):
             uni_colors = list(df.iloc[-1])
             uni_colors_rgba = [f"rgba{matplotlib.colors.to_rgb(x)}"[:-1]+", 0.3)" for x in uni_colors]#B4FBB8
             
-            differences = [list(i) for i in (zip(values[0],values[1], values[2])) if len(set(i[0:]))==len(values[0:])]
+            differences = [list(i) for i in (zip(values[0],values[1], values[2])) if len(set(i[1:]))!=1]
             
             value_header = [['Variable'], IDs[0], IDs[1]]
             compare_these = list(identify_IDs['Name'])
@@ -43,7 +43,7 @@ def elgiganten_view(df, compare_candidates):
             individual1 = applicant_compare(identify_IDs,compare_these[0])
             individual2 = applicant_compare(identify_IDs,compare_these[1])
             match_individual = go.Figure(data=[individual1,individual2],
-                layout=go.Layout(polar={'radialaxis': {'visible': False}},width=400, height=400,showlegend=True))
+                layout=go.Layout(polar={'radialaxis': {'visible': False}},width=550, height=400,showlegend=True))
             match_individual.update_polars(radialaxis_range=[0,10]) 
 
 
@@ -63,7 +63,7 @@ def elgiganten_view(df, compare_candidates):
             uni_colors = list(df.iloc[-1])
             uni_colors_rgba = [f"rgba{matplotlib.colors.to_rgb(x)}"[:-1]+", 0.3)" for x in uni_colors]#B4FBB8
             
-            differences = [list(i) for i in (zip(values[0],values[1], values[2], values[3])) if len(set(i[0:]))==len(values[0:])]
+            differences = [list(i) for i in (zip(values[0],values[1], values[2], values[3])) if len(set(i[1:]))!=1]
             
             compare_these = list(identify_IDs['Name'])
             individual1 = applicant_compare(identify_IDs,compare_these[0])
