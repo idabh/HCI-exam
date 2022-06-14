@@ -21,7 +21,20 @@ def page5():
     if 'invited' not in st.session_state: 
         st.session_state.invited = 0
 
-    #define process bar
+    
+    # help button
+    c1,c2 = st.columns([25,1])
+    help_p5 = '''
+    STEP 3: INVITE\n
+    These are your chosen shortlisted applicants.
+    If you have good reason to not invite a candidate, you can deselect their checkbox.
+    Click ‘Invite candidates to interview’ to automatically send out interview invitations.
+    Input your email to receive the applicants’ information.
+    '''
+    with c2:
+        st.download_button(label='?',data='blabla',help=help_p5,disabled=True)
+
+    #define progress bar
     progress3_path = 'Data/progress/progress3.png'
     progress4_path = 'Data/progress/progressdone.png'
     progress3 = "<img src='data:image/png;base64,{}' class='img-fluid' style= 'height:100px; padding-bottom: 30px; padding-left: 100px;'>".format(
@@ -32,8 +45,11 @@ def page5():
         ) 
 
     progressbar = st.empty()
+
     with progressbar.container():
         st.markdown(progress3, unsafe_allow_html= True)
+
+ 
 
     #Define columns
     col1, col2,col3 = st.columns(3)

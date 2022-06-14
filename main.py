@@ -98,21 +98,22 @@ div.stButton > button:active {
    top:2px;
    }
 
-div.stDownloadButton > button:first-child {
-   background-color: #007429;
-   color:#ffffff;
-   border-color: #006eaf;
-   height: 3.7em;
-   width: 16em;
-   margin: auto;
-   display: block;
+div.stTooltipIcon > button:first-child {
+   background-color:#5ca08e;
+	border-radius:28px;
+	border:1px solid #006a4e;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Verdana;
+	font-size:25px;
+	font-weight:bold;
+	padding:11px 16px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #006a4e;
    }
-div.stDownloadButton > button:hover {
-   background-color: #1e9047;
-   color:#ffffff;
-   border-color: #006eaf;
-   height: 3.7em;
-   width: 16em;
+div.stTooltipIcon > button:hover {
+   background-color:#2e856e;
    }
 
 </style>""", unsafe_allow_html=True)

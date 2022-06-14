@@ -12,12 +12,27 @@ import plotly.io as pio
 pio.kaleido.scope.default_format = "png"
 
 def page1():
-    #define process bar
+    # columns for progress bar and info icon
+    c1,c2 = st.columns([25,1])
+
+    # progress bar
     progress1_path = 'Data/progress/progress1.png'
     progress1 = "<img src='data:image/png;base64,{}' class='img-fluid' style= 'height:100px; padding-bottom: 30px; padding-left: 50px;'>".format(
         img_to_bytes(progress1_path)
         ) 
-    st.markdown(progress1, unsafe_allow_html= True)
+    with c1:
+        st.markdown(progress1, unsafe_allow_html= True)
+
+    # info hover button
+    help_p1 = '''
+    STEP 1: FILTER\n
+    Use the sliders to the left to define minimum requirements for the job position. The plot shows your chosen minimum requirements. The number shows how many applicants meet your chosen requirements. When you press ‘Next’, only these applicants will move on to the next step.\n
+    If you check the ‘Add a wildcard’ box before you press ‘Next’, ScreenAid will automatically add one applicant that does not meet all minimum requirements, but that might still be a good fit for the position.
+    '''
+
+    with c2:
+        st.download_button(label='?',data='blabla',help=help_p1,disabled=True)
+
 
     c1,c2 = st.columns([20,5])
     
