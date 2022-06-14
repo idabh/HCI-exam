@@ -51,12 +51,27 @@ def page2():
     #Define comparison: 
     compare_candidates = [key for key, value in st.session_state.items() if 'compare_' in key and value == True]
 
-    #define process bar
-    progress2_path = 'Data/progress/progress2.png'
-    progress2 = "<img src='data:image/png;base64,{}' class='img-fluid' style= 'height:100px; padding-bottom: 30px; padding-left: 220px;'>".format(
-        img_to_bytes(progress2_path)
-        ) 
-    st.markdown(progress2, unsafe_allow_html= True)
+    # columns for progress bar and info icon
+    c1,c2 = st.columns([25,1])
+
+    # progress bar
+    with c1:
+        progress2_path = 'Data/progress/progress2.png'
+        progress2 = "<img src='data:image/png;base64,{}' class='img-fluid' style= 'height:100px; padding-bottom: 30px; padding-left: 220px;'>".format(
+            img_to_bytes(progress2_path)
+            ) 
+        st.markdown(progress2, unsafe_allow_html= True)
+
+    # help button
+    help_p2 = '''
+    STEP 2: COMPARE & SORT\n
+    Learn more about your applicants by reading their profiles. Each profile picture is the applicant’s skill plot overlaid on your thresholds from Step 1. Use the radio buttons to sort applicants into ‘yes’, ‘maybe’, and ‘no’ piles as you go. You can navigate the piles by clicking at the tabs at the top. You can also write notes to yourself about each applicant. Click the ‘+’ icon below an applicant to read their motivational letter.\n
+    To compare 2-3 applicants, check the ‘Compare’ box next to each of them and click the ‘+’ icon next to ‘Compare candidates’ at the top of the page. To the left, you can compare their skill plots (click on a name to toggle on and off). To the right, you can compare their information in a table.\n
+    When you press ‘Next’, all applicants in the ‘yes’ pile are chosen and will be revealed in the final step.
+
+    '''
+    with c2:
+        st.download_button(label='?',data='blabla',help=help_p2,disabled=True)
 
 
     #Add comparison
