@@ -35,7 +35,7 @@ def elgiganten_view(df, compare_candidates):
             uni_colors = list(df.iloc[-1])
             uni_colors_rgba = [f"rgba{matplotlib.colors.to_rgb(x)}"[:-1]+", 0.3)" for x in uni_colors]#B4FBB8
             
-            differences = [list(i) for i in (zip(values[0],values[1], values[2])) if len(set(i[1:]))==len(values[1:])]
+            differences = [list(i) for i in (zip(values[0],values[1], values[2])) if len(set(i[0:]))==len(values[0:])]
             
             value_header = [['Variable'], IDs[0], IDs[1]]
             compare_these = list(identify_IDs['Name'])
@@ -57,15 +57,13 @@ def elgiganten_view(df, compare_candidates):
             #Create dataframe
             df = pd.DataFrame(df.iloc[indexes]).transpose()
             values = [list(df.index), list(df[df.columns[0]]), list(df[df.columns[1]]), list(df[df.columns[2]])]
-            
-            print(values)
 
             IDs = list(df.iloc[-2])
             value_header = [['Variable'], IDs[0], IDs[1], IDs[2]]
             uni_colors = list(df.iloc[-1])
             uni_colors_rgba = [f"rgba{matplotlib.colors.to_rgb(x)}"[:-1]+", 0.3)" for x in uni_colors]#B4FBB8
             
-            differences = [list(i) for i in (zip(values[0],values[1], values[2], values[3])) if len(set(i[1:]))==len(values[1:])]
+            differences = [list(i) for i in (zip(values[0],values[1], values[2], values[3])) if len(set(i[0:]))==len(values[0:])]
             
             compare_these = list(identify_IDs['Name'])
             individual1 = applicant_compare(identify_IDs,compare_these[0])
