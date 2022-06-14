@@ -40,11 +40,11 @@ def page1():
     # DEFINE SIDEBAR #####################
     with st.sidebar:
         st.image('logo.png')
-        st.session_state.education_level = st.select_slider("Education level", options=["High School", "Bachelor", "Masters", "Ph.d.", "Postdoc"],  help="Choose minimum education level needed", value = st.session_state.education_level)
-        st.session_state.python_skills = st.slider("Python test score", min_value=0, max_value=100, value=st.session_state.python_skills, step=1, format=None,  help="The performances of the candidates on the python test", on_change=None, args=None, kwargs=None,  disabled=False)
-        st.session_state.sql = st.slider("SQL test score", min_value=0, max_value=100, value=st.session_state.sql, step=1, format=None,  help="The performances of the candidates on the SQL test", on_change=None, args=None, kwargs=None,  disabled=False)
-        st.session_state.grade = st.slider('GPA', 0,10, value=st.session_state.grade)
-        st.session_state.english = st.select_slider('English Proficiency', options=["No Proficiency", "Limited", "Professional", "Advanced", "Native"], help="Choose minimum English proficiency level needed", value = st.session_state.english)
+        st.session_state.education_level = st.select_slider("Education level", options=["High School", "Bachelor", "Masters", "Ph.d.", "Postdoc"],  help="Choose minimum education level", value = st.session_state.education_level)
+        st.session_state.python_skills = st.slider("Python test score", min_value=0, max_value=100, value=st.session_state.python_skills, step=1, format=None,  help="Choose minimum Python test performance", on_change=None, args=None, kwargs=None,  disabled=False)
+        st.session_state.sql = st.slider("SQL test score", min_value=0, max_value=100, value=st.session_state.sql, step=1, format=None,  help="Choose minimum SQL test performance", on_change=None, args=None, kwargs=None,  disabled=False)
+        st.session_state.grade = st.slider('GPA', 0,10, value=st.session_state.grade, help="Choose minimum grade point average")
+        st.session_state.english = st.select_slider('English Proficiency', options=["No Proficiency", "Limited", "Professional", "Advanced", "Native"], help="Choose minimum level of English proficiency", value = st.session_state.english)
         
         #academic_prof = st.multiselect("Academic profile", options=["sciences", "engineering", "arts"], default=["sciences", "engineering", "arts"], key=None, help="Check all the relevant profiles for this position")
 
@@ -82,9 +82,9 @@ def page1():
 
     col1, col2 = st.columns(2)
     with col2: 
-        if st.checkbox('Add a wildcard', help='Click here to add a wildcard to the full pool of applicants that does not meet the requirements you set'):
+        if st.checkbox('Add a wildcard', help='Click here to automatically add a "wildcard" applicant that does not meet all minimum requirements'):
             wildcard = df.sample()
-            st.info('Added a wildcard')
+            st.info('Added a wildcard to the pool of filtered applicants. Click "Next" to move on to Step 2.')
 
     st.session_state.temp_df = temp_df
     st.session_state.radar_data= radar_data
