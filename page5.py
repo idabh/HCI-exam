@@ -25,7 +25,6 @@ def page5():
     if 'invited' not in st.session_state: 
         st.session_state.invited = 0
 
-    
     # help button
     c1,c2 = st.columns([25,1])
     help_p5 = '''
@@ -52,8 +51,6 @@ def page5():
 
     with progressbar.container():
         st.markdown(progress3, unsafe_allow_html= True)
-
- 
 
     #Define columns
     col1, col2,col3 = st.columns(3)

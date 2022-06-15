@@ -37,7 +37,8 @@ def show_page2(ckey_list, rkey_list, tkey_list, index, df):
         st.markdown(image, unsafe_allow_html= True)
     
     with col2: 
-        st.radio(label = 'Select option', options =['Not selected', 'Yes', 'Maybe', 'No'], key=radio_key)
+        options = ['Not selected', 'Yes', 'Maybe', 'No']
+        st.radio(label = 'Select option', options = options, key=radio_key, index = options.index(st.session_state[radio_key]))
         st.write('')
         st.text_input(label = 'Notes', key = text_key)
 

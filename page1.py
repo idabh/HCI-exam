@@ -55,6 +55,10 @@ def page1():
     if 'wildcard' not in st.session_state: 
         st.session_state.wildcard = False
 
+    #reload session states
+    for key in st.session_state: 
+        st.session_state[key] = st.session_state[key]
+        
     # DEFINE SIDEBAR #####################
     with st.sidebar:
         st.image('logo.png')
