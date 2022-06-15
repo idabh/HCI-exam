@@ -37,10 +37,10 @@ def page5():
     #define progress bar
     progress3_path = 'Data/progress/progress3.png'
     progress4_path = 'Data/progress/progressdone.png'
-    progress3 = "<img src='data:image/png;base64,{}' class='img-fluid' style= 'height:100px; padding-bottom: 30px; padding-left: 100px;'>".format(
+    progress3 = "<img src='data:image/png;base64,{}' class='img-fluid' style= 'height:100px; padding-bottom: 30px; padding-left: 240px;'>".format(
         img_to_bytes(progress3_path)
         )
-    progress4 = "<img src='data:image/png;base64,{}' class='img-fluid' style= 'height:100px; padding-bottom: 30px; padding-left: 100px;'>".format(
+    progress4 = "<img src='data:image/png;base64,{}' class='img-fluid' style= 'height:100px; padding-bottom: 30px; padding-left: 240px;'>".format(
         img_to_bytes(progress4_path)
         ) 
 
@@ -63,12 +63,12 @@ def page5():
             with ncol: 
                 current_name = df.loc[df['ano_image']== candidate]
                 if current_name.iloc[0,2] == 'female':
-                    path="Data/Images/female/"
+                    path="Data/Images/female_shaped/"
                     files=os.listdir(path)
                     female_img = files[i]
                     st.image(os.path.join(path,female_img))
                 if current_name.iloc[0,2] == 'male':
-                    path="Data/Images/male/"
+                    path="Data/Images/male_shaped/"
                     files=os.listdir(path)
 
                     male_img = files[i]
