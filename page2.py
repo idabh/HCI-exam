@@ -20,10 +20,13 @@ from src.utils_page2 import *
 def page2(): 
     candidates = st.session_state.temp_df2
 
+    #define candidates
+    IDs = [candidate.replace(' ', '') for candidate in candidates['ID']]
+
     #initialise session state
-    rkey_list = [f'radio_{i}' for i in range(0, len(candidates))]
-    tkey_list = [f'text_{i}' for i in range(0, len(candidates))]
-    ckey_list = [f'compare_{i}' for i in range(0, len(candidates))]
+    rkey_list = [f'radio_{i}' for i in IDs]
+    tkey_list = [f'text_{i}' for i in IDs]
+    ckey_list = [f'compare_{i}' for i in IDs]
 
     #reload session states
     for key in st.session_state: 
@@ -82,10 +85,11 @@ def page2():
     col1, col2, col3, col4 = st.columns(4)
 
     #define candidates
-    st.session_state.yes_candidates = [int(item[0][-1]) for item in st.session_state.items() if  'radio_' in item[0] and item[1]== 'Yes']
-    st.session_state.maybe_candidates = [int(item[0][-1]) for item in st.session_state.items() if 'radio_' in item[0] and item[1]== 'Maybe']
-    st.session_state.no_candidates = [int(item[0][-1]) for item in st.session_state.items() if  'radio_' in item[0] and item[1]== 'No']
-  
+    
+    st.session_state.yes_candidates = [str(item[0]).partition("_")[2] for item in st.session_state.items() if  'radio_' in item[0] and item[1]== 'Yes']
+    st.session_state.maybe_candidates = [str(item[0]).partition("_")[2] for item in st.session_state.items() if 'radio_' in item[0] and item[1]== 'Maybe']
+    st.session_state.no_candidates = [str(item[0]).partition("_")[2] for item in st.session_state.items() if  'radio_' in item[0] and item[1]== 'No']
+
     #show pages
     if st.session_state.selected.partition(" ")[0] == 'All':
         #loop through candidates
