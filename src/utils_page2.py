@@ -23,7 +23,6 @@ def show_page2(ckey_list, rkey_list, tkey_list, index, df):
         img_to_bytes(f'Data/personality_plots/{personality_path}')
         )
         
-
     #define info
     motivation = df.iloc[index]['Motivation Letter']
     years_experience = df.iloc[index]['Years Experience']
@@ -35,7 +34,6 @@ def show_page2(ckey_list, rkey_list, tkey_list, index, df):
 
     with col1: 
         st.markdown(f"<div style = ' position:relative; left:90px; '> <b> {alias} </b></div>", unsafe_allow_html=True)
-
         st.markdown(image, unsafe_allow_html= True)
     
     with col2: 
@@ -63,8 +61,8 @@ def show_page2(ckey_list, rkey_list, tkey_list, index, df):
         st.markdown(f'<b>Motivation </b> <br> {motivation}', unsafe_allow_html=True)
     st.write('')
     st.write('')
-    
-    
+
+
 
 def applicant_compare(data, individual):
     education_rank = {"High School":1, "Bachelor":2, "Masters":3, "Ph.d.":4, "Postdoc":5}
@@ -81,5 +79,4 @@ def applicant_compare(data, individual):
     r = [*r, r[0]]
     individual = go.Scatterpolar(r=r, theta=theta, fill='toself',name=ID, line_color = color,opacity = 0.2,fillcolor= color) 
     return individual
-
 
