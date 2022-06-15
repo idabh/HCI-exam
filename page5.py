@@ -37,10 +37,10 @@ def page5():
     #define progress bar
     progress3_path = 'Data/progress/progress3.png'
     progress4_path = 'Data/progress/progressdone.png'
-    progress3 = "<img src='data:image/png;base64,{}' class='img-fluid' style= 'height:100px; padding-bottom: 30px; padding-left: 100px;'>".format(
+    progress3 = "<img src='data:image/png;base64,{}' class='img-fluid' style= 'height:100px; padding-bottom: 30px; padding-left: 240px;'>".format(
         img_to_bytes(progress3_path)
         )
-    progress4 = "<img src='data:image/png;base64,{}' class='img-fluid' style= 'height:100px; padding-bottom: 30px; padding-left: 100px;'>".format(
+    progress4 = "<img src='data:image/png;base64,{}' class='img-fluid' style= 'height:100px; padding-bottom: 30px; padding-left: 240px;'>".format(
         img_to_bytes(progress4_path)
         ) 
 
