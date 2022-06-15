@@ -25,6 +25,8 @@ def page2():
     tkey_list = [f'text_{i}' for i in range(0, len(candidates))]
     ckey_list = [f'compare_{i}' for i in range(0, len(candidates))]
 
+    st.session_state.wildcard = st.session_state.wildcard
+
     for key in rkey_list + tkey_list + ckey_list: 
         if key not in st.session_state and 'radio_' in key:
             st.session_state[key] = "Not selected"

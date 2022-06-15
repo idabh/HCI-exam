@@ -18,6 +18,10 @@ def page5():
     #load data
     df = st.session_state['output_from_page2']
 
+    #reload session states
+    for key in st.session_state: 
+        st.session_state[key] = st.session_state[key]
+
     if 'invited' not in st.session_state: 
         st.session_state.invited = 0
 
