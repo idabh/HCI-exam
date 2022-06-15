@@ -63,12 +63,12 @@ def page5():
             with ncol: 
                 current_name = df.loc[df['ano_image']== candidate]
                 if current_name.iloc[0,2] == 'female':
-                    path="Data/Images/female/"
+                    path="Data/Images/female_shaped/"
                     files=os.listdir(path)
                     female_img = files[i]
                     st.image(os.path.join(path,female_img))
                 if current_name.iloc[0,2] == 'male':
-                    path="Data/Images/male/"
+                    path="Data/Images/male_shaped/"
                     files=os.listdir(path)
 
                     male_img = files[i]
