@@ -22,6 +22,7 @@ def page2():
 
     #define candidates
     IDs = [candidate.replace(' ', '') for candidate in candidates['ID']]
+    candidates['IDs'] = [candidate.replace(' ', '') for candidate in candidates['ID']]
 
     #initialise session state
     rkey_list = [f'radio_{i}' for i in IDs]
@@ -85,10 +86,28 @@ def page2():
     col1, col2, col3, col4 = st.columns(4)
 
     #define candidates
-    
     st.session_state.yes_candidates = [str(item[0]).partition("_")[2] for item in st.session_state.items() if  'radio_' in item[0] and item[1]== 'Yes']
     st.session_state.maybe_candidates = [str(item[0]).partition("_")[2] for item in st.session_state.items() if 'radio_' in item[0] and item[1]== 'Maybe']
     st.session_state.no_candidates = [str(item[0]).partition("_")[2] for item in st.session_state.items() if  'radio_' in item[0] and item[1]== 'No']
+
+    #define indexes for candidates
+    st.session_state.yes_indexes = [int(IDs.index(i)) for i in st.session_state.yes_candidates]
+    st.session_state.maybe_indexes = [int(IDs.index(i)) for i in st.session_state.maybe_candidates]
+    st.session_state.no_indexes = [int(IDs.index(i)) for i in st.session_state.no_candidates]
+
+    #sort candidates
+    #candidates['index_column'] = 0
+
+#    for i in candidates['IDs'].index:
+#        if candidates['IDs'][i] in st.session_state.yes_candidates:
+#            candidates['index_column'][i] = 1 
+#        elif candidates['IDs'][int(i)] in st.session_state.maybe_candidates:
+#            candidates['index_column'][i] = 2 
+#        elif candidates['IDs'][int(i)] in st.session_state.no_candidates:
+#            candidates['index_column'][i] = 3
+
+#    candidates = candidates.sort_values('index_column')
+
 
     #show pages
     if st.session_state.selected.partition(" ")[0] == 'All':
@@ -101,21 +120,21 @@ def page2():
 
     if st.session_state.selected.partition(" ")[0] == 'Yes':
         #loop through candidates
-        for c in st.session_state.yes_candidates: 
+        for c in st.session_state.yes_indexes: 
             #show page
             show_page2(ckey_list, rkey_list, tkey_list, index = c, df = candidates)   
             st.write('---')
 
     if st.session_state.selected.partition(" ")[0] == 'Maybe':
         #loop through candidates
-        for c in st.session_state.maybe_candidates: 
+        for c in st.session_state.maybe_indexes: 
             #show page
             show_page2(ckey_list, rkey_list, tkey_list, index = c, df = candidates)   
             st.write('---')
 
     if st.session_state.selected.partition(" ")[0] == 'No':
         #loop through candidates 
-        for c in st.session_state.no_candidates: 
+        for c in st.session_state.no_indexes: 
             #show page
             show_page2(ckey_list, rkey_list, tkey_list, index = c, df = candidates)
             st.write('---')

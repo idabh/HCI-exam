@@ -166,7 +166,7 @@ if st.session_state["page"] == 'page1':
 elif st.session_state["page"] == 'page2':
    with placeholder.container(): 
       page2()
-      st.session_state['output_from_page2'] = st.session_state['temp_df2'].iloc[st.session_state['yes_candidates']]
+      st.session_state['output_from_page2'] = st.session_state['temp_df2'].iloc[st.session_state['yes_indexes']]
 
 elif st.session_state["page"] == 'page5':
    with placeholder.container(): 
