@@ -39,8 +39,6 @@ def show_page2(ckey_list, rkey_list, tkey_list, index, df):
     with col2: 
         options = ['Not selected', 'Yes', 'Maybe', 'No']
         st.radio(label = 'Select option', options = options, key=radio_key, index = options.index(st.session_state[radio_key]))
-        st.write(radio_key)
-        st.write(options.index(st.session_state[radio_key]))
         st.write('')
         st.text_input(label = 'Notes', key = text_key)
 
