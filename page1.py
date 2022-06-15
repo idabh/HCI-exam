@@ -71,6 +71,9 @@ def page1():
         (df['English Proficiency'].isin([k for k in proficiency_rank.keys() if proficiency_rank[k] >= proficiency_rank[st.session_state.english]])) &
         ((df['GPA'] >= st.session_state.grade))
         ]
+    
+    #not chosen applicants
+    unchosen_temp_df = df[~df.ID.isin(temp_df.ID)]
 
     #count of remaining applicants
     remaining_app = len(temp_df)
@@ -93,17 +96,20 @@ def page1():
     with c1:
         radar_bar(radar_data)
 
+    #save output
+    st.session_state.temp_df = temp_df
+    st.session_state.radar_data= radar_data
+    st.session_state.education_rank = education_rank
+    st.session_state.proficiency_rank = proficiency_rank
+
     #BUTTON##############################################################################################
 
     col1, col2 = st.columns(2)
     with col2: 
         if st.checkbox('Add a wildcard', help='Click here to automatically add a "wildcard" applicant that does not meet all minimum requirements'):
-            wildcard = df.sample()
+            wildcard = unchosen_temp_df.sample()
+            st.session_state.temp_df = temp_df.append(wildcard, ignore_index = True)
             st.info('Added a wildcard to the pool of filtered applicants. Click "Next" to move on to Step 2.')
 
-    st.session_state.temp_df = temp_df
-    st.session_state.radar_data= radar_data
-    st.session_state.education_rank = education_rank
-    st.session_state.proficiency_rank = proficiency_rank
 
 #page1()
