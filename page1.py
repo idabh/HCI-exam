@@ -52,6 +52,9 @@ def page1():
         st.session_state.grade = 0
     if 'english' not in st.session_state: 
         st.session_state.english = "No Proficiency"
+    if 'wildcard' not in st.session_state: 
+        st.session_state.wildcard = False
+
     # DEFINE SIDEBAR #####################
     with st.sidebar:
         st.image('logo.png')
@@ -106,7 +109,8 @@ def page1():
 
     col1, col2 = st.columns(2)
     with col2: 
-        if st.checkbox('Add a wildcard', help='Click here to automatically add a "wildcard" applicant that does not meet all minimum requirements'):
+        wildcard_box = st.checkbox('Add a wildcard', help='Click here to automatically add a "wildcard" applicant that does not meet all minimum requirements', key = 'wildcard', value= st.session_state.wildcard)
+        if wildcard_box:
             wildcard = unchosen_temp_df.sample()
             st.session_state.temp_df = temp_df.append(wildcard, ignore_index = True)
             st.info('Added a wildcard to the pool of filtered applicants. Click "Next" to move on to Step 2.')
