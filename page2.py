@@ -73,7 +73,7 @@ def page2():
         elgiganten_view(candidates, compare_candidates)
 
     if len(compare_candidates) > 3:
-        st.warning('You can only compare 3 candidates at the time!')
+        st.warning('You can only compare 3 candidates at a time!')
     
     if 'selected' not in st.session_state: 
         st.session_state.selected = f'All ({len(candidates)})'
