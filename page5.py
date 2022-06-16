@@ -26,7 +26,8 @@ def page5():
         st.session_state.invited = 0
 
     # help button
-    c1,c2 = st.columns([25,1])
+    c1, c2, c3 = st.columns([1,9,1])
+    #c1,c2 = st.columns([25,1])
     help_p5 = '''
     STEP 3: INVITE\n
     These are your chosen shortlisted applicants.
@@ -34,20 +35,24 @@ def page5():
     Click ‘Invite candidates to interview’ to automatically send out interview invitations.
     Input your email to receive the applicants’ information.
     '''
-    with c2:
+    with c3:
         st.download_button(label='?',data='blabla',help=help_p5,disabled=True)
 
     #define progress bar
     progress3_path = 'Data/progress/progress3.png'
     progress4_path = 'Data/progress/progressdone.png'
-    progress3 = "<img src='data:image/png;base64,{}' class='img-fluid' style= 'height:100px; padding-bottom: 30px; padding-left: 240px;'>".format(
+    progress3 = "<img src='data:image/png;base64,{}' class='img-fluid' style= 'height:100px; padding-bottom: 30px;'>".format(
         img_to_bytes(progress3_path)
         )
-    progress4 = "<img src='data:image/png;base64,{}' class='img-fluid' style= 'height:100px; padding-bottom: 30px; padding-left: 240px;'>".format(
+    progress4 = "<img src='data:image/png;base64,{}' class='img-fluid' style= 'height:100px; padding-bottom: 30px;'>".format(
         img_to_bytes(progress4_path)
         ) 
 
-    progressbar = st.empty()
+    c1, c2, c3 = st.columns([3,5,5])
+    with c2:
+        progressbar = st.empty()
+
+    
 
     with progressbar.container():
         st.markdown(progress3, unsafe_allow_html= True)
