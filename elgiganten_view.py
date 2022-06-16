@@ -27,7 +27,7 @@ def elgiganten_view(df, compare_candidates):
 
             #Create dataframe
             df = pd.DataFrame(df.iloc[indexes]).transpose()
-            #df = df.astype(str)
+            df = df.astype(str)
             
             values = [list(df.index), list(df[df.columns[0]]), list(df[df.columns[1]])]
             
