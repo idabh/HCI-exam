@@ -100,5 +100,9 @@ def page5():
         if len(input) > 0:
             st.success('The profiles have been sent to your e-mail.')
 
+    st.write("")
+    st.write("")
+    st.write("")
+
 
 #page5()
