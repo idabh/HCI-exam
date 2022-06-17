@@ -165,13 +165,13 @@ def elgiganten_view(df, compare_candidates, ckey_list):
                 for key in ckey_list: 
                     st.session_state[key] = False
                 with comparison_box_a.container(): 
-                    st.write('')
+                    comparison_box_a.empty()
                 with comparison_box_b.container(): 
-                    st.write('')
+                    comparison_box_b.empty()
                 with comparison_box_c.container():
-                    st.write('')
+                    comparison_box_c.empty()
                 with comparison_box_d.container():
-                    st.write('')
+                    comparison_box_d.empty()
     else: 
         st.warning('Choose 2 or 3 candidates to compare')
 
