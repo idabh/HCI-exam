@@ -113,10 +113,11 @@ def page1():
 
     col1, col2 = st.columns(2)
     with col2: 
-        wildcard_box = st.checkbox('Add a wildcard', help='Click here to automatically add a "wildcard" applicant that does not meet all minimum requirements', key = 'wildcard', value= st.session_state.wildcard)
-        if wildcard_box and len(unchosen_temp_df) == 0:
-            st.warning('Use the sliders, before adding a wildcard')
-        if wildcard_box and len(unchosen_temp_df) > 0:
+        st.checkbox('Add a wildcard', help='Click here to automatically add a "wildcard" applicant that does not meet all minimum requirements', key = 'wildcard', value= st.session_state.wildcard)
+        if st.session_state.wildcard and len(unchosen_temp_df) == 0:
+            wildcard = temp_df.sample()
+            st.info('Added a wildcard to the pool of filtered applicants. Click "Next" to move on to Step 2.')
+        if st.session_state.wildcard and len(unchosen_temp_df) > 0:
             wildcard = unchosen_temp_df.sample()
             st.session_state.temp_df = temp_df.append(wildcard, ignore_index = True)
             st.info('Added a wildcard to the pool of filtered applicants. Click "Next" to move on to Step 2.')

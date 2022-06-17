@@ -33,6 +33,7 @@ english_proficiency = ['No Proficiency', 'Limited', 'Professional', 'Advanced', 
 with open('Data/applicants' + str(nr_applicants) + '.csv', 'w', newline ='') as f: 
     file = csv.writer(f)
     file.writerow(['Name', 'Age', 'Sex', 'Python Score', 'Education Level', 'Education', 'Faculty', 'Workfields', "Years Experience", "image", "Personality Profiles", "Strength", "Text1", "Text2", "English Proficiency", "GPA", 'Skills', 'Motivation Letter', 'SQL Score', 'ID'])
+    alias_list = []
       
     # generate applicant data from random combinations of variables
     for i in range(nr_applicants):
@@ -40,6 +41,11 @@ with open('Data/applicants' + str(nr_applicants) + '.csv', 'w', newline ='') as 
         alias = randomname.get_name(adj=('colors'), noun=('fruit'))
         alias = alias.replace('-', ' ')
         alias = alias.split(' ')[0].capitalize() + ' ' + alias.split(' ')[1].capitalize()
+        while alias in alias_list:
+            alias = randomname.get_name(adj=('colors'), noun=('fruit'))
+            alias = alias.replace('-', ' ')
+            alias = alias.split(' ')[0].capitalize() + ' ' + alias.split(' ')[1].capitalize()
+        alias_list.append(alias)
         sex = random.choice(sexes)
         file.writerow([
             names.get_full_name(gender = sex), # name
