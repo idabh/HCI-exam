@@ -27,7 +27,6 @@ def page2():
     #initialise session state
     rkey_list = [f'radio_{i}' for i in IDs]
     tkey_list = [f'text_{i}' for i in IDs]
-    #ckey_list = [f'compare_{i}' for i in IDs]
     ckey_list = [f'compare_{i}' for i in range(0, len(candidates))] # with index instead of ID again!
 
     #reload session states
@@ -92,9 +91,9 @@ def page2():
     st.session_state.no_candidates = [str(item[0]).partition("_")[2] for item in st.session_state.items() if  'radio_' in item[0] and item[1]== 'No']
 
     #define indexes for candidates
-    st.session_state.yes_indexes = [int(IDs.index(i)) for i in st.session_state.yes_candidates]
-    st.session_state.maybe_indexes = [int(IDs.index(i)) for i in st.session_state.maybe_candidates]
-    st.session_state.no_indexes = [int(IDs.index(i)) for i in st.session_state.no_candidates]
+    st.session_state.yes_indexes = [int(IDs.index(i)) for i in st.session_state.yes_candidates if i in IDs]
+    st.session_state.maybe_indexes = [int(IDs.index(i)) for i in st.session_state.maybe_candidates if i in IDs]
+    st.session_state.no_indexes = [int(IDs.index(i)) for i in st.session_state.no_candidates if i in IDs]
 
     #sort candidates
     #candidates['index_column'] = 0

@@ -63,7 +63,8 @@ def page5():
 
     if len(df) < 1: 
         st.warning('You have not choosen any candidates!')
-    if len(df) > 1: 
+    if len(df) >= 1: 
+        
         #Loop through candidates
         for candidate,ncol,i in zip(list(df['ano_image']), cycle(columns), range(0,len(df))): 
             with ncol: 
