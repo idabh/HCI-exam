@@ -27,7 +27,7 @@ def elgiganten_view(df, compare_candidates):
 
             #Create dataframe
             df = pd.DataFrame(df.iloc[indexes]).transpose()
-            #df = df.astype(str)
+            df = df.astype(str)
             
             values = [list(df.index), list(df[df.columns[0]]), list(df[df.columns[1]])]
             
@@ -108,7 +108,7 @@ def elgiganten_view(df, compare_candidates):
         )
         
         c1, c2, c3 = st.columns(3)
-        if c3.checkbox('Show only differences', help='Check this box to only show rows where the candidates differ'):
+        if c3.checkbox('Show only differences', help='Check this box to only show variables where the candidates differ'):
             fig = go.Figure(data=[go.Table(
                 columnwidth = [15,20, 20, 20],
                 header = dict(

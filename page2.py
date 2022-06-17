@@ -27,7 +27,8 @@ def page2():
     #initialise session state
     rkey_list = [f'radio_{i}' for i in IDs]
     tkey_list = [f'text_{i}' for i in IDs]
-    ckey_list = [f'compare_{i}' for i in IDs]
+    #ckey_list = [f'compare_{i}' for i in IDs]
+    ckey_list = [f'compare_{i}' for i in range(0, len(candidates))] # with index instead of ID again!
 
     #reload session states
     for key in st.session_state: 
@@ -73,7 +74,7 @@ def page2():
         elgiganten_view(candidates, compare_candidates)
 
     if len(compare_candidates) > 3:
-        st.warning('You can only compare 3 candidates at the time!')
+        st.warning('You can only compare 3 candidates at a time!')
     
     if 'selected' not in st.session_state: 
         st.session_state.selected = f'All ({len(candidates)})'
