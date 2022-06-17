@@ -70,7 +70,7 @@ def page2():
 
     #Add comparison
     with st.expander("Compare candidates"):
-        elgiganten_view(candidates, compare_candidates)
+        elgiganten_view(candidates, compare_candidates, ckey_list)
 
     if len(compare_candidates) > 3:
         st.warning('You can only compare 3 candidates at a time!')

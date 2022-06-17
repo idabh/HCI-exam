@@ -5,7 +5,7 @@ from src.utils import *
 from src.utils_page2 import applicant_compare
 import matplotlib.colors
 
-def elgiganten_view(df, compare_candidates):
+def elgiganten_view(df, compare_candidates, ckey_list):
     #Define show variables in df
     #variables = ['Python_score', 'Education_level', 'Faculty', 'Years_experience', 'factor1', 'factor2', 'ID']
     variables = ['Education', 'Faculty', 'Workfields', 'Years Experience', 'Strength', 'Skills', 'ID', 'unique_color']
@@ -107,48 +107,71 @@ def elgiganten_view(df, compare_candidates):
             )
         )
         
-        c1, c2, c3 = st.columns(3)
-        if c3.checkbox('Show only differences', help='Check this box to only show variables where the candidates differ'):
-            fig = go.Figure(data=[go.Table(
-                columnwidth = [15,20, 20, 20],
-                header = dict(
-                    values = value_header,
-                    line_color='darkslategray',
-                    fill_color='darkgrey',
-                    align=['left','center'],
-                    font=dict(color='white', size=12),
-                    height=40
-                ),
-                cells=dict(
-                    #values=values,
-                    values = [i[:-2] for i in [i for i in zip(*differences)]],
-                    line_color='white',
-                    fill=dict(color=['lightgrey']+ uni_colors_rgba),
-                    align=['left', 'center'],
-                    font_size=12,
-                    height=50)
-                    )
-                ])
-            
-            fig.update_layout(
-                autosize=False,
-                width=500,
-                height=500,
-                margin=dict(
-                    l=50,
-                    r=50,
-                    b=100,
-                    t=100,
-                    pad=10
-                )
-            ) 
+        #define layout
+        col1_a, col2_a = st.columns(2)
+        comparison_box_a = col1_a.empty()
+        comparison_box_b = col2_a.empty()
 
-        col1, col2 = st.columns([15,15])
-        with col1:
-            st.write(match_individual)
-        with col2:        
-            #st.checkbox('Show only differences')
-            st.plotly_chart(fig)
+        col1_b, col2_b = st.columns([9, 3])
+        comparison_box_c = col2_b.empty()
+
+        col1_c, col2_c = st.columns([9, 3])
+        comparison_box_d = col2_c.empty()
+
+
+        with comparison_box_c.container(): 
+            if st.checkbox('Show only differences', help='Check this box to only show variables where the candidates differ'):
+                fig = go.Figure(data=[go.Table(
+                    columnwidth = [15,20, 20, 20],
+                    header = dict(
+                        values = value_header,
+                        line_color='darkslategray',
+                        fill_color='darkgrey',
+                        align=['left','center'],
+                        font=dict(color='white', size=12),
+                        height=40
+                    ),
+                    cells=dict(
+                        #values=values,
+                        values = [i[:-2] for i in [i for i in zip(*differences)]],
+                        line_color='white',
+                        fill=dict(color=['lightgrey']+ uni_colors_rgba),
+                        align=['left', 'center'],
+                        font_size=12,
+                        height=50)
+                        )
+                    ])
+                
+                fig.update_layout(
+                    autosize=False,
+                    width=500,
+                    height=500,
+                    margin=dict(
+                        l=50,
+                        r=50,
+                        b=100,
+                        t=100,
+                        pad=10
+                    )
+                ) 
+
+        with comparison_box_a.container(): 
+                st.write(match_individual)
+        with comparison_box_b.container(): 
+                st.plotly_chart(fig)
+        
+        with comparison_box_d.container(): 
+            if st.button('Clear comparisons'): 
+                for key in ckey_list: 
+                    st.session_state[key] = False
+                with comparison_box_a.container(): 
+                    st.write('')
+                with comparison_box_b.container(): 
+                    st.write('')
+                with comparison_box_c.container():
+                    st.write('')
+                with comparison_box_d.container():
+                    st.write('')
     else: 
         st.warning('Choose 2 or 3 candidates to compare')
 
