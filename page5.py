@@ -69,6 +69,7 @@ def page5():
         for candidate,ncol,i in zip(list(df['ano_image']), cycle(columns), range(0,len(df))): 
             with ncol: 
                 current_name = df.loc[df['ano_image']== candidate]
+                
                 if current_name.iloc[0,2] == 'female':
                     path="Data/Images/female/"
                     files=os.listdir(path)
@@ -80,9 +81,8 @@ def page5():
 
                     male_img = files[i]
                     st.image(os.path.join(path,male_img))
-                
                 st.subheader(f'{current_name.iloc[0,0]}')
-                st.markdown(f'{current_name.iloc[0,0]} is __{current_name.iloc[0,1]} years old__ and has a __{current_name.iloc[0,4]}__ in __{current_name.iloc[0,5]}__.', unsafe_allow_html=True)
+                st.markdown(f'{current_name.iloc[0,0]} (aka *{current_name.iloc[0,19]}*) is __{current_name.iloc[0,1]} years old__ and has a __{current_name.iloc[0,4]}__ in __{current_name.iloc[0,5]}__.', unsafe_allow_html=True)
                 st.checkbox(f'Invite {current_name.iloc[0,0]} to interview', value=True, key = current_name)
 
     st.write('')
