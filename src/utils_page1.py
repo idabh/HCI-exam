@@ -48,7 +48,7 @@ def applicant_match(data, ID, match_data, education_rank, proficiency_rank):
 
 #@st.cache
 def create_plots(): 
-    with st.spinner('Wait for it...'):
+    with st.spinner('Loading candidates...'):
         image_files=[]
         color_list = []
         n_colors_to_generate = len(list(st.session_state['temp_df']['Name']))
