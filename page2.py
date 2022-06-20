@@ -69,7 +69,7 @@ def page2():
         st.download_button(label='?',data='blabla',help=help_p2,disabled=True)
 
     #Add comparison
-    with st.expander(" C⃣   O⃣   M⃣   P⃣   A⃣   R⃣   E⃣    ◦   C⃣   A⃣   N⃣   D⃣   I⃣   D⃣   A⃣   T⃣   E⃣   S⃣     ◦    H⃣   E⃣   R⃣   E⃣ "):
+    with st.expander("𝘾𝙊𝙈𝙋𝘼𝙍𝙀 𝘾𝘼𝙉𝘿𝙄𝘿𝘼𝙏𝙀𝙎 𝙃𝙀𝙍𝙀"):
         elgiganten_view(candidates, compare_candidates, ckey_list)
 
     if len(compare_candidates) > 3:
